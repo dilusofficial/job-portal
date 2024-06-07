@@ -4,6 +4,8 @@ import authRouter from "./modules/auth/routers/authRouter.js";
 
 const app = express();
 
+app.use(express.static("public"));
+
 app.use("/", homeRouter);
 app.use("/auth", authRouter);
 
