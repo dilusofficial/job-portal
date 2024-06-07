@@ -1,9 +1,11 @@
 import express from "express";
 import homeRouter from "./modules/user/routers/homeRouter.js";
+import authRouter from "./modules/auth/routers/authRouter.js";
 
 const app = express();
 
 app.use("/", homeRouter);
+app.use("/auth", authRouter);
 
 const port = process.env.PORT || 3000;
 try {
