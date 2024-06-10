@@ -10,7 +10,7 @@ export default function AdminLayout() {
       <BigSideBar show={showSidebar} />
       <div className=" flex-grow">
         <Navbar toggle={setShowSidebar} show={showSidebar} />
-        <div className="p-2">
+        <div className="p-2 m-3">
           <Outlet />
         </div>
       </div>

@@ -3,7 +3,7 @@ import { FaAlignLeft } from "react-icons/fa";
 
 export default function Navbar({ toggle, show }) {
   return (
-    <div className=" h-24 flex items-center justify-center shadow-md bg-secondary my-3 me-3 rounded-lg lg:sticky lg:top-0 z-30 md:z-0">
+    <div className=" h-24 flex items-center justify-center shadow-md bg-secondary m-3 rounded-lg lg:sticky lg:top-0 z-30 md:z-0">
       <nav className="vw90 flex items-center justify-between lg:w-11/12">
         <button
           type="button"
