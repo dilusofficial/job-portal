@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  font-size: 100%;
+} /*16px*/
+
+body {
+  background: #f9f7f7;
+  color: #112d4e;
+  font-family: sans-serif;
+  font-weight: 400;
+  line-height: 1;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+
+.loginContainer {
+  min-height: calc(100vh -80px);
+}
+.vw90 {
+  width: 90vw;
+}
+.dashboardlayout {
+  grid-template-columns: auto 1fr;
+}
+.animation {
+  transition: margin-left 0.3s ease-in-out;
+}
+.nav-link {
+  transition: 0.3s ease-in-out all;
+}
