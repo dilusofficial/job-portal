@@ -9,12 +9,15 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import AdminLayout from "./pages/admin/AdminLayout";
-import Statistics from "./pages/admin/Statistics";
-import Companies from "./pages/admin/Companies";
-import Jobs from "./pages/admin/Jobs";
-import Users from "./pages/admin/Users";
-import Reports from "./pages/admin/Reports";
-import Settings from "./pages/admin/Settings";
+import Statistics from "./pages/admin/statistics/Statistics";
+import Companies from "./pages/admin/company/Companies";
+import Jobs from "./pages/admin/jobs/Jobs";
+import Users from "./pages/admin/users/Users";
+import Reports from "./pages/admin/reports/Reports";
+import Settings from "./pages/admin/settings/Settings";
+import SingleCompanyPage from "./pages/admin/company/SingleCompanyPage";
+import SingleJobPage from "./pages/admin/jobs/SingleJobPage";
+import SingleUserPage from "./pages/admin/users/SingleUserPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -63,12 +66,24 @@ function App() {
           element: <Companies />,
         },
         {
+          path: "companies/:id",
+          element: <SingleCompanyPage />,
+        },
+        {
           path: "jobs",
           element: <Jobs />,
         },
         {
+          path: "jobs/:id",
+          element: <SingleJobPage />,
+        },
+        {
           path: "users",
           element: <Users />,
+        },
+        {
+          path: "users/:id",
+          element: <SingleUserPage />,
         },
         {
           path: "reports",

@@ -21,7 +21,7 @@ export default function Navbar({ toggle, show }) {
           <h4 className="hidden lg:block text-xl font-semibold">Dashboard</h4>
         </div>
         <div className=" flex items-center">
-          <button className="bg-ascent text-primary p-2 rounded-md">
+          <button className="bg-ascent text-primary p-2 rounded-md hover:bg-hover">
             Logout
           </button>
         </div>

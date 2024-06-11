@@ -34,6 +34,7 @@ h5 {
   grid-template-columns: auto 1fr;
 }
 .animation {
+  margin-left: -240px;
   transition: margin-left 0.3s ease-in-out;
 }
 .nav-link {
