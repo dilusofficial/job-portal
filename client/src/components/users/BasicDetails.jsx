@@ -1,5 +1,6 @@
 import React from "react";
 import { RxAvatar } from "react-icons/rx";
+import DetailElement from "../DetailElement";
 
 export default function BasicDetails({ user }) {
   return (
@@ -9,31 +10,20 @@ export default function BasicDetails({ user }) {
           <h4 className="form-title mb-3 text-lg font-semibold">
             {"Basic Details"}
           </h4>
-          <div className="flex gap-3 justify-start items-center my-3">
-            <p>Email</p>
-            <p>:</p>
-            <p>{user?.email || "example@gmail.com"}</p>
-          </div>
-          <div className="flex gap-3 justify-start items-center my-3">
-            <p>Phone</p>
-            <p>:</p>
-            <p>{user?.phone || "9999999999"}</p>
-          </div>
-          <div className="flex gap-3 justify-start items-center my-3">
-            <p>Address</p>
-            <p>:</p>
-            <p>{user?.address || "India"}</p>
-          </div>
-          <div className="flex gap-3 justify-start items-center my-3">
-            <p>Age</p>
-            <p>:</p>
-            <p>{user?.age || "23"}</p>
-          </div>
-          <div className="flex gap-3 justify-start items-center my-3">
-            <p>D.O.B</p>
-            <p>:</p>
-            <p>{user?.dateOfBirth || "23/10/1997"}</p>
-          </div>
+          <DetailElement
+            title={"Email"}
+            content={user?.email || "example@gmail.com"}
+          />
+          <DetailElement
+            title={"Phone"}
+            content={user?.phone || "9999999999"}
+          />
+          <DetailElement title={"Address"} content={user?.address || "India"} />
+          <DetailElement title={"Age"} content={user?.age || "23"} />
+          <DetailElement
+            title={"D.O.B"}
+            content={user?.dateOfBirth || "23/10/1997"}
+          />
         </div>
         <div className="text-8xl p-2 border border-primary">
           <RxAvatar />

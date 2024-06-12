@@ -1,34 +1,30 @@
 import React from "react";
 import { rating } from "../../utils/rating";
+import DetailElement from "../DetailElement";
 
 export default function CompanyDetails({ company }) {
   return (
     <section className="bg-secondary p-3 rounded-lg">
-      <div className="flex gap-3 justify-start items-center my-3">
-        <p>Address</p>
-        <p>:</p>
-        <p>{company?.address || "Menlo Park, California, United States"}</p>
-      </div>
-      <div className="flex gap-3 justify-start items-center my-3">
-        <p>Website</p>
-        <p>:</p>
-        <p>{company?.website || "www.exampleweb.com"}</p>
-      </div>
-      <div className="flex gap-3 justify-start items-center my-3">
-        <p>Email</p>
-        <p>:</p>
-        <p>{company?.email || "examplemail@gmail.com"}</p>
-      </div>
-      <div className="flex gap-3 justify-start items-center my-3">
-        <p>Contact</p>
-        <p>:</p>
-        <p>{company?.contact || "99999999999"}</p>
-      </div>
-      <div className="flex gap-3 justify-start items-center my-3">
-        <p>Rating</p>
-        <p>:</p>
-        <p>{company?.rating ? rating(company.rating) : "Not Rated"}</p>
-      </div>
+      <DetailElement
+        title={"Address"}
+        content={company?.address || "Menlo Park, California, United States"}
+      />
+      <DetailElement
+        title={"Website"}
+        content={company?.website || "www.exampleweb.com"}
+      />
+      <DetailElement
+        title={"Email"}
+        content={company?.email || "examplemail@gmail.com"}
+      />
+      <DetailElement
+        title={"Contact"}
+        content={company?.contact || "99999999999"}
+      />
+      <DetailElement
+        title={"Rating"}
+        content={company?.rating ? rating(company.rating) : "Not Rated"}
+      />
     </section>
   );
 }

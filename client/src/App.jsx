@@ -18,6 +18,11 @@ import Settings from "./pages/admin/settings/Settings";
 import SingleCompanyPage from "./pages/admin/company/SingleCompanyPage";
 import SingleJobPage from "./pages/admin/jobs/SingleJobPage";
 import SingleUserPage from "./pages/admin/users/SingleUserPage";
+import PaymentSettings from "./pages/admin/settings/PaymentSettings";
+import NotificationSettings from "./pages/admin/settings/NotificationSettings";
+import AdvertisementSettings from "./pages/admin/settings/AdvertisementSettings";
+import PlanSettings from "./pages/admin/settings/PlanSettings";
+import SingleNotification from "./pages/admin/settings/SingleNotification";
 
 function App() {
   const router = createBrowserRouter([
@@ -92,6 +97,27 @@ function App() {
         {
           path: "settings",
           element: <Settings />,
+        },
+
+        {
+          path: "settings/payment",
+          element: <PaymentSettings />,
+        },
+        {
+          path: "settings/notification",
+          element: <NotificationSettings />,
+        },
+        {
+          path: "settings/notification/:id",
+          element: <SingleNotification />,
+        },
+        {
+          path: "settings/advertisement",
+          element: <AdvertisementSettings />,
+        },
+        {
+          path: "settings/plan",
+          element: <PlanSettings />,
         },
       ],
     },
