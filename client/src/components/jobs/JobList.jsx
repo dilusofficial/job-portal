@@ -1,12 +1,15 @@
 import React from "react";
 import { jobData } from "../../utils/data";
 import { Link } from "react-router-dom";
+import Pagination from "../Pagination";
 
 export default function JobList() {
   return (
     <section className=" mt-5 rounded-lg">
       <h4 className="form-title mb-8 text-2xl font-semibold">All Jobs</h4>
-
+      <div className="flex justify-end">
+        <Pagination />
+      </div>
       <div className="mt-7 mb-5">
         <table className="bg-secondary w-full text-center rounded-lg">
           <thead>

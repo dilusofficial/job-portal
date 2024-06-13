@@ -8,7 +8,7 @@ export default function SmallSideBar({ setShowSideBar, showSidebar }) {
         showSidebar ? "invisible" : "visible"
       }`}
     >
-      <div className="bg-secondary min-h-screen m-3 p-3 ">
+      <div className="bg-ascent text-primary min-h-screen m-3 p-3 ">
         <div>
           <button
             className="text-xl"

@@ -3,12 +3,15 @@ import { userData } from "../../utils/data";
 import { Link } from "react-router-dom";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
+import Pagination from "../Pagination";
 
 export default function UserList() {
   return (
     <section className=" mt-5 rounded-lg">
       <h4 className="form-title mb-8 text-2xl font-semibold">All Users</h4>
-
+      <div className="flex justify-end">
+        <Pagination />
+      </div>
       <div className="mt-7 mb-5">
         <table className="bg-secondary w-full text-center rounded-lg">
           <thead>

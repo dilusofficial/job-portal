@@ -3,11 +3,11 @@ import { FaAlignLeft } from "react-icons/fa";
 
 export default function Navbar({ toggle, show }) {
   return (
-    <div className=" h-24 flex items-center justify-center shadow-md bg-secondary m-3 rounded-lg lg:sticky lg:top-0 z-30 md:z-0">
+    <div className=" h-24 flex items-center justify-center shadow-md bg-ascent text-primary m-3 rounded-lg lg:sticky lg:top-0 z-30 md:z-0">
       <nav className="vw90 flex items-center justify-between lg:w-11/12">
         <button
           type="button"
-          className="md:text-3xl text-xl text-ascent flex items-center"
+          className="md:text-3xl text-xl text-primary flex items-center"
           onClick={() => toggle(!show)}
         >
           <FaAlignLeft />
@@ -21,7 +21,7 @@ export default function Navbar({ toggle, show }) {
           <h4 className="hidden lg:block text-xl font-semibold">Dashboard</h4>
         </div>
         <div className=" flex items-center">
-          <button className="bg-ascent text-primary p-2 rounded-md hover:bg-hover">
+          <button className="bg-ascent text-primary p-2 border border-secondary rounded-md hover:bg-hover">
             Logout
           </button>
         </div>

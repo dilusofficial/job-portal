@@ -2,11 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { rating } from "../../utils/rating";
+import Pagination from "../Pagination";
 
 export default function CompanyList({ data }) {
   return (
     <section className=" mt-5 rounded-lg">
       <h4 className="form-title mb-8 text-2xl font-semibold">All Companies</h4>
+      <div className="flex justify-end">
+        <Pagination />
+      </div>
 
       <div className="mt-7 mb-5">
         <table className="bg-secondary w-full text-center rounded-lg">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CompanySearch from "../../../components/company/CompanySearch";
 import CompanyList from "../../../components/company/CompanyList";
 import { companyData } from "../../../utils/data";
+import Pagination from "../../../components/Pagination";
 
 export default function Companies() {
   const [companies, setCompanies] = useState(companyData);
@@ -29,6 +30,7 @@ export default function Companies() {
         handleSubmit={handleSubmit}
         handleReset={handleReset}
       />
+
       <CompanyList data={companies} />
     </div>
   );
