@@ -67,8 +67,12 @@ h5 {
 .tablecolumn {
   @apply text-xs lg:text-lg items-center justify-center border md:px-3 sm:px-1 py-2;
 }
+.detailTable {
+  @apply text-xs lg:text-lg items-center justify-center border md:px-3 sm:px-1 py-2;
+}
 
 @media (max-width: 344px) {
+  .detailTable,
   .tablecolumn {
     max-width: 50px;
     overflow-x: scroll;
