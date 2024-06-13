@@ -8,16 +8,16 @@ export default function Statistics() {
     <>
       <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 my-10 gap-2">
         <div className="bg-secondary rounded-xl">
-          <StatComponent count={"500K+"} text={"Jobs"} />
+          <StatComponent count={"100"} text={"Jobs"} />
         </div>
         <div className="bg-secondary rounded-xl">
-          <StatComponent count={"10K+"} text={"Companies"} />
+          <StatComponent count={"100"} text={"Companies"} />
         </div>
         <div className="bg-secondary rounded-xl">
-          <StatComponent count={"200K+"} text={"Users"} />
+          <StatComponent count={"100"} text={"Users"} />
         </div>
         <div className="bg-secondary rounded-xl">
-          <StatComponent count={"10K+"} text={"Subscribers"} />
+          <StatComponent count={"50"} text={"Subscribers"} />
         </div>
       </div>
       <div className="mt-5">

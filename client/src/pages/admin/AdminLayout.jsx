@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import BigSideBar from "../../components/BigSideBar";
+import SmallSideBar from "../../components/SmallSideBar";
 
 export default function AdminLayout() {
   const [showSidebar, setShowSidebar] = useState(true);
   return (
     <div className="flex">
-      <BigSideBar show={showSidebar} />
+      <div className={`${showSidebar ? "block" : "hidden"}`}>
+        <BigSideBar />
+      </div>
+      <SmallSideBar setShowSideBar={setShowSidebar} showSidebar={showSidebar} />
       <div className=" flex-grow">
         <Navbar toggle={setShowSidebar} show={showSidebar} />
         <div className="p-2 m-3">

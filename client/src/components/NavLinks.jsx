@@ -2,9 +2,12 @@ import React from "react";
 import { adminLinks } from "../utils/links";
 import { NavLink, useLocation } from "react-router-dom";
 
-export default function NavLinks() {
+export default function NavLinks({ isSmall, toggle, show }) {
   const location = useLocation();
   const pathname = location.pathname.toString();
+  function handleClick() {
+    toggle(!show);
+  }
   return (
     <div className="pt-8 flex flex-col">
       {adminLinks.map((item) => (
@@ -14,6 +17,7 @@ export default function NavLinks() {
           }`}
           key={item.text}
           to={item.path}
+          onClick={isSmall && handleClick}
         >
           <span className="lg:text-2xl lg:me-4">{item.icon}</span>
           {item.text}

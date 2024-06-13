@@ -2,10 +2,10 @@ import React from "react";
 
 export default function ReportOption({ name, setReport }) {
   return (
-    <div className="flex justify-between items-center bg-secondary rounded-md p-2 my-2 lg:w-3/4">
-      <p className="text-lg font-semibold">{name}</p>
+    <div className="flex lg:flex-row flex-col justify-between items-center bg-secondary rounded-md p-2 my-2 lg:w-3/4">
+      <p className="text-lg lg:mb-0 mb-5 font-semibold">{name}</p>
 
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex lg:flex-row flex-col justify-center items-center gap-2">
         <label htmlFor="fromDate" className="me-2">
           From
         </label>

@@ -11,19 +11,19 @@ export default function ExistingItemDetailElement({
 }) {
   return (
     <div className="flex justify-between items-center bg-secondary rounded-md p-2 my-2">
-      <p className="text-lg font-semibold">{name}</p>
-      {price && <p className="text-lg font-semibold">{price}</p>}
+      <p className="lg:text-lg text-sm font-semibold">{name}</p>
+      {price && <p className="lg:text-lg text-sm font-semibold">{price}</p>}
       {img && (
         <a
           href="https://www.littlethings.info/wp-content/uploads/2014/04/dummy-image-green-e1398449160839.jpg"
           target="blank"
-          className="text-lg underline"
+          className="lg:text-lg text-sm underline"
         >
           View
         </a>
       )}
-      {location && <p className="text-lg">{`@${location}`}</p>}
-      {type && <p className="text-lg">{type}</p>}
+      {location && <p className="lg:text-lg text-sm">{`@${location}`}</p>}
+      {type && <p className="lg:text-lg text-sm">{type}</p>}
 
       <div className="flex justify-center items-center gap-2">
         {detaillink && (
