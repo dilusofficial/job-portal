@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { jobData, userData } from "../../../utils/data";
-import JobDetails from "../../../components/jobs/JobDetails";
+import JobDetails from "../../../components/admin/jobs/JobDetails";
 
-import JobApplies from "../../../components/jobs/JobApplies";
+import JobApplies from "../../../components/admin/jobs/JobApplies";
 
 export default function SingleJobPage() {
   const { id } = useParams();

@@ -1,6 +1,7 @@
 import React from "react";
-import { description } from "../../utils/data2";
+
 import DetailElement from "../DetailElement";
+import { description } from "../../../utils/data2";
 
 export default function JobDetails({ job }) {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { jobData } from "../../utils/data";
+import { jobData } from "../../../utils/data";
 
 export default function JobReport() {
   return (

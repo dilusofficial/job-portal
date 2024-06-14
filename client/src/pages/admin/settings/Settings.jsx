@@ -1,5 +1,5 @@
 import React from "react";
-import SettingOption from "../../../components/settings/SettingOption";
+import SettingOption from "../../../components/admin/settings/SettingOption";
 
 export default function Settings() {
   return (

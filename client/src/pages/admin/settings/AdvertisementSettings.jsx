@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ExistingItemDetailElement from "../../../components/settings/ExistingItemDetailElement";
-import NewAdForm from "../../../components/settings/NewAdForm";
+import ExistingItemDetailElement from "../../../components/admin/settings/ExistingItemDetailElement";
+import NewAdForm from "../../../components/admin/settings/NewAdForm";
 
 export default function AdvertisementSettings() {
   const [showForm, setShowForm] = useState(false);

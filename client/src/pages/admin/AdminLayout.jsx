@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import BigSideBar from "../../components/BigSideBar";
-import SmallSideBar from "../../components/SmallSideBar";
+import BigSideBar from "../../components/admin/BigSideBar";
+import SmallSideBar from "../../components/admin/SmallSideBar";
 
 export default function AdminLayout() {
   const [showSidebar, setShowSidebar] = useState(true);

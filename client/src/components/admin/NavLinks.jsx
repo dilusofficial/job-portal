@@ -1,5 +1,5 @@
 import React from "react";
-import { adminLinks } from "../utils/links";
+import { adminLinks } from "../../utils/links";
 import { NavLink, useLocation } from "react-router-dom";
 
 export default function NavLinks({ isSmall, toggle, show }) {

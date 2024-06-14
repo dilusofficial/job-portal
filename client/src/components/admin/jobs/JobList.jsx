@@ -1,7 +1,8 @@
 import React from "react";
-import { jobData } from "../../utils/data";
+
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
+import { jobData } from "../../../utils/data";
 
 export default function JobList() {
   return (

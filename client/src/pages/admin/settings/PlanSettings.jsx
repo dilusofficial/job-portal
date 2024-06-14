@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import NewPlanForm from "../../../components/settings/NewPlanForm";
-import ExistingItemDetailElement from "../../../components/settings/ExistingItemDetailElement";
+import NewPlanForm from "../../../components/admin/settings/NewPlanForm";
+import ExistingItemDetailElement from "../../../components/admin/settings/ExistingItemDetailElement";
 
 export default function PlanSettings() {
   const [showForm, setShowForm] = useState(false);

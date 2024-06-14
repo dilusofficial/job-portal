@@ -1,5 +1,5 @@
 import React from "react";
-import { userData } from "../../utils/data";
+import { userData } from "../../../utils/data";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 

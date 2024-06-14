@@ -1,6 +1,6 @@
 import React from "react";
-import UserSearch from "../../../components/users/UserSearch";
-import UserList from "../../../components/users/UserList";
+import UserSearch from "../../../components/admin/users/UserSearch";
+import UserList from "../../../components/admin/users/UserList";
 
 export default function Users() {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { rating } from "../../utils/rating";
 import Pagination from "../Pagination";
+import { rating } from "../../../utils/rating";
 
 export default function CompanyList({ data }) {
   return (

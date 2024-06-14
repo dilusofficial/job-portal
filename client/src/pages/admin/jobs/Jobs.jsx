@@ -1,6 +1,6 @@
 import React from "react";
-import JobSearch from "../../../components/jobs/JobSearch";
-import JobList from "../../../components/jobs/JobList";
+import JobSearch from "../../../components/admin/jobs/JobSearch";
+import JobList from "../../../components/admin/jobs/JobList";
 
 export default function Jobs() {
   return (

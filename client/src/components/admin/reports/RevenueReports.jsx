@@ -1,5 +1,5 @@
 import React from "react";
-import { userData } from "../../utils/data";
+import { userData } from "../../../utils/data";
 
 export default function RevenueReports() {
   return (

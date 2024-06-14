@@ -1,5 +1,5 @@
 import React from "react";
-import { companyData } from "../../utils/data";
+import { companyData } from "../../../utils/data";
 
 export default function CompanyReport() {
   return (

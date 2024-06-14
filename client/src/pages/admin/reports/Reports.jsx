@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ReportOption from "../../../components/reports/ReportOption";
-import JobReport from "../../../components/reports/JobReport";
-import CompanyReport from "../../../components/reports/CompanyReport";
-import UserReports from "../../../components/reports/UserReports";
-import RevenueReports from "../../../components/reports/RevenueReports";
+import ReportOption from "../../../components/admin/reports/ReportOption";
+import JobReport from "../../../components/admin/reports/JobReport";
+import CompanyReport from "../../../components/admin/reports/CompanyReport";
+import UserReports from "../../../components/admin/reports/UserReports";
+import RevenueReports from "../../../components/admin/reports/RevenueReports";
 
 export default function Reports() {
   const [report, setReport] = useState("");

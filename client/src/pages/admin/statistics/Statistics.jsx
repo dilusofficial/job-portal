@@ -1,6 +1,6 @@
 import React from "react";
-import StatComponent from "../../../components/statistics/StatComponent";
-import GraphComponent from "../../../components/statistics/GraphComponent";
+import StatComponent from "../../../components/admin/statistics/StatComponent";
+import GraphComponent from "../../../components/admin/statistics/GraphComponent";
 import { graphData1, graphData2 } from "../../../utils/data";
 
 export default function Statistics() {

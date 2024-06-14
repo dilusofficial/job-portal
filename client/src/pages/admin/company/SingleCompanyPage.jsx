@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { companyData } from "../../../utils/data";
-import CompanyDetails from "../../../components/company/CompanyDetails";
-import OpenClosedJobs from "../../../components/company/OpenClosedJobs";
+import CompanyDetails from "../../../components/admin/company/CompanyDetails";
+import OpenClosedJobs from "../../../components/admin/company/OpenClosedJobs";
 import { JobDetailsData } from "../../../utils/data2";
 
 export default function SingleCompanyPage() {

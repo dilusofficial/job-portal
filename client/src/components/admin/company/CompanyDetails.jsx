@@ -1,6 +1,7 @@
 import React from "react";
-import { rating } from "../../utils/rating";
+
 import DetailElement from "../DetailElement";
+import { rating } from "../../../utils/rating";
 
 export default function CompanyDetails({ company }) {
   return (

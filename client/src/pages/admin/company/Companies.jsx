@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import CompanySearch from "../../../components/company/CompanySearch";
-import CompanyList from "../../../components/company/CompanyList";
+import CompanySearch from "../../../components/admin/company/CompanySearch";
+import CompanyList from "../../../components/admin/company/CompanyList";
 import { companyData } from "../../../utils/data";
-import Pagination from "../../../components/Pagination";
 
 export default function Companies() {
   const [companies, setCompanies] = useState(companyData);

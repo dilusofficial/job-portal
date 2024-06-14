@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ExistingItemDetailElement from "../../../components/settings/ExistingItemDetailElement";
-import NewNotificationForm from "../../../components/settings/NewNotificationForm";
+import ExistingItemDetailElement from "../../../components/admin/settings/ExistingItemDetailElement";
+import NewNotificationForm from "../../../components/admin/settings/NewNotificationForm";
 
 function NotificationSettings() {
   const [showForm, setShowForm] = useState(false);

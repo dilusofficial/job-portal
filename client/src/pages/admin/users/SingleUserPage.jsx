@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { userData } from "../../../utils/data";
-import BasicDetails from "../../../components/users/BasicDetails";
-import ExtraDetails from "../../../components/users/ExtraDetails";
-import UserApplies from "../../../components/users/UserApplies";
+import BasicDetails from "../../../components/admin/users/BasicDetails";
+import ExtraDetails from "../../../components/admin/users/ExtraDetails";
+import UserApplies from "../../../components/admin/users/UserApplies";
 import { JobDetailsData } from "../../../utils/data2";
 
 export default function SingleUserPage() {
