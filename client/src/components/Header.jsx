@@ -1,25 +1,19 @@
 import React from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { homeLinks } from "../utils/links";
+import { homeLinks1 } from "../utils/links";
+import { IoNotificationsOutline } from "react-icons/io5";
 
 export default function Header() {
   const location = useLocation();
   const pathname = location.pathname.toString();
   return (
-    <header className=" bg-secondary h-20 flex justify-between items-center p-5">
-      <Link to={"/"} className="text-xl md:text-3xl font-semibold ms-4">
-        Job Portal
-      </Link>
-
-      <div className="flex justify-center items-center gap-1 md:gap-3">
-        <Link
-          to={"/admin/statistics"}
-          className="p-1 border border-ascent rounded-md hover:bg-hover"
-        >
-          Admin
+    <header className="lg:px-16 bg-primary h-20 flex justify-between items-center sticky top-0 p-5 border-b border-primary shadow-sm">
+      <div className="flex gap-1 md:gap-3">
+        <Link to={"/"} className="text-xl md:text-3xl font-semibold">
+          Job Portal
         </Link>
-        <div className="flex gap-1 md:gap-3">
-          {homeLinks.map((item) => (
+        <div className="lg:ms-5 flex gap-1 md:gap-3">
+          {homeLinks1.map((item) => (
             <NavLink
               to={item.path}
               key={item.text}
@@ -32,6 +26,25 @@ export default function Header() {
             </NavLink>
           ))}
         </div>
+      </div>
+
+      <div className="flex justify-center items-center gap-1 md:gap-5">
+        <div className="text-2xl">
+          <IoNotificationsOutline />
+        </div>
+
+        <Link
+          to={"/admin/statistics"}
+          className="p-1 px-2 border border-ascent rounded-md hover:bg-hover text-xl"
+        >
+          Admin
+        </Link>
+        <Link
+          to={"/login"}
+          className="p-1 px-2 text-xl bg-ascent text-primary rounded-md hover:bg-hover"
+        >
+          Login
+        </Link>
       </div>
     </header>
   );

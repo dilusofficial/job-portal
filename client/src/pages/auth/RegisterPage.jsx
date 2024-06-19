@@ -1,7 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useRegisterUserMutation } from "../../slices/authApiSlice";
+import Loading from "../../components/Loading";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (password !== rePassword) {
+      toast.error("Password does not match");
+      return;
+    } else {
+      try {
+        const res = await registerUser({
+          username,
+          password,
+          email,
+        }).unwrap();
+        navigate("/admin/statistics");
+        toast.success("successfully registered");
+      } catch (err) {
+        toast.error(err?.data?.msg || err?.error);
+      }
+    }
+  }
   return (
     <div>
       <div className="flex flex-col justify-center items-center mx-auto w-11/12 md:w-2/3 lg:w-1/4 border p-2 rounded-md bg-secondary">
@@ -15,35 +44,47 @@ export default function RegisterPage() {
             type="text"
             className="my-3 py-1 ps-1"
             name="username"
-            placeholder="Full Name"
-          />
-          <input
-            type="number"
-            className="my-3 py-1 ps-1"
-            name="mobile"
-            placeholder="Mobile"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder="Username"
+            required
           />
           <input
             type="email"
             className="my-3 py-1 ps-1"
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Email"
+            required
           />
           <input
             type="password"
             className="my-3 py-1 ps-1"
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter Password"
+            required
           />
           <input
             type="password"
             className="my-3 py-1 ps-1"
             name="re-password"
+            value={rePassword}
+            onChange={(e) => setRePassword(e.target.value)}
             placeholder="Re-Enter Password"
+            required
           />
-          <button className="my-3 py-2 bg-ascent text-primary rounded-md hover:bg-hover">
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            disabled={isLoading}
+            className="my-3 py-2 bg-ascent text-center text-primary rounded-md hover:bg-hover"
+          >
             Register
           </button>
+          {isLoading && <Loading />}
         </form>
         <p className="my-3">
           Already have an account?{" "}

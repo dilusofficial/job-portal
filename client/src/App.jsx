@@ -1,10 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import HomeLayout from "./pages/home/HomeLayout";
+import HomeLayout from "./pages/user/HomeLayout";
 import ErrorPage from "./pages/error/ErrorPage";
-import Home from "./pages/home/HomePage";
-import About from "./pages/home/AboutPage";
-import ContactPage from "./pages/home/ContactPage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
@@ -23,6 +20,10 @@ import NotificationSettings from "./pages/admin/settings/NotificationSettings";
 import AdvertisementSettings from "./pages/admin/settings/AdvertisementSettings";
 import PlanSettings from "./pages/admin/settings/PlanSettings";
 import SingleNotification from "./pages/admin/settings/SingleNotification";
+import DataCollection from "./pages/dataCollection/DataCollection";
+import HomePage from "./pages/user/home/HomePage";
+import JobPage from "./pages/user/jobs/JobPage";
+import CompaniesPage from "./pages/user/companies/CompaniesPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,15 +34,15 @@ function App() {
       children: [
         {
           index: true,
-          element: <Home />,
+          element: <HomePage />,
         },
         {
-          path: "about",
-          element: <About />,
+          path: "jobs",
+          element: <JobPage />,
         },
         {
-          path: "contact",
-          element: <ContactPage />,
+          path: "companies",
+          element: <CompaniesPage />,
         },
         {
           path: "login",
@@ -50,6 +51,10 @@ function App() {
         {
           path: "register",
           element: <RegisterPage />,
+        },
+        {
+          path: "register/details",
+          element: <DataCollection />,
         },
         {
           path: "forgot-password",

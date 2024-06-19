@@ -6,7 +6,7 @@ export default function HomeLayout() {
   return (
     <>
       <Header />
-      <div className="p-6">
+      <div className="p-6 lg:px-16">
         <Outlet />
       </div>
     </>

@@ -1,7 +1,21 @@
 import React from "react";
 import { FaAlignLeft } from "react-icons/fa";
+import { useLogoutUserMutation } from "../slices/authApiSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Navbar({ toggle, show }) {
+  const [logoutUser] = useLogoutUserMutation();
+  const navigate = useNavigate();
+  async function handleLogout() {
+    try {
+      const res = await logoutUser().unwrap();
+      navigate("/");
+      toast.success("Logged out");
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
   return (
     <div className=" h-24 flex items-center justify-center shadow-md bg-ascent text-primary m-3 rounded-lg lg:sticky lg:top-0 z-30 md:z-0">
       <nav className="vw90 flex items-center justify-between lg:w-11/12">
@@ -21,7 +35,10 @@ export default function Navbar({ toggle, show }) {
           <h4 className="hidden lg:block text-xl font-semibold">Dashboard</h4>
         </div>
         <div className=" flex items-center">
-          <button className="bg-ascent text-primary p-2 border border-secondary rounded-md hover:bg-hover">
+          <button
+            onClick={handleLogout}
+            className="bg-ascent text-primary p-2 border border-secondary rounded-md hover:bg-hover"
+          >
             Logout
           </button>
         </div>

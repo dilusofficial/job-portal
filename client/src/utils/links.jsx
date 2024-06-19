@@ -5,10 +5,9 @@ import { HiUsers } from "react-icons/hi";
 import { TbReport } from "react-icons/tb";
 import { IoSettingsSharp } from "react-icons/io5";
 
-export const homeLinks = [
-  { path: "/about", text: "About" },
-  { path: "/contact", text: "Contact" },
-  { path: "/login", text: "Login" },
+export const homeLinks1 = [
+  { path: "/jobs", text: "Find Jobs" },
+  { path: "/companies", text: "Companies" },
 ];
 
 export const adminLinks = [
