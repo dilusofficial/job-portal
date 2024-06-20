@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import homeRouter from "./modules/user/routers/homeRouter.js";
 import authRouter from "./modules/auth/routers/authRouter.js";
+import userRouter from "./modules/user/routers/userRouter.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
@@ -24,6 +25,7 @@ app.use(
 );
 app.use("/home", homeRouter);
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "Not Found" });

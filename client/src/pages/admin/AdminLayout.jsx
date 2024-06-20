@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import BigSideBar from "../../components/admin/BigSideBar";
 import SmallSideBar from "../../components/admin/SmallSideBar";
+import { useGetUserInfoQuery } from "../../slices/userApiSlice";
+import axios from "axios";
 
 export default function AdminLayout() {
   const [showSidebar, setShowSidebar] = useState(true);
+  const { data } = useGetUserInfoQuery();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location.pathname.toString();
 
-  /*const getInfo = async () => {
-    const res = await fetch("http://localhost:3000/home/user");
-    console.log(res);
+  const getInfo = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/user/info", {
+        withCredentials: true,
+      });
+    } catch (error) {
+      navigate("/");
+    }
   };
   useEffect(() => {
     getInfo();
-  }, []);**/
+  }, [pathname]);
 
   return (
     <div className="flex">
@@ -22,7 +33,11 @@ export default function AdminLayout() {
       </div>
       <SmallSideBar setShowSideBar={setShowSidebar} showSidebar={showSidebar} />
       <div className=" flex-grow">
-        <Navbar toggle={setShowSidebar} show={showSidebar} />
+        <Navbar
+          toggle={setShowSidebar}
+          show={showSidebar}
+          user={data?.username}
+        />
         <div className="p-2 m-3">
           <Outlet />
         </div>

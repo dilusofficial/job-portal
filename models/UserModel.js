@@ -10,7 +10,14 @@ const UserSchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
+    phone: {
+      type: String,
+      unique: true,
+    },
+    verifiedph: Boolean,
+    otp: String,
     password: {
       type: String,
     },

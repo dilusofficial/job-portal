@@ -24,8 +24,12 @@ export default function RegisterPage() {
           password,
           email,
         }).unwrap();
-        navigate("/admin/statistics");
-        toast.success("successfully registered");
+        if (res.msg === "registered successfully") {
+          navigate("/send-otp");
+          toast.success("successfully registered");
+        } else {
+          toast.error(res.msg);
+        }
       } catch (err) {
         toast.error(err?.data?.msg || err?.error);
       }

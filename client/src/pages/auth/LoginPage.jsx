@@ -23,8 +23,12 @@ export default function LoginPage() {
         password,
         email,
       }).unwrap();
-      navigate("/admin/statistics");
-      toast.success("successfully logged in");
+      if (res.msg === "logged in successfully") {
+        navigate("/admin/statistics");
+        toast.success("successfully logged in");
+      } else {
+        toast.error(res.msg);
+      }
     } catch (err) {
       toast.error(err?.data?.msg || err?.error);
     }
@@ -37,8 +41,15 @@ export default function LoginPage() {
         email: decoded.email,
         username: decoded.name,
       }).unwrap();
-      navigate("/admin/statistics");
-      toast.success("successfully logged in");
+      if (
+        resp.msg === "successfully logged in" ||
+        resp.msg === "registered successfully"
+      ) {
+        navigate("/admin/statistics");
+        toast.success("successfully logged in");
+      } else {
+        toast.error(resp.msg);
+      }
     } catch (err) {
       toast.error(err?.data?.msg || err?.error);
     }
@@ -60,6 +71,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Email"
+            required
           />
           <input
             type="password"
@@ -68,6 +80,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter Password"
+            required
           />
           <button
             type="submit"
@@ -83,7 +96,7 @@ export default function LoginPage() {
           size="large"
           onSuccess={handleGoogleSuccess}
           onError={() => {
-            console.log("Login Failed");
+            toast.error("Login Failed");
           }}
         />
         <p className="my-3">

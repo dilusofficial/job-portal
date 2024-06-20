@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useForgotPasswordMutation } from "../../slices/authApiSlice";
+import { useVerifyOTPtoUserMutation } from "../../slices/authApiSlice";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 
-export default function ForgotPasswordPage() {
-  const [phone, setPhone] = useState("");
+export default function MobileVerify() {
+  const [otp, setOtp] = useState("");
   const navigate = useNavigate();
-  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
+  const [verifyOTPtoUser, { isLoading }] = useVerifyOTPtoUserMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await forgotPassword({ phone }).unwrap();
-      if (res.msg === "KEY has been sent") {
-        navigate("/reset-password");
-        toast.success("Key has been send to mobile");
+      const res = await verifyOTPtoUser({ otp }).unwrap();
+      if (res.msg === "verified") {
+        navigate("/admin/statistics");
+        toast.success("Phone number verified");
       } else {
         toast.error(res.msg);
       }
@@ -23,6 +23,7 @@ export default function ForgotPasswordPage() {
       toast.error(err?.data?.msg || err?.error);
     }
   };
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center mx-auto w-11/12 md:w-2/3 lg:w-1/4 border p-2 rounded-md bg-secondary">
@@ -30,31 +31,33 @@ export default function ForgotPasswordPage() {
           <h1 className="text-2xl font-semibold">Job Portal</h1>
         </div>
 
-        <h2 className="text-xl mt-3 font-medium">Password reset</h2>
+        <h2 className="text-xl mt-3 font-medium">Enter OTP</h2>
         <form className="flex flex-col w-full">
-          <h2 className="text-lg mt-3 font-medium">Enter registered phone</h2>
           <input
             type="text"
             className="my-3 py-1 ps-1"
-            name="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="phone with code eg:+91"
+            name="otp"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            placeholder="Enter OTP"
             required
           />
 
           <button
+            type="submit"
             onClick={handleSubmit}
             disabled={isLoading}
             className="my-3 py-2 bg-ascent text-primary rounded-md hover:bg-hover"
           >
-            Submit
+            Verify
           </button>
           {isLoading && <Loading />}
         </form>
+
         <p className="my-3">
-          <Link to="/login" className="text-blue-700 underline">
-            Back
+          Dont get OTP
+          <Link to="/send-otp" className="text-blue-700 underline">
+            Resend
           </Link>
         </p>
       </div>

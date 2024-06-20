@@ -24,6 +24,9 @@ import DataCollection from "./pages/dataCollection/DataCollection";
 import HomePage from "./pages/user/home/HomePage";
 import JobPage from "./pages/user/jobs/JobPage";
 import CompaniesPage from "./pages/user/companies/CompaniesPage";
+import MobileOtp from "./pages/auth/MobileOtp";
+import MobileVerify from "./pages/auth/MobileVerify";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 function App() {
   const router = createBrowserRouter([
@@ -53,12 +56,24 @@ function App() {
           element: <RegisterPage />,
         },
         {
+          path: "send-otp",
+          element: <MobileOtp />,
+        },
+        {
+          path: "verify",
+          element: <MobileVerify />,
+        },
+        {
           path: "register/details",
           element: <DataCollection />,
         },
         {
           path: "forgot-password",
           element: <ForgotPasswordPage />,
+        },
+        {
+          path: "reset-password",
+          element: <ResetPassword />,
         },
       ],
     },

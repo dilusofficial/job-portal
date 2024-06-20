@@ -4,14 +4,18 @@ import { useLogoutUserMutation } from "../slices/authApiSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function Navbar({ toggle, show }) {
+export default function Navbar({ toggle, show, user }) {
   const [logoutUser] = useLogoutUserMutation();
   const navigate = useNavigate();
   async function handleLogout() {
     try {
       const res = await logoutUser().unwrap();
-      navigate("/");
-      toast.success("Logged out");
+      if (res.msg === "successfully logged out") {
+        navigate("/");
+        toast.success("Logged out");
+      } else {
+        toast.error(res.msg);
+      }
     } catch (err) {
       toast.error(err?.data?.msg || err?.error);
     }
@@ -34,7 +38,8 @@ export default function Navbar({ toggle, show }) {
           </div>
           <h4 className="hidden lg:block text-xl font-semibold">Dashboard</h4>
         </div>
-        <div className=" flex items-center">
+        <div className=" flex items-center gap-2">
+          <h1 className="text-lg">{user}</h1>
           <button
             onClick={handleLogout}
             className="bg-ascent text-primary p-2 border border-secondary rounded-md hover:bg-hover"

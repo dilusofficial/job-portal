@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useForgotPasswordMutation } from "../../slices/authApiSlice";
-import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
+import { Link, useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../../slices/authApiSlice";
+import { toast } from "react-toastify";
 
-export default function ForgotPasswordPage() {
-  const [phone, setPhone] = useState("");
+export default function ResetPassword() {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await forgotPassword({ phone }).unwrap();
-      if (res.msg === "KEY has been sent") {
-        navigate("/reset-password");
-        toast.success("Key has been send to mobile");
+      const res = await resetPassword({ id, password }).unwrap();
+      if (res.msg === "password reset") {
+        navigate("/login");
+        toast.success("password has been changed");
       } else {
         toast.error(res.msg);
       }
@@ -32,17 +33,26 @@ export default function ForgotPasswordPage() {
 
         <h2 className="text-xl mt-3 font-medium">Password reset</h2>
         <form className="flex flex-col w-full">
-          <h2 className="text-lg mt-3 font-medium">Enter registered phone</h2>
+          <h2 className="text-lg mt-3 font-medium">Enter key</h2>
           <input
             type="text"
             className="my-3 py-1 ps-1"
-            name="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="phone with code eg:+91"
+            name="id"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            placeholder="Enter key"
             required
           />
-
+          <h2 className="text-lg mt-3 font-medium">Enter new Password</h2>
+          <input
+            type="password"
+            className="my-3 py-1 ps-1"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="*****"
+            required
+          />
           <button
             onClick={handleSubmit}
             disabled={isLoading}
@@ -53,7 +63,8 @@ export default function ForgotPasswordPage() {
           {isLoading && <Loading />}
         </form>
         <p className="my-3">
-          <Link to="/login" className="text-blue-700 underline">
+          Didnt get Key?
+          <Link to="/forgot-password" className="text-blue-700 underline">
             Back
           </Link>
         </p>
