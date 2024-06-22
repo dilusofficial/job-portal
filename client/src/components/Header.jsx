@@ -7,7 +7,7 @@ export default function Header() {
   const location = useLocation();
   const pathname = location.pathname.toString();
   return (
-    <header className="lg:px-16 bg-primary h-20 flex justify-between items-center sticky top-0 p-5 border-b border-primary shadow-sm">
+    <header className="lg:px-16 bg-primary h-20 flex justify-between items-center sticky top-0 p-5 border-b border-primary shadow-sm z-10">
       <div className="flex gap-1 md:gap-3">
         <Link to={"/"} className="text-xl md:text-3xl font-semibold">
           Job Portal
@@ -34,13 +34,13 @@ export default function Header() {
         </div>
 
         <Link
-          to={"/admin/statistics"}
+          to={"/employer"}
           className="p-1 px-2 border border-ascent rounded-md hover:bg-hover text-xl"
         >
-          Admin
+          Employer
         </Link>
         <Link
-          to={"/login"}
+          to={"/auth/login"}
           className="p-1 px-2 text-xl bg-ascent text-primary rounded-md hover:bg-hover"
         >
           Login

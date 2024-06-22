@@ -20,12 +20,6 @@ export default function BasicDetails() {
         <input type="text" id="fullname" className="form-input" />
       </div>
       <div className="form-row">
-        <label htmlFor="phone" className="form-label">
-          Phone
-        </label>
-        <input type="number" id="phone" className="form-input" />
-      </div>
-      <div className="form-row">
         <label htmlFor="dob" className="form-label">
           Date of Birth
         </label>

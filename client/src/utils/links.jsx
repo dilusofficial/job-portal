@@ -10,6 +10,17 @@ export const homeLinks1 = [
   { path: "/companies", text: "Companies" },
 ];
 
+export const employerHomeList = [
+  {
+    path: "/candidates",
+    text: "Candidates",
+  },
+  {
+    path: "/companies",
+    text: "Companies",
+  },
+];
+
 export const adminLinks = [
   {
     path: "/admin/statistics",

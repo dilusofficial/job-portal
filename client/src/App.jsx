@@ -27,6 +27,9 @@ import CompaniesPage from "./pages/user/companies/CompaniesPage";
 import MobileOtp from "./pages/auth/MobileOtp";
 import MobileVerify from "./pages/auth/MobileVerify";
 import ResetPassword from "./pages/auth/ResetPassword";
+import AuthLayout from "./pages/auth/AuthLayout";
+import EmployerHomeLayout from "./pages/employer/EmployerHomeLayout";
+import EmployerHomePage from "./pages/employer/home/EmployerHomePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -47,6 +50,13 @@ function App() {
           path: "companies",
           element: <CompaniesPage />,
         },
+      ],
+    },
+    {
+      path: "/auth",
+      element: <AuthLayout />,
+      errorElement: <ErrorPage />,
+      children: [
         {
           path: "login",
           element: <LoginPage />,
@@ -64,7 +74,7 @@ function App() {
           element: <MobileVerify />,
         },
         {
-          path: "register/details",
+          path: "details",
           element: <DataCollection />,
         },
         {
@@ -74,6 +84,17 @@ function App() {
         {
           path: "reset-password",
           element: <ResetPassword />,
+        },
+      ],
+    },
+    {
+      path: "/employer",
+      element: <EmployerHomeLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <EmployerHomePage />,
         },
       ],
     },

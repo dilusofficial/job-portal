@@ -8,6 +8,11 @@ export default {
         secondary: "#F9F7F7",
         ascent: "#112D4E",
         hover: "#3F72AF",
+        background1: "#dedede",
+        background2: "#e8e9ed",
+      },
+      backgroundImage: {
+        "hero-pattern": "url('/employers-1.png')",
       },
     },
   },

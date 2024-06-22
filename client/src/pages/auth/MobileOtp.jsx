@@ -14,7 +14,7 @@ export default function MobileOtp() {
     try {
       const res = await sendOTPtoUser({ phone }).unwrap();
       if (res.msg === "success") {
-        navigate("/verify");
+        navigate("/auth/verify");
         toast.success("OTP has been send to mobile");
       } else {
         toast.error(res.msg);
@@ -25,28 +25,33 @@ export default function MobileOtp() {
   };
   return (
     <div>
-      <div className="flex flex-col justify-center items-center mx-auto w-11/12 md:w-2/3 lg:w-1/4 border p-2 rounded-md bg-secondary">
-        <div className="border-b-2 border-b-ascent w-full text-center">
-          <h1 className="text-2xl font-semibold">Job Portal</h1>
+      <div className="flex flex-col justify-center items-center mx-auto w-11/12 lg:w-4/5p-4 lg:border-0 border border-ascent rounded-md">
+        <div className="w-full text-center mb-10">
+          <h1 className="text-2xl lg:text-4xl font-semibold">Job Portal</h1>
         </div>
 
-        <h2 className="text-xl mt-3 font-medium">Verify Your Mobile</h2>
+        <h2 className="text-xl lg:text-2xl my-3 font-medium">
+          Verify Your Mobile
+        </h2>
         <form className="flex flex-col w-full">
-          <input
-            type="text"
-            className="my-3 py-1 ps-1"
-            name="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="phone with code eg:+91"
-            required
-          />
+          <div className="form-row">
+            <label className="form-label">Enter Phone with code</label>
+            <input
+              type="text"
+              className="form-input"
+              name="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="+91xxxxxxxxxx"
+              required
+            />
+          </div>
 
           <button
             type="submit"
             onClick={handleSubmit}
             disabled={isLoading}
-            className="my-3 py-2 bg-ascent text-primary rounded-md hover:bg-hover"
+            className="my-3 py-3 bg-ascent text-primary rounded-md hover:bg-hover"
           >
             Send OTP
           </button>

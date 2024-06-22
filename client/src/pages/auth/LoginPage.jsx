@@ -57,59 +57,76 @@ export default function LoginPage() {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center mx-auto w-11/12 md:w-2/3 lg:w-1/4 border p-2 rounded-md bg-secondary">
-        <div className="border-b-2 border-b-ascent w-full text-center">
-          <h1 className="text-2xl font-semibold">Job Portal</h1>
+      <div className="flex flex-col justify-center items-center mx-auto w-11/12 lg:w-4/5 p-4 lg:border-0 border border-ascent rounded-md">
+        <div className=" w-full text-center mb-10">
+          <h1 className="text-2xl lg:text-4xl font-semibold">Job Portal</h1>
         </div>
 
-        <h2 className="text-xl mt-3 font-medium">Login</h2>
+        <h2 className="text-xl lg:text-2xl my-3 font-medium">Login</h2>
         <form className="flex flex-col w-full">
-          <input
-            type="email"
-            className="my-3 py-1 ps-1"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter Email"
-            required
-          />
-          <input
-            type="password"
-            className="my-3 py-1 ps-1"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter Password"
-            required
-          />
+          <div className="form-row">
+            <label htmlFor="emailid" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              className="form-input"
+              id="emailid"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter Email"
+              required
+            />
+          </div>
+          <div className="form-row">
+            <label htmlFor="passwordid" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-input"
+              id="passwordid"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter Password"
+              required
+            />
+          </div>
+
           <button
             type="submit"
             onClick={handleSubmit}
             disabled={isLoading}
-            className="my-3 py-2 bg-ascent text-primary rounded-md hover:bg-hover"
+            className="my-3 py-3 bg-ascent text-primary rounded-md hover:bg-hover"
           >
             Login
           </button>
           {isLoading && <Loading />}
         </form>
+
+        <p className="my-3">
+          Not have an account?{" "}
+          <Link to="/auth/register" className="text-blue-700 underline">
+            Register
+          </Link>
+        </p>
+        <p className="my-3">
+          <Link to="/auth/forgot-password" className="text-blue-700 underline">
+            Forgot Password?
+          </Link>
+        </p>
+        <p className="mb-3">or</p>
         <GoogleLogin
-          size="large"
+          theme="filled_blue"
+          shape="pill"
+          width={"100"}
           onSuccess={handleGoogleSuccess}
           onError={() => {
             toast.error("Login Failed");
           }}
         />
-        <p className="my-3">
-          Not have an account?{" "}
-          <Link to="/register" className="text-blue-700 underline">
-            Register
-          </Link>
-        </p>
-        <p className="my-3">
-          <Link to="/forgot-password" className="text-blue-700 underline">
-            Forgot Password?
-          </Link>
-        </p>
       </div>
     </div>
   );

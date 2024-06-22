@@ -15,7 +15,7 @@ export default function ResetPassword() {
     try {
       const res = await resetPassword({ id, password }).unwrap();
       if (res.msg === "password reset") {
-        navigate("/login");
+        navigate("/auth/login");
         toast.success("password has been changed");
       } else {
         toast.error(res.msg);
@@ -26,37 +26,42 @@ export default function ResetPassword() {
   };
   return (
     <div>
-      <div className="flex flex-col justify-center items-center mx-auto w-11/12 md:w-2/3 lg:w-1/4 border p-2 rounded-md bg-secondary">
-        <div className="border-b-2 border-b-ascent w-full text-center">
-          <h1 className="text-2xl font-semibold">Job Portal</h1>
+      <div className="flex flex-col justify-center items-center mx-auto w-11/12 lg:w-4/5 p-4 lg:border-0 border border-ascent rounded-md">
+        <div className="w-full text-center mb-10">
+          <h1 className="text-2xl lg:text-4xl font-semibold">Job Portal</h1>
         </div>
 
-        <h2 className="text-xl mt-3 font-medium">Password reset</h2>
+        <h2 className="text-xl lg:text-2xl my-3 font-medium">Password reset</h2>
         <form className="flex flex-col w-full">
-          <h2 className="text-lg mt-3 font-medium">Enter key</h2>
-          <input
-            type="text"
-            className="my-3 py-1 ps-1"
-            name="id"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            placeholder="Enter key"
-            required
-          />
-          <h2 className="text-lg mt-3 font-medium">Enter new Password</h2>
-          <input
-            type="password"
-            className="my-3 py-1 ps-1"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="*****"
-            required
-          />
+          <div className="form-row">
+            <label className="form-label">Enter Key</label>
+            <input
+              type="text"
+              className="form-input"
+              name="id"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              placeholder="Enter key"
+              required
+            />
+          </div>
+          <div className="form-row">
+            <label className="form-label">Enter new Password</label>
+            <input
+              type="password"
+              className="form-input"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="*****"
+              required
+            />
+          </div>
+
           <button
             onClick={handleSubmit}
             disabled={isLoading}
-            className="my-3 py-2 bg-ascent text-primary rounded-md hover:bg-hover"
+            className="my-3 py-3 bg-ascent text-primary rounded-md hover:bg-hover"
           >
             Submit
           </button>
@@ -64,7 +69,7 @@ export default function ResetPassword() {
         </form>
         <p className="my-3">
           Didnt get Key?
-          <Link to="/forgot-password" className="text-blue-700 underline">
+          <Link to="/auth/forgot-password" className="text-blue-700 underline">
             Back
           </Link>
         </p>

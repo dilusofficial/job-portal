@@ -8,9 +8,10 @@ html {
 body {
   background: #dbe2ef;
   color: #112d4e;
-  font-family: sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1;
+  letter-spacing: 1px;
 }
 h1,
 h2,
@@ -119,4 +120,12 @@ h5 {
   border-radius: 50%;
   border-top-color: rgb(17, 0, 255);
   animation: spinner 0.6s linear infinite;
+}
+
+.minusheight {
+  min-height: calc(100vh - 80px);
+}
+
+.categorycard {
+  @apply flex flex-col justify-center items-center m-3 gap-4 border border-ascent border-opacity-10 p-5 min-w-24 hover:border-opacity-55 hover:shadow-xl hover:m-0 hover:gap-3;
 }
