@@ -43,6 +43,14 @@ export default function RegisterPage() {
         </div>
 
         <h2 className="text-xl lg:text-xl my-3 font-medium">Register</h2>
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full my-3">
+          <button className="bg-ascent text-secondary w-full px-2 py-3 rounded-lg">
+            Candidate
+          </button>
+          <button className="bg-background1 hover:bg-hover hover:text-secondary w-full px-2 py-3 rounded-lg">
+            Employer
+          </button>
+        </div>
         <form className="flex flex-col w-full">
           <div className="form-row">
             <label className="form-label">Username</label>

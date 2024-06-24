@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PostJobSection() {
   return (
-    <section className="grid lg:grid-cols-2 grid-cols-1 minusheight bg-background1 rounded-lg mt-2">
+    <section className="grid lg:grid-flow-row grid-flow-col lg:grid-cols-2 threesteppic minusheight bg-background1 rounded-lg mt-2">
       <div className="flex flex-col justify-center items-start gap-3 px-6">
         <h1 className="lg:text-3xl text-xl my-2">Iam a Recruiter.</h1>
         <p className=" my-2 leading-7">
@@ -13,8 +13,8 @@ export default function PostJobSection() {
           Post a Job
         </button>
       </div>
-      <div className="hidden lg:block overflow-hidden place-content-center">
-        <img src="/employers-2.png" className="w-4/5"></img>
+      <div className=" overflow-hidden place-content-center">
+        <img src="/employers-2.png" className="w-4/5 mx-auto"></img>
       </div>
     </section>
   );

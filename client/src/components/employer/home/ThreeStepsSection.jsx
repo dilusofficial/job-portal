@@ -7,9 +7,9 @@ import {
 import ThreeStepElt from "./ThreeStepElt";
 export default function ThreeStepsSection() {
   return (
-    <section className="grid lg:grid-cols-2 grid-cols-1 minusheight bg-background2 rounded-lg mt-2">
-      <div className="hidden lg:block overflow-hidden place-content-center place-self-center">
-        <img src="/employers-3.png" className="w-full"></img>
+    <section className="grid lg:grid-flow-row grid-flow-col lg:grid-cols-2 threesteppic minusheight bg-background2 rounded-lg mt-2">
+      <div className=" overflow-hidden place-content-center place-self-center mt-3">
+        <img src="/employers-3.png" className="w-4/5 lg:w-full mx-auto"></img>
       </div>
       <div className="flex flex-col justify-center items-start gap-3 px-6">
         <h1 className="lg:text-3xl text-xl my-2">

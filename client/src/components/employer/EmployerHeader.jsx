@@ -15,7 +15,7 @@ export default function EmployerHeader() {
         <div className="lg:ms-5 flex gap-1 md:gap-3">
           {employerHomeList.map((item) => (
             <NavLink
-              to={item.path}
+              to={`/employer${item.path}`}
               key={item.text}
               className={`text-base md:text-lg mx-1 md:mx-2 p-1 rounded-md hover:bg-hover hover:text-primary ${
                 pathname.includes(item.path) && "bg-ascent text-primary"
@@ -32,6 +32,7 @@ export default function EmployerHeader() {
         <div className="text-2xl">
           <IoNotificationsOutline />
         </div>
+        <Link to={"/employer/dashboard"}>Dashboard</Link>
         <Link
           to={"/auth/login"}
           className="p-1 px-2 text-xl bg-ascent text-primary rounded-md hover:bg-hover"
