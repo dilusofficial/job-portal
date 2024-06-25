@@ -1,7 +1,7 @@
 import React from "react";
 import { companyList } from "../../../utils/CompanyListingData";
 import CompanyCard from "./CompanyCard";
-import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
+import Pagination from "../../Pagination";
 
 export default function CompanyList() {
   return (
@@ -19,17 +19,10 @@ export default function CompanyList() {
           category={item.category}
           location={item.location}
           no={item.openJobs}
+          id={item.id}
         />
       ))}
-      <div className="flex items-center gap-4">
-        <div className="text-3xl text-ascent rounded-full cursor-pointer hover:bg-hover hover:text-secondary">
-          <FiArrowLeftCircle />
-        </div>
-        <h1>Page 1 of 3</h1>
-        <div className="text-3xl text-ascent rounded-full cursor-pointer hover:bg-hover hover:text-secondary">
-          <FiArrowRightCircle />
-        </div>
-      </div>
+      <Pagination />
     </div>
   );
 }

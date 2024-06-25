@@ -2,6 +2,7 @@ import React from "react";
 import { IoCashOutline } from "react-icons/io5";
 import { SlLocationPin } from "react-icons/sl";
 import { professionalSkills } from "../../../utils/skills";
+import { Link } from "react-router-dom";
 
 export default function CandidateCard({
   image,
@@ -9,6 +10,7 @@ export default function CandidateCard({
   position,
   location,
   currentCTC,
+  id,
 }) {
   return (
     <div className="flex md:flex-row flex-col md:justify-between items-center md:px-10 p-3 border border-primary shadow-md rounded-xl">
@@ -46,9 +48,12 @@ export default function CandidateCard({
         </div>
       </div>
       <div className="mt-3 md:mt-0">
-        <button className="px-3 py-3 bg-primary hover:bg-ascent hover:text-secondary rounded-lg">
+        <Link
+          to={`/employer/candidates/${id}`}
+          className="px-3 py-3 bg-primary hover:bg-ascent hover:text-secondary rounded-lg"
+        >
           View profile
-        </button>
+        </Link>
       </div>
     </div>
   );

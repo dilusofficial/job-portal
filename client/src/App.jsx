@@ -41,6 +41,8 @@ import AllApplicants from "./pages/employer/dashboard/AllApplicants";
 import Messages from "./pages/employer/dashboard/Messages";
 import ShortListedResumes from "./pages/employer/dashboard/ShortListedResumes";
 import ChangePassword from "./pages/employer/dashboard/ChangePassword";
+import CandidateSinglePage from "./pages/employer/candidates/CandidateSinglePage";
+import CompanySinglePage from "./pages/employer/companies/CompanySinglePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -60,6 +62,10 @@ function App() {
         {
           path: "companies",
           element: <CompaniesPage />,
+        },
+        {
+          path: "details",
+          element: <DataCollection />,
         },
       ],
     },
@@ -84,10 +90,7 @@ function App() {
           path: "verify",
           element: <MobileVerify />,
         },
-        {
-          path: "details",
-          element: <DataCollection />,
-        },
+
         {
           path: "forgot-password",
           element: <ForgotPasswordPage />,
@@ -112,8 +115,16 @@ function App() {
           element: <CandidatesPage />,
         },
         {
+          path: "candidates/:id",
+          element: <CandidateSinglePage />,
+        },
+        {
           path: "companies",
           element: <CompanyPage />,
+        },
+        {
+          path: "companies/:id",
+          element: <CompanySinglePage />,
         },
         {
           path: "dashboard",

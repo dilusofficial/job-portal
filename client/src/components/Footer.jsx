@@ -24,7 +24,7 @@ export default function Footer() {
         <FaFacebookF />
         <FaInstagram />
         <FaTwitter />
-        <FaTwitter />
+        <FaLinkedinIn />
       </div>
     </footer>
   );

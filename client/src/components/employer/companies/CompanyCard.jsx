@@ -1,7 +1,15 @@
 import React from "react";
 import { SlLocationPin } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
-export default function CompanyCard({ name, image, category, location, no }) {
+export default function CompanyCard({
+  name,
+  image,
+  category,
+  location,
+  no,
+  id,
+}) {
   return (
     <div className="flex md:flex-row flex-col md:justify-between items-center md:px-10 p-3 border border-primary shadow-md rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
@@ -27,9 +35,12 @@ export default function CompanyCard({ name, image, category, location, no }) {
         </div>
       </div>
       <div className="mt-3 md:mt-0">
-        <button className="px-3 py-3 bg-primary hover:bg-ascent hover:text-secondary rounded-lg">
+        <Link
+          to={`/employer/companies/${id}`}
+          className="px-3 py-3 bg-primary hover:bg-ascent hover:text-secondary rounded-lg"
+        >
           View Company
-        </button>
+        </Link>
       </div>
     </div>
   );
