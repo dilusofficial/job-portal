@@ -11,7 +11,7 @@ export default function CompanyCard({
   id,
 }) {
   return (
-    <div className="flex md:flex-row flex-col md:justify-between items-center md:px-10 p-3 border border-primary shadow-md rounded-xl">
+    <div className="flex md:flex-row flex-col gap-3 md:justify-between items-center md:px-10 p-3 border border-primary shadow-md rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
         <div>
           <img src={image}></img>
@@ -34,7 +34,7 @@ export default function CompanyCard({
           </div>
         </div>
       </div>
-      <div className="mt-3 md:mt-0">
+      <div className="my-3 md:my-0">
         <Link
           to={`/employer/companies/${id}`}
           className="px-3 py-3 bg-primary hover:bg-ascent hover:text-secondary rounded-lg"

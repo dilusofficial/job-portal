@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import WorkElt from "./WorkElt";
 import { useDispatch } from "react-redux";
 import {
@@ -8,6 +8,7 @@ import {
 } from "../../slices/dataCollectionSlice";
 
 export default function WorkDetails() {
+  const [newForm, setNewForm] = useState(1);
   const dispatch = useDispatch();
   function handleBack() {
     dispatch(setEducationDetails("current"));
@@ -20,7 +21,10 @@ export default function WorkDetails() {
   return (
     <div className="p-4 bg-secondary w-11/12 lg:w-1/2 rounded-lg mt-3">
       <h1 className="text-xl my-2">Work Experience</h1>
-      <WorkElt />
+      {Array.from({ length: newForm }).map((_, index) => (
+        <WorkElt key={index} />
+      ))}
+
       <div>
         <div className="flex justify-end">
           <button
@@ -28,6 +32,12 @@ export default function WorkDetails() {
             onClick={handleBack}
           >
             Back
+          </button>
+          <button
+            className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
+            onClick={() => setNewForm(newForm + 1)}
+          >
+            Add New
           </button>
           <button
             className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"

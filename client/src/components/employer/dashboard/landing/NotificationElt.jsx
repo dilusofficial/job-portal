@@ -8,7 +8,7 @@ export default function NotificationElt({ name, post }) {
         <BsSuitcaseLg />
       </div>
 
-      <p>
+      <p className="leading-6">
         <span className="font-semibold">{name}</span> applied for a job{" "}
         <span className=" text-blue-700">{post}</span>
       </p>

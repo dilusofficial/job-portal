@@ -14,7 +14,7 @@ export default function HeaderPart() {
         <div className="flex flex-col gap-4">
           <h1 className="text-xl font-medium">{"Darlene Johnson"}</h1>
           <p className="text-hover">{"UI Developer"}</p>
-          <div className="flex gap-5 text-sm">
+          <div className="flex md:flex-row flex-col gap-5 text-sm">
             <p className="flex gap-2 items-center text-gray-500">
               <span>
                 <SlLocationPin />

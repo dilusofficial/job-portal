@@ -14,6 +14,7 @@ export default function LoginPage() {
   const [googleLoginUser] = useGoogleLoginUserMutation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("candidate");
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -63,6 +64,28 @@ export default function LoginPage() {
         </div>
 
         <h2 className="text-xl lg:text-2xl my-3 font-medium">Login</h2>
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full my-3">
+          <button
+            onClick={() => setRole("candidate")}
+            className={` w-full px-2 py-3 rounded-lg ${
+              role === "candidate"
+                ? "bg-ascent text-secondary"
+                : "bg-background1 hover:bg-hover hover:text-secondary"
+            }`}
+          >
+            Candidate
+          </button>
+          <button
+            onClick={() => setRole("employer")}
+            className={`w-full px-2 py-3 rounded-lg ${
+              role === "employer"
+                ? "bg-ascent text-secondary"
+                : "bg-background1 hover:bg-hover hover:text-secondary"
+            }`}
+          >
+            Employer
+          </button>
+        </div>
         <form className="flex flex-col w-full">
           <div className="form-row">
             <label htmlFor="emailid" className="form-label">

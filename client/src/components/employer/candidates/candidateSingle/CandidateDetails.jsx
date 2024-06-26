@@ -1,5 +1,10 @@
 import React from "react";
 import ProfessionalDetailListing from "./ProfessionalDetailListing";
+import ExtraDetails from "./ExtraDetails";
+import ContactDetails from "./ContactDetails";
+import SocialMedia from "./SocialMedia";
+import Skills from "./Skills";
+import MessageForm from "./MessageForm";
 
 export default function CandidateDetails() {
   return (
@@ -60,7 +65,13 @@ export default function CandidateDetails() {
           year={"2014-2016"}
         />
       </div>
-      <div className="bg-background1 h-screen w-full lg:w-1/4 rounded-lg"></div>
+      <div className="bg-background1 w-full lg:w-1/4 rounded-lg p-3 lg:px-8">
+        <ExtraDetails />
+        <ContactDetails />
+        <SocialMedia candidate />
+        <Skills />
+        <MessageForm />
+      </div>
     </div>
   );
 }

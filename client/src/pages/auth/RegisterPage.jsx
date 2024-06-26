@@ -10,6 +10,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
+  const [role, setRole] = useState("candidate");
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -44,10 +45,24 @@ export default function RegisterPage() {
 
         <h2 className="text-xl lg:text-xl my-3 font-medium">Register</h2>
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full my-3">
-          <button className="bg-ascent text-secondary w-full px-2 py-3 rounded-lg">
+          <button
+            onClick={() => setRole("candidate")}
+            className={` w-full px-2 py-3 rounded-lg ${
+              role === "candidate"
+                ? "bg-ascent text-secondary"
+                : "bg-background1 hover:bg-hover hover:text-secondary"
+            }`}
+          >
             Candidate
           </button>
-          <button className="bg-background1 hover:bg-hover hover:text-secondary w-full px-2 py-3 rounded-lg">
+          <button
+            onClick={() => setRole("employer")}
+            className={`w-full px-2 py-3 rounded-lg ${
+              role === "employer"
+                ? "bg-ascent text-secondary"
+                : "bg-background1 hover:bg-hover hover:text-secondary"
+            }`}
+          >
             Employer
           </button>
         </div>

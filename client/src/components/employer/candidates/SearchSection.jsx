@@ -8,6 +8,10 @@ import { MdOutlineWorkOutline } from "react-icons/md";
 import { GrUserExpert } from "react-icons/gr";
 import { IoSchoolOutline } from "react-icons/io5";
 import { jobCategory } from "../../../utils/jobcategory";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { toggleEmployerCandidatesFilter } from "../../../slices/responsiveSlice";
+
 const genderlist = [
   { category: "Male" },
   { category: "Female" },
@@ -29,8 +33,19 @@ const Qualificationlist = [
 ];
 
 export default function SearchSection() {
+  const dispatch = useDispatch();
   return (
-    <div className="flex flex-col justify-start gap-8 h-full sticky left-0 top-0">
+    <div
+      className={` flex flex-col justify-start gap-8 h-full sticky left-0 top-0`}
+    >
+      <div className="flex justify-end xl:hidden">
+        <button
+          onClick={() => dispatch(toggleEmployerCandidatesFilter())}
+          className="text-3xl"
+        >
+          <IoMdCloseCircleOutline />
+        </button>
+      </div>
       <SearchElt
         title={"Search by Keywords"}
         icon={<CiSearch />}
