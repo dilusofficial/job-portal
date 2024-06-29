@@ -14,7 +14,11 @@ export default function MobileVerify() {
     try {
       const res = await verifyOTPtoUser({ otp }).unwrap();
       if (res.msg === "verified") {
-        navigate("/details");
+        if (res.role === "employer") {
+          navigate("/employer/dashboard/company-profile");
+        } else if (res.role === "candidate") {
+          navigate("/details");
+        }
         toast.success("Phone number verified");
       } else {
         toast.error(res.msg);

@@ -66,6 +66,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    getUserInfo: builder.query({
+      query: () => ({
+        url: `${BASE_URL}/auth/userInfo`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -78,4 +85,5 @@ export const {
   useVerifyOTPtoUserMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useGetUserInfoQuery,
 } = authApiSlice;

@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function ProfileFormInputElt({ title, placeholder, type }) {
+export default function ProfileFormInputElt({
+  title,
+  placeholder,
+  type,
+  value,
+  onchange,
+}) {
   return (
     <div className="form-row">
       <label className="form-label">{title}</label>
@@ -9,6 +15,9 @@ export default function ProfileFormInputElt({ title, placeholder, type }) {
           type={type}
           className="w-full py-1 px-3 rounded-lg bg-background2 border border-gray-300 text-gray-900 h-11"
           placeholder={placeholder}
+          value={value}
+          onChange={onchange}
+          required
         />
       </div>
     </div>

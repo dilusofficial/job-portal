@@ -24,6 +24,7 @@ export default function RegisterPage() {
           username,
           password,
           email,
+          role,
         }).unwrap();
         if (res.msg === "registered successfully") {
           navigate("/auth/send-otp");

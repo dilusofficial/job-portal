@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navigation from "../../../components/employer/dashboard/navigation/Navigation";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { CiMenuBurger } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleEmployerSmallDashboard } from "../../../slices/responsiveSlice";
@@ -9,7 +9,15 @@ export default function DashboardLayout() {
   const { showEmployerSmallDashboard } = useSelector(
     (state) => state.responsive
   );
+  const { userInfo } = useSelector((state) => state.allUsers);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userInfo?.username) {
+      navigate("/employer");
+    }
+  }, [userInfo]);
   return (
     <div>
       <h1 className="form-title mb-8 text-2xl font-semibold text-center">

@@ -12,30 +12,24 @@ const EmployerSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
   },
   phone: {
     type: String,
-    unique: true,
   },
   logo: {
     type: String,
   },
   companyName: {
     type: String,
-    unique: true,
   },
   companyEmail: {
     type: String,
-    unique: true,
   },
   companyContact: {
     type: String,
-    unique: true,
   },
   website: {
     type: String,
-    unique: true,
   },
   founded: {
     type: Date,

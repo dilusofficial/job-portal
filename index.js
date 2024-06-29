@@ -4,12 +4,15 @@ dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import homeRouter from "./modules/user/routers/homeRouter.js";
 import authRouter from "./modules/auth/routers/authRouter.js";
-import userRouter from "./modules/user/routers/userRouter.js";
+import employerDashboardRouter from "./modules/employer/routers/employerDashboardRouter.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+import {
+  authenticateEmployer,
+  authenticateUser,
+} from "./middleware/authMiddleware.js";
 
 const app = express();
 
@@ -23,9 +26,14 @@ app.use(
     origin: "http://localhost:5173",
   })
 );
-app.use("/home", homeRouter);
+
 app.use("/auth", authRouter);
-app.use("/user", userRouter);
+app.use(
+  "/employer",
+  authenticateUser,
+  authenticateEmployer,
+  employerDashboardRouter
+);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "Not Found" });

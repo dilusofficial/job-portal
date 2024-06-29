@@ -23,9 +23,10 @@ export default function LoginPage() {
       const res = await loginUser({
         password,
         email,
+        role,
       }).unwrap();
       if (res.msg === "logged in successfully") {
-        navigate("/admin/statistics");
+        navigate("/employer");
         toast.success("successfully logged in");
       } else {
         toast.error(res.msg);
@@ -41,12 +42,13 @@ export default function LoginPage() {
       const resp = await googleLoginUser({
         email: decoded.email,
         username: decoded.name,
+        role,
       }).unwrap();
       if (
         resp.msg === "successfully logged in" ||
         resp.msg === "registered successfully"
       ) {
-        navigate("/admin/statistics");
+        navigate("/employer");
         toast.success("successfully logged in");
       } else {
         toast.error(resp.msg);
