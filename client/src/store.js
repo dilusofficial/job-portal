@@ -3,7 +3,9 @@ import dataCollectionReducer from "./slices/dataCollectionSlice";
 import responsiveReducer from "./slices/responsiveSlice";
 import allUsersReducer from "./slices/allUsersSlice";
 import employerCompanyProfileReducer from "./slices/employerCompanyProfileSlice";
+import employerPostJobReducer from "./slices/employerPostJobSlice";
 import { apiSlice } from "./slices/apiSlice";
+
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -11,6 +13,7 @@ export const store = configureStore({
     responsive: responsiveReducer,
     allUsers: allUsersReducer,
     employerCompanyProfile: employerCompanyProfileReducer,
+    employerPostJob: employerPostJobReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

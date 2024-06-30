@@ -9,12 +9,14 @@ import { toggleEmployerSmallBar } from "../../slices/responsiveSlice";
 import { useLogoutUserMutation } from "../../slices/authApiSlice";
 import { toast } from "react-toastify";
 import { setUserInfo } from "../../slices/allUsersSlice";
+import { useGetCompanyProfileQuery } from "../../slices/employerApiSlice";
 
 export default function EmployerHeader() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { showEmployerSmallBar } = useSelector((state) => state.responsive);
   const { userInfo } = useSelector((state) => state.allUsers);
+  const { data } = useGetCompanyProfileQuery();
   const [showLogout, setShowLogout] = useState(false);
   const [logoutUser] = useLogoutUserMutation();
   const navigate = useNavigate();
@@ -83,9 +85,13 @@ export default function EmployerHeader() {
             </Link>
             <div className="relative">
               <button
-                className="px-2 py-2 bg-gray-400 rounded-lg flex items-center"
+                className="px-2 py-2 bg-gray-400 rounded-lg gap-3 flex items-center"
                 onClick={() => setShowLogout(!showLogout)}
               >
+                <img
+                  className="w-7 h-7 rounded-full border border-ascent"
+                  src={`${data?.logo ? data.logo : "/nocompany.png"}`}
+                ></img>
                 <span className="md:block hidden">{userInfo.username}</span>
                 <span className="text-2xl">
                   <RiArrowDropDownLine />

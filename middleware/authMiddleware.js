@@ -1,7 +1,9 @@
 import {
+  BadRequestError,
   UnauthenticatedError,
   UnauthorizedError,
 } from "../errors/customErrors.js";
+import Employer from "../models/EmployerModel.js";
 import User from "../models/UserModel.js";
 import { verifyJWT } from "../utils/jwtUtils.js";
 
@@ -23,5 +25,14 @@ export const authenticateEmployer = async (req, res, next) => {
     next();
   } else {
     throw new UnauthorizedError("Not authorized. Admins only");
+  }
+};
+
+export const checkCompany = async (req, res, next) => {
+  const employer = await Employer.findById(req.user.userId);
+  if (employer.companyName) {
+    next();
+  } else {
+    throw new BadRequestError("No company details found.");
   }
 };

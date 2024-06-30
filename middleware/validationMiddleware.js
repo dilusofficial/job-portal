@@ -38,7 +38,15 @@ export const validateLoginInput = withValidationErrors([
 ]);
 
 export const validateCompanyProfileInput = withValidationErrors([
-  body("companyName").notEmpty().withMessage("company name is required"),
+  body("companyName")
+    .notEmpty()
+    .withMessage("company name is required")
+    .custom(async (companyName, { req }) => {
+      const user = await Employer.findOne({ companyName });
+      if (user && user._id.toString() !== req.user.userId.toString()) {
+        throw new BadRequestError("Company Name already exists");
+      }
+    }),
   body("companyEmail")
     .notEmpty()
     .withMessage("Email is required")
@@ -70,4 +78,18 @@ export const validateCompanyProfileInput = withValidationErrors([
   body("state").notEmpty().withMessage("state is required"),
   body("companyAddress").notEmpty().withMessage("company address is required"),
   body("about").notEmpty().withMessage("about is required"),
+]);
+
+export const validatePostJobInput = withValidationErrors([
+  body("jobTitle").notEmpty().withMessage("Job title is required"),
+  body("description").notEmpty().withMessage("description is required"),
+  body("category").notEmpty().withMessage("Job category is required"),
+  body("jobType").notEmpty().withMessage("Job type is required"),
+  body("qualification").notEmpty().withMessage("Job qualification is required"),
+  body("experience").notEmpty().withMessage("experience is required"),
+  body("gender").notEmpty().withMessage("gender is required"),
+  body("skills").notEmpty().withMessage("skills is required"),
+  body("jobLocation").notEmpty().withMessage("Job location is required"),
+  body("deadline").notEmpty().withMessage("deadline is required"),
+  body("salary").notEmpty().withMessage("Job salary is required"),
 ]);

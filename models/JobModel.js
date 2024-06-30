@@ -42,15 +42,15 @@ const JobSchema = new Schema(
       enum: [
         "Certificate",
         "Diploma",
-        "Bachelor's Degree",
-        "Master's Degree",
+        "Bachelors Degree",
+        "Masters Degree",
         "Doctorate",
       ],
     },
     experience: {
       type: String,
       required: true,
-      enum: ["All", "Fresher", "0-1", "1-2", "2-4", "4-6", ">6"],
+      enum: ["All", "fresher", "0-1", "1-2", "2-4", "4-6", ">6"],
     },
     gender: {
       type: String,
