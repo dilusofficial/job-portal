@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
-import ProfileFormInputElt from "../ProfileFormInputElt";
-import ProfileInputSelectElt from "../ProfileInputSelectElt";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  useEditSingleJobMutation,
+  useGetMySingleJobQuery,
+} from "../../../../slices/employerApiSlice";
+import Loading from "../../../Loading";
+import { Identity } from "twilio/lib/twiml/VoiceResponse";
 import {
   resetAll,
   setCategory,
@@ -17,11 +21,11 @@ import {
   setSalary,
   setSkills,
 } from "../../../../slices/employerPostJobSlice";
-import { usePostNewJobMutation } from "../../../../slices/employerApiSlice";
+import ProfileFormInputElt from "../ProfileFormInputElt";
+import ProfileInputSelectElt from "../ProfileInputSelectElt";
 import { toast } from "react-toastify";
-import Loading from "../../../Loading";
 
-export default function JobForm() {
+export default function EditJobForm() {
   const {
     jobTitle,
     description,
@@ -37,11 +41,14 @@ export default function JobForm() {
   } = useSelector((state) => state.employerPostJob);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [postNewJob, { isLoading }] = usePostNewJobMutation();
+  const { id } = useParams();
+  const { data, isLoading: loadingData } = useGetMySingleJobQuery(id);
+  const [editSingleJob, { isLoading }] = useEditSingleJobMutation();
 
-  const handlePost = async () => {
+  const handleUpdate = async () => {
     try {
-      const res = await postNewJob({
+      const res = await editSingleJob({
+        id,
         jobTitle,
         description,
         category,
@@ -54,10 +61,11 @@ export default function JobForm() {
         jobLocation,
         salary,
       }).unwrap();
-      if (res.msg === "Job added successfully") {
-        toast.success("Job successfully added");
+      if (res.msg === "Job updated successfully") {
+        toast.success("job updated successfully");
         dispatch(resetAll());
         navigate("/employer/dashboard/manage-jobs");
+        window.scrollTo(0, 0);
       } else {
         toast.error(res.msg);
       }
@@ -67,8 +75,22 @@ export default function JobForm() {
   };
 
   useEffect(() => {
-    dispatch(resetAll());
-  }, []);
+    if (data) {
+      const formatedDate = new Date(data.deadline);
+      const dateToShow = formatedDate.toISOString().split("T")[0];
+      dispatch(setJobTitle(data.jobTitle));
+      dispatch(setDescription(data.description));
+      dispatch(setCategory(data.category));
+      dispatch(setJobType(data.jobType));
+      dispatch(setQualification(data.qualification));
+      dispatch(setExperience(data.experience));
+      dispatch(setGender(data.gender));
+      dispatch(setSkills(data.skills.join(", ")));
+      dispatch(setDeadline(dateToShow));
+      dispatch(setJobLocation(data.jobLocation));
+      dispatch(setSalary(data.salary));
+    }
+  }, [loadingData]);
 
   return (
     <div className="my-4">
@@ -165,13 +187,26 @@ export default function JobForm() {
         onchange={(e) => dispatch(setSkills(e.target.value))}
         placeholder={"Html, css, python,"}
       />
-      <button
-        onClick={handlePost}
-        disabled={isLoading}
-        className="p-3 rounded-lg bg-ascent text-secondary hover:bg-hover"
-      >
-        Post
-      </button>
+      <div className=" flex gap-3">
+        <Link
+          onClick={() => {
+            dispatch(resetAll());
+            window.scrollTo(0, 0);
+          }}
+          to={"/employer/dashboard/manage-jobs"}
+          className="p-3 rounded-lg bg-ascent text-secondary hover:bg-hover"
+        >
+          Back
+        </Link>
+        <button
+          onClick={handleUpdate}
+          disabled={isLoading}
+          className="p-3 rounded-lg bg-ascent text-secondary hover:bg-hover"
+        >
+          Update
+        </button>
+      </div>
+
       {isLoading && <Loading />}
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
-import JobTable from "../../../components/employer/dashboard/mangeJobs/Table";
-import Pagination from "../../../components/Pagination";
-import { useGetMyJobsQuery } from "../../../slices/employerApiSlice";
+import JobTable from "../../../../components/employer/dashboard/mangeJobs/Table";
+import Pagination from "../../../../components/Pagination";
+import { useGetMyJobsQuery } from "../../../../slices/employerApiSlice";
 
 export default function ManageJobs() {
   const { data } = useGetMyJobsQuery();

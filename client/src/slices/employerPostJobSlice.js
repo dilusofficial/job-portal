@@ -51,6 +51,19 @@ const employerPostJobSlice = createSlice({
     setSalary: (state, { payload }) => {
       state.salary = payload;
     },
+    resetAll: (state) => {
+      state.jobTitle = "";
+      state.description = "";
+      state.category = "Healthcare & Medical";
+      state.jobType = "Full-time";
+      state.qualification = "Certificate";
+      state.experience = "All";
+      state.gender = "All";
+      state.skills = "";
+      state.deadline = "";
+      state.jobLocation = "On-site";
+      state.salary = "";
+    },
   },
 });
 
@@ -67,4 +80,5 @@ export const {
   setQualification,
   setSalary,
   setSkills,
+  resetAll,
 } = employerPostJobSlice.actions;

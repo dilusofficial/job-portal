@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function PostJobSection() {
   return (
@@ -9,9 +10,12 @@ export default function PostJobSection() {
           As a new recruiter, post a job for your company and select suitable
           candidates by exploring through thousands of available resumes.
         </p>
-        <button className="bg-ascent py-5 px-2 text-secondary hover:bg-hover rounded-lg">
+        <Link
+          to={"/employer/dashboard/post-job"}
+          className="bg-ascent py-5 px-2 text-secondary hover:bg-hover rounded-lg"
+        >
           Post a Job
-        </button>
+        </Link>
       </div>
       <div className=" overflow-hidden place-content-center">
         <img src="/employers-2.png" className="w-4/5 mx-auto"></img>

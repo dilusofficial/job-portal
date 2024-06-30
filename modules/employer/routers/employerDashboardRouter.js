@@ -2,7 +2,9 @@ import { Router } from "express";
 import {
   addNewJob,
   companyProfile,
+  editJob,
   getEmployerJobs,
+  getSingleJob,
   updateCompanyProfile,
 } from "../controllers/employerDashboardController.js";
 import {
@@ -20,5 +22,7 @@ router.post(
 router.get("/company-profile", companyProfile);
 router.get("/job", getEmployerJobs);
 router.post("/job", validatePostJobInput, checkCompany, addNewJob);
+router.patch("/job/:id", editJob);
+router.get("/job/:id", getSingleJob);
 
 export default router;

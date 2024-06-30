@@ -33,6 +33,21 @@ export const employerApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    editSingleJob: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/employer/job/${data.id}`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    getMySingleJob: builder.query({
+      query: (jobId) => ({
+        url: `${BASE_URL}/employer/job/${jobId}`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 3,
+    }),
   }),
 });
 
@@ -41,4 +56,6 @@ export const {
   useGetCompanyProfileQuery,
   usePostNewJobMutation,
   useGetMyJobsQuery,
+  useEditSingleJobMutation,
+  useGetMySingleJobQuery,
 } = employerApiSlice;

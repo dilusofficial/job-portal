@@ -54,10 +54,12 @@ export default function ProfileForm() {
 
   useEffect(() => {
     if (data) {
+      const formatedDate = new Date(data.founded);
+      const dateToShow = formatedDate.toISOString().split("T")[0];
       dispatch(setCompanyName(data.companyName));
       dispatch(setCompanyEmail(data.companyEmail));
       dispatch(setCompanyContact(data.companyContact));
-      dispatch(setFounded(data.founded));
+      dispatch(setFounded(dateToShow));
       dispatch(setSize(data.size));
       dispatch(setIndustry(data.industry));
       dispatch(setWebsite(data.website));

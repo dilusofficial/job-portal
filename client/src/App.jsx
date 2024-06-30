@@ -36,13 +36,15 @@ import DashboardLayout from "./pages/employer/dashboard/DashboardLayout";
 import EmployerDashBoard from "./pages/employer/dashboard/EmployerDashBoard";
 import CompanyProfile from "./pages/employer/dashboard/CompanyProfile";
 import PostAJob from "./pages/employer/dashboard/PostAJob";
-import ManageJobs from "./pages/employer/dashboard/ManageJobs";
+import ManageJobs from "./pages/employer/dashboard/manageJobs/ManageJobs";
 import AllApplicants from "./pages/employer/dashboard/AllApplicants";
 import Messages from "./pages/employer/dashboard/Messages";
 import ShortListedResumes from "./pages/employer/dashboard/ShortListedResumes";
 import ChangePassword from "./pages/employer/dashboard/ChangePassword";
 import CandidateSinglePage from "./pages/employer/candidates/CandidateSinglePage";
 import CompanySinglePage from "./pages/employer/companies/CompanySinglePage";
+import SingleJob from "./pages/employer/dashboard/manageJobs/SingleJob";
+import EditJob from "./pages/employer/dashboard/manageJobs/EditJob";
 
 function App() {
   const router = createBrowserRouter([
@@ -142,6 +144,14 @@ function App() {
             {
               path: "manage-jobs",
               element: <ManageJobs />,
+            },
+            {
+              path: "manage-jobs/edit/:id",
+              element: <EditJob />,
+            },
+            {
+              path: "manage-jobs/:id",
+              element: <SingleJob />,
             },
             {
               path: "applicants",

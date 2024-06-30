@@ -10,6 +10,7 @@ import { jobData } from "../../../../utils/jobData";
 import TableCard from "./TableCard";
 import { useGetMyJobsQuery } from "../../../../slices/employerApiSlice";
 import Loading from "../../../Loading";
+import { Link } from "react-router-dom";
 
 const rows = [];
 
@@ -49,16 +50,26 @@ export default function JobTable() {
                   {row.createdAt.toString().slice(0, 10)}
                 </TableCell>
                 <TableCell align="center">
-                  {row.isActive ? "Active" : "Inactive"}
+                  {row.isActive ? (
+                    <span className="text-green-500">Active</span>
+                  ) : (
+                    <span className=" text-red-500">Inactive</span>
+                  )}
                 </TableCell>
                 <TableCell align="center">
                   <div className="flex gap-3 justify-between">
-                    <button className="text-blue-700 bg-blue-100 hover:bg-blue-200 p-2 rounded-xl">
+                    <Link
+                      to={`/employer/dashboard/manage-jobs/${row._id}`}
+                      className="text-blue-700 bg-blue-100 hover:bg-blue-200 p-2 rounded-xl"
+                    >
                       View
-                    </button>
-                    <button className="text-yellow-700 bg-yellow-100 hover:bg-yellow-200 p-2 rounded-xl">
+                    </Link>
+                    <Link
+                      to={`/employer/dashboard/manage-jobs/edit/${row._id}`}
+                      className="text-yellow-700 bg-yellow-100 hover:bg-yellow-200 p-2 rounded-xl"
+                    >
                       Edit
-                    </button>
+                    </Link>
                     <button className="text-red-700 bg-red-100 hover:bg-red-200 p-2 rounded-xl">
                       Delete
                     </button>
