@@ -80,3 +80,9 @@ export const editJob = async (req, res) => {
   await job.save();
   res.status(200).json({ msg: "Job updated successfully" });
 };
+
+export const deleteJob = async (req, res) => {
+  const job = await Job.findByIdAndDelete(req.params.id);
+  if (!job) throw new NotFoundError("no jobs found");
+  res.status(200).json({ msg: "Job deleted successfully" });
+};
