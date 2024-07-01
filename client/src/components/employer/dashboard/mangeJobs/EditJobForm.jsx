@@ -76,8 +76,8 @@ export default function EditJobForm() {
 
   useEffect(() => {
     if (data) {
-      const formatedDate = new Date(data.deadline);
-      const dateToShow = formatedDate.toISOString().split("T")[0];
+      const formatedDate = new Date(data?.deadline);
+      const dateToShow = formatedDate?.toISOString().split("T")[0];
       dispatch(setJobTitle(data.jobTitle));
       dispatch(setDescription(data.description));
       dispatch(setCategory(data.category));
@@ -86,7 +86,7 @@ export default function EditJobForm() {
       dispatch(setExperience(data.experience));
       dispatch(setGender(data.gender));
       dispatch(setSkills(data.skills.join(", ")));
-      dispatch(setDeadline(dateToShow));
+      dispatch(setDeadline(dateToShow || ""));
       dispatch(setJobLocation(data.jobLocation));
       dispatch(setSalary(data.salary));
     }

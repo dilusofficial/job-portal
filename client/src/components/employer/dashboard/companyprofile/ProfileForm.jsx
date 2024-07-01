@@ -54,12 +54,9 @@ export default function ProfileForm() {
 
   useEffect(() => {
     if (data) {
-      const formatedDate = new Date(data.founded);
-      const dateToShow = formatedDate.toISOString().split("T")[0];
       dispatch(setCompanyName(data.companyName));
       dispatch(setCompanyEmail(data.companyEmail));
       dispatch(setCompanyContact(data.companyContact));
-      dispatch(setFounded(dateToShow));
       dispatch(setSize(data.size));
       dispatch(setIndustry(data.industry));
       dispatch(setWebsite(data.website));
@@ -70,6 +67,13 @@ export default function ProfileForm() {
       dispatch(setState(data.state));
       dispatch(setCompanyAddress(data.companyAddress));
       dispatch(setAbout(data.about));
+      if (data.founded) {
+        const formatedDate = new Date(data.founded);
+        const dateToShow = formatedDate.toISOString().split("T")[0];
+        dispatch(setFounded(dateToShow));
+      } else {
+        dispatch(setFounded(""));
+      }
     }
   }, [loadingDetails]);
   const handleSave = async () => {
