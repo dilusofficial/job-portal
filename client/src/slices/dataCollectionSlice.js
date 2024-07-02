@@ -1,32 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  basicDetails: "current",
-  basicColor: "text-ascent",
-  educationDetails: "pending",
-  educationColor: "text-gray-400",
+  educationDetails: "current",
+  educationColor: "text-ascent",
   workDetails: "pending",
   workColor: "text-gray-400",
   professionalDetails: "pending",
   professionalColor: "text-gray-400",
   preferences: "pending",
   preferencesColor: "text-gray-400",
+  education: [{}],
+  work: [{}],
+  projects: [{}],
+  certificates: [{}],
+  fullName: "",
+  resume: "",
+  currentSalary: "",
+  expectedSalary: "",
+  totalExperience: "",
+  preferredLocation: "",
+  skills: "",
+  languages: "",
+  about: "",
 };
 
 const dataCollectionSlice = createSlice({
   name: "dataCollection",
   initialState,
   reducers: {
-    setBasicDetails: (state, { payload }) => {
-      state.basicDetails = payload;
-      if (payload === "pending") {
-        state.basicColor = "text-gray-400";
-      } else if (payload === "current") {
-        state.basicColor = "text-ascent";
-      } else if (payload === "completed") {
-        state.basicColor = "text-green-700";
-      }
-    },
     setEducationDetails: (state, { payload }) => {
       state.educationDetails = payload;
       if (payload === "pending") {
@@ -67,14 +68,81 @@ const dataCollectionSlice = createSlice({
         state.preferencesColor = "text-green-700";
       }
     },
+    setWork: (state, { payload }) => {
+      state.work = payload;
+    },
+    setEducation: (state, { payload }) => {
+      state.education = payload;
+    },
+    setProjects: (state, { payload }) => {
+      state.projects = payload;
+    },
+    setCertificates: (state, { payload }) => {
+      state.certificates = payload;
+    },
+    setFullName: (state, { payload }) => {
+      state.fullName = payload;
+    },
+    setResume: (state, { payload }) => {
+      state.resume = payload;
+    },
+    setCurrentSalary: (state, { payload }) => {
+      state.currentSalary = payload;
+    },
+    setExpectedSalary: (state, { payload }) => {
+      state.expectedSalary = payload;
+    },
+    setTotalExperience: (state, { payload }) => {
+      state.totalExperience = payload;
+    },
+    setPrefferedLocation: (state, { payload }) => {
+      state.preferredLocation = payload;
+    },
+    setskills: (state, { payload }) => {
+      state.skills = payload;
+    },
+    setLanguages: (state, { payload }) => {
+      state.languages = payload;
+    },
+    setAbout: (state, { payload }) => {
+      state.about = payload;
+    },
+    resetData: (state) => {
+      state.education = [{}];
+      state.work = [{}];
+      state.projects = [{}];
+      state.certificates = [{}];
+      state.fullName = "";
+      state.resume = "";
+      state.currentSalary = "";
+      state.expectedSalary = "";
+      state.totalExperience = "";
+      state.preferredLocation = "";
+      state.skills = "";
+      state.languages = "";
+      state.about = "";
+    },
   },
 });
 
 export default dataCollectionSlice.reducer;
 export const {
-  setBasicDetails,
   setEducationDetails,
   setPreferences,
   setProfessionalDetails,
   setWorkDetails,
+  setAbout,
+  setCertificates,
+  setCurrentSalary,
+  setEducation,
+  setExpectedSalary,
+  setFullName,
+  setLanguages,
+  setPrefferedLocation,
+  setProjects,
+  setResume,
+  setTotalExperience,
+  setWork,
+  setskills,
+  resetData,
 } = dataCollectionSlice.actions;

@@ -29,7 +29,11 @@ export default function JobPortalType() {
     try {
       const res = await saveJobSeeker().unwrap();
       if (res.msg === "success") {
-        navigate("/jobseeker/details");
+        if (res.newSeeker?.dataCollected || res.jobseeker?.dataCollected) {
+          navigate("/jobseeker");
+        } else {
+          navigate("/jobseeker/details");
+        }
       } else {
         toast.error(res.msg);
       }

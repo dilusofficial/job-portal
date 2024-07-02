@@ -15,13 +15,15 @@ export default function ProfessionalDetails() {
   function handleBack() {
     dispatch(setProfessionalDetails("pending"));
     dispatch(setWorkDetails("current"));
+    window.scrollTo(0, 0);
   }
   function handleNext() {
     dispatch(setProfessionalDetails("completed"));
     dispatch(setPreferences("current"));
+    window.scrollTo(0, 0);
   }
   return (
-    <div className="p-4 bg-secondary w-11/12 lg:w-1/2 rounded-lg mt-3">
+    <div className="p-4 bg-secondary min-h-96 w-11/12 lg:w-1/2 rounded-lg mt-3">
       <h1 className="text-xl my-2">Personal Projects</h1>
       {Array.from({ length: newProject }).map((_, index) => (
         <ProjectElt key={index} />

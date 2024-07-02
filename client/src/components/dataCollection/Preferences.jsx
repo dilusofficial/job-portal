@@ -13,13 +13,14 @@ export default function Preferences() {
   function handleBack() {
     dispatch(setPreferences("pending"));
     dispatch(setProfessionalDetails("current"));
+    window.scrollTo(0, 0);
   }
   function handleNext() {
     dispatch(setPreferences("completed"));
     navigate("/");
   }
   return (
-    <div className="p-4 bg-secondary w-11/12 lg:w-1/2 rounded-lg mt-3">
+    <div className="p-4 bg-secondary min-h-96 w-11/12 lg:w-1/2 rounded-lg mt-3">
       <PreferenceElt />
 
       <div>

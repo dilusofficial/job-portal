@@ -14,7 +14,7 @@ const WorkSchema = new Schema({
   started: Date,
   ended: Date,
   isWorking: Boolean,
-  achievements: String,
+  acheivements: String,
 });
 const ProjectSchema = new Schema({
   project: String,
@@ -97,6 +97,9 @@ const JobSeekerSchema = new Schema(
     },
     certificates: {
       type: [CertificateSchema],
+    },
+    dataCollected: {
+      type: Boolean,
     },
   },
   {
