@@ -1,20 +1,9 @@
 import mongoose, { Schema, model } from "mongoose";
 
 const EmployerSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-  },
-  phone: {
-    type: String,
+  owner: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
   },
   logo: {
     type: String,
@@ -84,19 +73,6 @@ const EmployerSchema = new Schema({
     type: [mongoose.Types.ObjectId],
     ref: "User",
     default: [],
-  },
-  role: {
-    type: String,
-    required: true,
-    enum: ["candidate", "employer", "admin"],
-  },
-  otp: {
-    type: String,
-  },
-  hasVerified: {
-    type: Boolean,
-    required: true,
-    default: false,
   },
 });
 

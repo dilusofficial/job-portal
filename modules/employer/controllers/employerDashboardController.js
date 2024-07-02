@@ -3,7 +3,7 @@ import Employer from "../../../models/EmployerModel.js";
 import Job from "../../../models/JobModel.js";
 
 export const updateCompanyProfile = async (req, res) => {
-  const employer = await Employer.findById(req.user.userId);
+  const employer = await Employer.findById(req.user.employerId);
   if (!employer) throw new NotFoundError("Employer not found");
   employer.companyName = req.body.companyName;
   employer.companyEmail = req.body.companyEmail;
@@ -24,7 +24,7 @@ export const updateCompanyProfile = async (req, res) => {
 };
 
 export const companyProfile = async (req, res) => {
-  const employer = await Employer.findById(req.user.userId);
+  const employer = await Employer.findById(req.user.employerId);
   if (!employer) throw new NotFoundError("Employer not found");
   res.status(200).json(employer);
 };
@@ -42,7 +42,7 @@ export const addNewJob = async (req, res) => {
     qualification: req.body.qualification,
     experience: req.body.experience,
     gender: req.body.gender,
-    owner: req.user.userId,
+    owner: req.user.employerId,
     skills: skillsArray,
   });
   await newJob.save();
@@ -50,7 +50,7 @@ export const addNewJob = async (req, res) => {
 };
 
 export const getEmployerJobs = async (req, res) => {
-  const jobs = await Job.find({ owner: req.user.userId });
+  const jobs = await Job.find({ owner: req.user.employerId });
   if (!jobs) throw new NotFoundError("No Jobs Found");
   res.status(200).json(jobs);
 };
@@ -75,7 +75,7 @@ export const editJob = async (req, res) => {
   job.qualification = req.body.qualification;
   job.experience = req.body.experience;
   job.gender = req.body.gender;
-  job.owner = req.user.userId;
+  job.owner = req.user.employerId;
   job.skills = skillsArray;
   await job.save();
   res.status(200).json({ msg: "Job updated successfully" });

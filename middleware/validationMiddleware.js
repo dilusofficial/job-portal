@@ -23,7 +23,6 @@ export const validateRegisterInput = withValidationErrors([
     .withMessage("Email is required")
     .isEmail()
     .withMessage("Invalid Email format"),
-  body("role").notEmpty().withMessage("Role is required"),
   body("password").notEmpty().withMessage("Password is required"),
 ]);
 
@@ -33,8 +32,21 @@ export const validateLoginInput = withValidationErrors([
     .withMessage("Email is required")
     .isEmail()
     .withMessage("Invalid Email format"),
-  body("role").notEmpty().withMessage("Role is required"),
   body("password").notEmpty().withMessage("Password is required"),
+]);
+
+export const validateUserDetailInput = withValidationErrors([
+  body("age").notEmpty().withMessage("age is required"),
+  body("dateOfBirth").notEmpty().withMessage("Date of Birth is required"),
+  body("hobbies").notEmpty().withMessage("hobbies are required"),
+  body("interest").notEmpty().withMessage("interest are is required"),
+  body("gender").notEmpty().withMessage("gender is required"),
+  body("smoking").notEmpty().withMessage("smoking is required"),
+  body("address").notEmpty().withMessage("address is required"),
+  body("drinking").notEmpty().withMessage("drinking is required"),
+  body("highestQualification")
+    .notEmpty()
+    .withMessage("qualification is required"),
 ]);
 
 export const validateCompanyProfileInput = withValidationErrors([

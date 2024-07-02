@@ -1,3 +1,4 @@
+import { body } from "express-validator";
 import { BASE_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 

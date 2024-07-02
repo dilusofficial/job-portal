@@ -12,7 +12,7 @@ export default {
         background2: "#e8e9ed",
       },
       backgroundImage: {
-        "hero-pattern": "url('/employers-1.png')",
+        homeback: "url('/homebackground.jpg')",
       },
     },
   },

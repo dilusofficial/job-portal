@@ -16,8 +16,8 @@ import { BsSuitcaseLg } from "react-icons/bs";
 import { BiMessageDetail } from "react-icons/bi";
 
 export const homeLinks1 = [
-  { path: "/jobs", text: "Find Jobs" },
-  { path: "/companies", text: "Companies" },
+  { path: "/jobseeker/jobs", text: "Find Jobs" },
+  { path: "/jobseeker/companies", text: "Companies" },
 ];
 
 export const employerHomeList = [

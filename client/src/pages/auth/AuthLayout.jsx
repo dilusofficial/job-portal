@@ -1,7 +1,5 @@
 import React from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
-import { homeLinks1 } from "../../utils/links";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { Link, Outlet } from "react-router-dom";
 
 export default function AuthLayout() {
   return (
@@ -11,7 +9,7 @@ export default function AuthLayout() {
           to={"/"}
           className="text-xl md:text-3xl font-semibold  text-ascent"
         >
-          Job Portal
+          Community App
         </Link>
       </div>
       <div className="grid lg:grid-cols-2 grid-cols-1">
@@ -21,7 +19,7 @@ export default function AuthLayout() {
               to={"/"}
               className="text-xl md:text-3xl font-semibold text-secondary"
             >
-              Job Portal
+              Community App
             </Link>
 
             <img

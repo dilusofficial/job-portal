@@ -27,7 +27,7 @@ export default function MobileOtp() {
     <div>
       <div className="flex flex-col justify-center items-center mx-auto w-11/12 lg:w-4/5p-4 lg:border-0 border border-ascent rounded-md">
         <div className="w-full text-center mb-10">
-          <h1 className="text-2xl lg:text-4xl font-semibold">Job Portal</h1>
+          <h1 className="text-2xl lg:text-4xl font-semibold">Community App</h1>
         </div>
 
         <h2 className="text-xl lg:text-2xl my-3 font-medium">
@@ -57,13 +57,6 @@ export default function MobileOtp() {
           </button>
           {isLoading && <Loading />}
         </form>
-
-        <p className="my-3 flex justify-start">
-          Do this later
-          <Link to="/admin/statistics" className="ms-2 text-blue-700 underline">
-            skip
-          </Link>
-        </p>
       </div>
     </div>
   );

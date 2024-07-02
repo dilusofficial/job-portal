@@ -45,11 +45,39 @@ import CandidateSinglePage from "./pages/employer/candidates/CandidateSinglePage
 import CompanySinglePage from "./pages/employer/companies/CompanySinglePage";
 import SingleJob from "./pages/employer/dashboard/manageJobs/SingleJob";
 import EditJob from "./pages/employer/dashboard/manageJobs/EditJob";
+import MainHomeLayout from "./pages/home/MainHomeLayout";
+import LandingPage from "./pages/home/landing/LandingPage";
+import UserData from "./pages/dataCollection/UserData";
+import Choose5 from "./pages/dataCollection/Choose5";
+import JobPortalType from "./pages/dataCollection/JobPortalType";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <MainHomeLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <LandingPage />,
+        },
+        {
+          path: "details",
+          element: <UserData />,
+        },
+        {
+          path: "choose",
+          element: <Choose5 />,
+        },
+        {
+          path: "portal-type",
+          element: <JobPortalType />,
+        },
+      ],
+    },
+    {
+      path: "/jobseeker",
       element: <HomeLayout />,
       errorElement: <ErrorPage />,
       children: [

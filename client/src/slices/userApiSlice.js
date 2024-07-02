@@ -3,14 +3,33 @@ import { apiSlice } from "./apiSlice";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getUserInfo: builder.query({
-      query: () => ({
-        url: `${BASE_URL}/user/info`,
+    addUserDetails: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/user/details`,
+        method: "POST",
+        body: data,
         credentials: "include",
       }),
-      keepUnusedDataFor: 5,
+    }),
+    saveEmployer: builder.mutation({
+      query: () => ({
+        url: `${BASE_URL}/user/save-employer`,
+        method: "POST",
+        credentials: "include",
+      }),
+    }),
+    saveJobSeeker: builder.mutation({
+      query: () => ({
+        url: `${BASE_URL}/user/save-jobseeker`,
+        method: "POST",
+        credentials: "include",
+      }),
     }),
   }),
 });
 
-export const { useGetUserInfoQuery } = userApiSlice;
+export const {
+  useAddUserDetailsMutation,
+  useSaveEmployerMutation,
+  useSaveJobSeekerMutation,
+} = userApiSlice;

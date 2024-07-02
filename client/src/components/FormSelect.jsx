@@ -1,11 +1,6 @@
 import React from "react";
 
-export default function ProfileInputSelectElt({
-  title,
-  list,
-  value,
-  onchange,
-}) {
+export default function FormSelect({ title, list, value, onchange }) {
   return (
     <div className="form-row">
       <label htmlFor="status" className="form-label">

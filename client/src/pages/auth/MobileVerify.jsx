@@ -14,11 +14,7 @@ export default function MobileVerify() {
     try {
       const res = await verifyOTPtoUser({ otp }).unwrap();
       if (res.msg === "verified") {
-        if (res.role === "employer") {
-          navigate("/employer/dashboard/company-profile");
-        } else if (res.role === "candidate") {
-          navigate("/details");
-        }
+        navigate("/details");
         toast.success("Phone number verified");
       } else {
         toast.error(res.msg);
@@ -32,7 +28,7 @@ export default function MobileVerify() {
     <div>
       <div className="flex flex-col justify-center items-center mx-auto w-11/12 lg:w-4/5 p-4 lg:border-0 border border-ascent rounded-md">
         <div className="w-full text-center mb-10">
-          <h1 className="text-2xl lg:text-4xl font-semibold">Job Portal</h1>
+          <h1 className="text-2xl lg:text-4xl font-semibold">Community App</h1>
         </div>
 
         <h2 className="text-xl lg:text-2xl my-3 font-medium">Enter OTP</h2>

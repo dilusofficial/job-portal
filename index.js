@@ -4,10 +4,12 @@ dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import authRouter from "./modules/auth/routers/authRouter.js";
-import employerDashboardRouter from "./modules/employer/routers/employerDashboardRouter.js";
 import mongoose from "mongoose";
 import cors from "cors";
+
+import authRouter from "./modules/auth/routers/authRouter.js";
+import employerDashboardRouter from "./modules/employer/routers/employerDashboardRouter.js";
+import userRouter from "./modules/user/routers/userRouter.js";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import {
   authenticateEmployer,
@@ -28,6 +30,7 @@ app.use(
 );
 
 app.use("/auth", authRouter);
+app.use("/user", authenticateUser, userRouter);
 app.use(
   "/employer",
   authenticateUser,

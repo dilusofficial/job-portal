@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ProfileFormInputElt({
+export default function FormInput({
   title,
   placeholder,
   type,

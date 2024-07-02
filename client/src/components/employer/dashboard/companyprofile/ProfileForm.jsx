@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import LogoUpload from "./LogoUpload";
-import ProfileFormInputElt from "../ProfileFormInputElt";
-import ProfileInputSelectElt from "../ProfileInputSelectElt";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAbout,
@@ -25,6 +23,8 @@ import {
 } from "../../../../slices/employerApiSlice";
 import Loading from "../../../Loading";
 import { toast } from "react-toastify";
+import FormInput from "../../../FormInput";
+import FormSelect from "../../../FormSelect";
 
 export default function ProfileForm() {
   const {
@@ -109,40 +109,40 @@ export default function ProfileForm() {
     <div className="my-4">
       <LogoUpload />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <ProfileFormInputElt
+        <FormInput
           title={"Company name"}
           type={"text"}
           value={companyName}
           onchange={(e) => dispatch(setCompanyName(e.target.value))}
           placeholder={"Enter company name"}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Company Email"}
           type={"email"}
           value={companyEmail}
           onchange={(e) => dispatch(setCompanyEmail(e.target.value))}
           placeholder={"email@email.com"}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Company contact"}
           type={"text"}
           value={companyContact}
           onchange={(e) => dispatch(setCompanyContact(e.target.value))}
           placeholder={"+91xxxxxxxxx"}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Founded on"}
           type={"date"}
           value={founded}
           onchange={(e) => dispatch(setFounded(e.target.value))}
         />
-        <ProfileInputSelectElt
+        <FormSelect
           title={"Company Size"}
           list={["10-50", "50-100", "100-200", "200-400", "400-800", ">800"]}
           value={size}
           onchange={(e) => dispatch(setSize(e.target.value))}
         />
-        <ProfileInputSelectElt
+        <FormSelect
           title={"Industry Type"}
           list={[
             "Information Technology & Telecommunications",
@@ -159,42 +159,42 @@ export default function ProfileForm() {
           value={industry}
           onchange={(e) => dispatch(setIndustry(e.target.value))}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Company Website"}
           type={"text"}
           value={website}
           onchange={(e) => dispatch(setWebsite(e.target.value))}
           placeholder={"www.company.com"}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Facebook"}
           type={"text"}
           value={facebook}
           onchange={(e) => dispatch(setFacebook(e.target.value))}
           placeholder={"facebook url"}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Twitter"}
           type={"text"}
           value={twitter}
           onchange={(e) => dispatch(setTwitter(e.target.value))}
           placeholder={"twitter url"}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Linkedin"}
           type={"text"}
           value={linkedin}
           onchange={(e) => dispatch(setLinkedin(e.target.value))}
           placeholder={"linkedin url"}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Country"}
           type={"text"}
           value={country}
           onchange={(e) => dispatch(setCountry(e.target.value))}
           placeholder={"INDIA"}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"STATE"}
           type={"text"}
           value={state}

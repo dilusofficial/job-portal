@@ -10,7 +10,6 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
-  const [role, setRole] = useState("candidate");
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -24,7 +23,6 @@ export default function RegisterPage() {
           username,
           password,
           email,
-          role,
         }).unwrap();
         if (res.msg === "registered successfully") {
           navigate("/auth/send-otp");
@@ -41,32 +39,10 @@ export default function RegisterPage() {
     <div>
       <div className="flex flex-col justify-center items-center mx-auto w-11/12 lg:w-4/5 p-4 lg:border-0 border border-ascent rounded-md">
         <div className="w-full text-center mb-10">
-          <h1 className="text-2xl lg:text-4xl font-semibold">Job Portal</h1>
+          <h1 className="text-2xl lg:text-4xl font-semibold">Community App</h1>
         </div>
 
         <h2 className="text-xl lg:text-xl my-3 font-medium">Register</h2>
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full my-3">
-          <button
-            onClick={() => setRole("candidate")}
-            className={` w-full px-2 py-3 rounded-lg ${
-              role === "candidate"
-                ? "bg-ascent text-secondary"
-                : "bg-background1 hover:bg-hover hover:text-secondary"
-            }`}
-          >
-            Candidate
-          </button>
-          <button
-            onClick={() => setRole("employer")}
-            className={`w-full px-2 py-3 rounded-lg ${
-              role === "employer"
-                ? "bg-ascent text-secondary"
-                : "bg-background1 hover:bg-hover hover:text-secondary"
-            }`}
-          >
-            Employer
-          </button>
-        </div>
         <form className="flex flex-col w-full">
           <div className="form-row">
             <label className="form-label">Username</label>

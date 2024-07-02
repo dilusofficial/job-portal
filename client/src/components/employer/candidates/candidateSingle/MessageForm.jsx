@@ -1,5 +1,4 @@
 import React from "react";
-import ProfileFormInputElt from "../../dashboard/ProfileFormInputElt";
 
 export default function MessageForm() {
   return (

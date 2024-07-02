@@ -1,35 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
 
-const EducationSchema = new Schema({
-  programme: String,
-  institution: String,
-  started: Date,
-  ended: Date,
-  isCurrent: Boolean,
-  courses: String,
-});
-const WorkSchema = new Schema({
-  jobTitle: String,
-  company: String,
-  started: Date,
-  ended: Date,
-  isWorking: Boolean,
-  achievements: String,
-});
-const ProjectSchema = new Schema({
-  project: String,
-  started: Date,
-  ended: Date,
-  isCurrent: Boolean,
-  description: String,
-});
-const CertificateSchema = new Schema({
-  certificate: String,
-  started: Date,
-  ended: Date,
-  description: String,
-});
-
 const UserSchema = new Schema(
   {
     username: {
@@ -47,9 +17,7 @@ const UserSchema = new Schema(
     password: {
       type: String,
     },
-    fullName: {
-      type: String,
-    },
+
     dateOfBirth: {
       type: Date,
     },
@@ -66,17 +34,6 @@ const UserSchema = new Schema(
     address: {
       type: String,
     },
-    totalExperience: {
-      type: String,
-    },
-    resume: {
-      type: String,
-    },
-    role: {
-      type: String,
-      required: true,
-      enum: ["candidate", "employer", "admin"],
-    },
     otp: {
       type: String,
     },
@@ -85,58 +42,30 @@ const UserSchema = new Schema(
       required: true,
       default: false,
     },
-    currentSalary: {
-      type: String,
-    },
-    expectedSalary: { type: String },
-    preferredLocation: {
+    hobbies: {
       type: [String],
     },
-    skills: {
+    interest: {
       type: [String],
     },
-    languages: {
-      type: [String],
-    },
-    about: {
+    drinking: {
       type: String,
+      enum: ["Often", "Occasional", "Never"],
     },
-    appliedJobs: {
-      type: [mongoose.Types.ObjectId],
-      ref: "Job",
-      default: [],
-    },
-    shortListed: {
-      type: [mongoose.Types.ObjectId],
-      ref: "Job",
-      default: [],
-    },
-    facebook: {
+    smoking: {
       type: String,
+      enum: ["Often", "Occational", "Never"],
     },
-    linkedin: {
+    highestQualification: {
       type: String,
-    },
-    github: {
-      type: String,
-    },
-    portfolio: {
-      type: String,
-    },
-    twitter: {
-      type: String,
-    },
-    education: {
-      type: [EducationSchema],
-    },
-    work: {
-      type: [WorkSchema],
-    },
-    projects: {
-      type: [ProjectSchema],
-    },
-    certificates: {
-      type: [CertificateSchema],
+      enum: [
+        "High School",
+        "Higher Secondary",
+        "Diploma",
+        "Bachelors Degree",
+        "Masters Degree",
+        "Doctorate",
+      ],
     },
   },
   {

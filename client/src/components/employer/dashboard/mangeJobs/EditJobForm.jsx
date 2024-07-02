@@ -6,7 +6,6 @@ import {
   useGetMySingleJobQuery,
 } from "../../../../slices/employerApiSlice";
 import Loading from "../../../Loading";
-import { Identity } from "twilio/lib/twiml/VoiceResponse";
 import {
   resetAll,
   setCategory,
@@ -21,9 +20,9 @@ import {
   setSalary,
   setSkills,
 } from "../../../../slices/employerPostJobSlice";
-import ProfileFormInputElt from "../ProfileFormInputElt";
-import ProfileInputSelectElt from "../ProfileInputSelectElt";
 import { toast } from "react-toastify";
+import FormInput from "../../../FormInput";
+import FormSelect from "../../../FormSelect";
 
 export default function EditJobForm() {
   const {
@@ -94,7 +93,7 @@ export default function EditJobForm() {
 
   return (
     <div className="my-4">
-      <ProfileFormInputElt
+      <FormInput
         title={"Job Title"}
         type={"text"}
         value={jobTitle}
@@ -114,7 +113,7 @@ export default function EditJobForm() {
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <ProfileInputSelectElt
+        <FormSelect
           title={"Job Category"}
           value={category}
           onchange={(e) => dispatch(setCategory(e.target.value))}
@@ -131,13 +130,13 @@ export default function EditJobForm() {
             "Management & Executive",
           ]}
         />
-        <ProfileInputSelectElt
+        <FormSelect
           title={"Job Type"}
           list={["Full-time", "Part-time", "Internship"]}
           value={jobType}
           onchange={(e) => dispatch(setJobType(e.target.value))}
         />
-        <ProfileInputSelectElt
+        <FormSelect
           title={"Qualification"}
           value={qualification}
           onchange={(e) => dispatch(setQualification(e.target.value))}
@@ -149,38 +148,38 @@ export default function EditJobForm() {
             "Doctorate",
           ]}
         />
-        <ProfileInputSelectElt
+        <FormSelect
           title={"Experience"}
           value={experience}
           onchange={(e) => dispatch(setExperience(e.target.value))}
           list={["All", "fresher", "0-1", "1-2", "2-4", "4-6", ">6"]}
         />
-        <ProfileInputSelectElt
+        <FormSelect
           title={"Preffered Gender"}
           value={gender}
           onchange={(e) => dispatch(setGender(e.target.value))}
           list={["All", "Male", "Female"]}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Application Deadline"}
           value={deadline}
           onchange={(e) => dispatch(setDeadline(e.target.value))}
           type={"date"}
         />
-        <ProfileInputSelectElt
+        <FormSelect
           title={"Job Location"}
           value={jobLocation}
           onchange={(e) => dispatch(setJobLocation(e.target.value))}
           list={["On-site", "Remote", "W-F-H", "Hybrid"]}
         />
-        <ProfileFormInputElt
+        <FormInput
           title={"Salary"}
           type={"text"}
           value={salary}
           onchange={(e) => dispatch(setSalary(e.target.value))}
         />
       </div>
-      <ProfileFormInputElt
+      <FormInput
         title={"Skills required"}
         type={"text"}
         value={skills}

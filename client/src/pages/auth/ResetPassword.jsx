@@ -7,14 +7,13 @@ import { toast } from "react-toastify";
 export default function ResetPassword() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("candidate");
   const navigate = useNavigate();
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await resetPassword({ id, password, role }).unwrap();
+      const res = await resetPassword({ id, password }).unwrap();
       if (res.msg === "password reset") {
         navigate("/auth/login");
         toast.success("password has been changed");
@@ -29,32 +28,11 @@ export default function ResetPassword() {
     <div>
       <div className="flex flex-col justify-center items-center mx-auto w-11/12 lg:w-4/5 p-4 lg:border-0 border border-ascent rounded-md">
         <div className="w-full text-center mb-10">
-          <h1 className="text-2xl lg:text-4xl font-semibold">Job Portal</h1>
+          <h1 className="text-2xl lg:text-4xl font-semibold">Community App</h1>
         </div>
 
         <h2 className="text-xl lg:text-2xl my-3 font-medium">Password reset</h2>
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full my-3">
-          <button
-            onClick={() => setRole("candidate")}
-            className={` w-full px-2 py-3 rounded-lg ${
-              role === "candidate"
-                ? "bg-ascent text-secondary"
-                : "bg-background1 hover:bg-hover hover:text-secondary"
-            }`}
-          >
-            Candidate
-          </button>
-          <button
-            onClick={() => setRole("employer")}
-            className={`w-full px-2 py-3 rounded-lg ${
-              role === "employer"
-                ? "bg-ascent text-secondary"
-                : "bg-background1 hover:bg-hover hover:text-secondary"
-            }`}
-          >
-            Employer
-          </button>
-        </div>
+
         <form className="flex flex-col w-full">
           <div className="form-row">
             <label className="form-label">Enter Key</label>

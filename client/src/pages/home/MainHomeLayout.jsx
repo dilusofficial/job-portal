@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import HomeHeader from "../../components/home/HomeHeader";
 import { useDispatch } from "react-redux";
-import { BASE_URL } from "../../constants";
 import axios from "axios";
+import { BASE_URL } from "../../constants";
 import { setUserInfo } from "../../slices/allUsersSlice";
 
-export default function HomeLayout() {
+export default function MainHomeLayout() {
   const dispatch = useDispatch();
 
   const getInfo = async () => {
@@ -26,7 +26,7 @@ export default function HomeLayout() {
   }, []);
   return (
     <>
-      <Header />
+      <HomeHeader />
       <div className="p-6 lg:px-16">
         <Outlet />
       </div>

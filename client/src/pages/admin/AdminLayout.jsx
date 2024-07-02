@@ -3,7 +3,6 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import BigSideBar from "../../components/admin/BigSideBar";
 import SmallSideBar from "../../components/admin/SmallSideBar";
-import { useGetUserInfoQuery } from "../../slices/userApiSlice";
 import axios from "axios";
 
 export default function AdminLayout() {
