@@ -40,13 +40,17 @@ export default function EmployerHeader() {
     <header
       className={`${
         showEmployerSmallBar ? "hidden" : ""
-      } lg:px-16 bg-primary h-20 flex justify-between items-center sticky top-0 p-5 border-b border-primary shadow-sm nav-link`}
+      } lg:px-16 bg-primary h-20 flex justify-between items-center sticky top-0 p-5 border-b border-primary z-10 shadow-sm nav-link`}
     >
       <div className="flex gap-1 md:gap-3">
         <Link to={"/employer"} className="text-xl md:text-3xl font-semibold">
           Job Portal
         </Link>
-        <div className="lg:ms-5 hidden  lg:flex gap-1 md:gap-3">
+
+        <div className="lg:ms-5 hidden  lg:flex lg:items-center gap-1 md:gap-3">
+          <Link to={"/"} className="text-base md:text-lg">
+            Home
+          </Link>
           {employerHomeList.map((item) => (
             <NavLink
               to={`/employer${item.path}`}
@@ -62,7 +66,7 @@ export default function EmployerHeader() {
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-3  md:gap-5">
+      <div className="flex justify-center items-center gap-3 md:gap-5">
         <div className="text-2xl">
           <IoNotificationsOutline />
         </div>
@@ -75,6 +79,12 @@ export default function EmployerHeader() {
         >
           <RxHamburgerMenu />
         </button>
+        <Link
+          to={"/jobseeker"}
+          className="p-1 px-2 border hidden lg:block border-ascent rounded-md hover:bg-hover text-xl"
+        >
+          JobSeeker
+        </Link>
         {userInfo?.username && (
           <>
             <Link

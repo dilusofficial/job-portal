@@ -3,6 +3,7 @@ import { IoCashOutline } from "react-icons/io5";
 import { SlLocationPin } from "react-icons/sl";
 import { professionalSkills } from "../../../../utils/skills";
 import { BsClockHistory } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 export default function HeaderPart() {
   return (
@@ -48,6 +49,12 @@ export default function HeaderPart() {
         </div>
       </div>
       <div className="mt-3 md:mt-0">
+        <Link
+          to={"/employer/candidates"}
+          className="px-3 py-3 bg-ascent hover:bg-hover text-secondary rounded-lg mr-2"
+        >
+          Back
+        </Link>
         <button
           to={`/employer/candidates/${""}`}
           className="px-3 py-3 bg-ascent hover:bg-hover text-secondary rounded-lg"

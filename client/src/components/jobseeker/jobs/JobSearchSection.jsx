@@ -1,16 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { toggleJobSeekerJobsFilter } from "../../../slices/responsiveSlice";
+import SearchElt from "../../SearchElt";
+import SearchSelectElt from "../../SearchSelectElt";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { SlLocationPin } from "react-icons/sl";
-import SearchElt from "../../SearchElt";
 import { TbCategory } from "react-icons/tb";
-import SearchSelectElt from "../../SearchSelectElt";
+import { PiMoney } from "react-icons/pi";
+import { FaRegClock } from "react-icons/fa";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import { GrUserExpert } from "react-icons/gr";
 import { IoSchoolOutline } from "react-icons/io5";
-import { IoMdCloseCircleOutline } from "react-icons/io";
-import { useDispatch } from "react-redux";
-import { toggleEmployerCandidatesFilter } from "../../../slices/responsiveSlice";
-
 const genderlist = ["Male", "Female", "Others"];
 const Experiencelist = [
   "Fresher",
@@ -27,7 +28,7 @@ const Qualificationlist = [
   "Doctorate",
 ];
 
-export default function SearchSection() {
+export default function JobSearchSection() {
   const dispatch = useDispatch();
   return (
     <div
@@ -35,7 +36,7 @@ export default function SearchSection() {
     >
       <div className="flex justify-end xl:hidden">
         <button
-          onClick={() => dispatch(toggleEmployerCandidatesFilter())}
+          onClick={() => dispatch(toggleJobSeekerJobsFilter())}
           className="text-3xl"
         >
           <IoMdCloseCircleOutline />
@@ -73,6 +74,11 @@ export default function SearchSection() {
         list={genderlist}
       />
       <SearchSelectElt
+        title={"Job Type"}
+        icon={<FaRegClock />}
+        list={["Full-time", "Part-time", "Internship"]}
+      />
+      <SearchSelectElt
         title={"Experience Level"}
         icon={<GrUserExpert />}
         list={Experiencelist}
@@ -81,6 +87,11 @@ export default function SearchSection() {
         title={"Qualification"}
         icon={<IoSchoolOutline />}
         list={Qualificationlist}
+      />
+      <SearchElt
+        title={"Min Salary"}
+        icon={<PiMoney />}
+        placeholder={"Enter LPA"}
       />
     </div>
   );

@@ -78,6 +78,7 @@ export default function ProfileForm() {
   }, [loadingDetails]);
   const handleSave = async () => {
     try {
+      const formattedAbout = about.replace(/\n/g, "<br>");
       const res = await updateCompanyProfile({
         companyName,
         companyEmail,
@@ -92,7 +93,7 @@ export default function ProfileForm() {
         country,
         state,
         companyAddress,
-        about,
+        about: formattedAbout,
       }).unwrap();
       if (res.msg === "company details added successfully") {
         toast.success("Details successfully added");

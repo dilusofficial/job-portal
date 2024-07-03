@@ -5,6 +5,9 @@ const initialState = {
   showEmployerCandidatesFilter: false,
   showEmployerCompanyFilter: false,
   showEmployerSmallDashboard: false,
+  showJobSeekerSmallBar: false,
+  showJobSeekerJobsFilter: false,
+  showJobSeekerCompanyFilter: false,
 };
 const responsiveSlice = createSlice({
   name: "responsive",
@@ -22,6 +25,15 @@ const responsiveSlice = createSlice({
     toggleEmployerSmallDashboard: (state) => {
       state.showEmployerSmallDashboard = !state.showEmployerSmallDashboard;
     },
+    toggleJobSeekerSmallBar: (state) => {
+      state.showJobSeekerSmallBar = !state.showJobSeekerSmallBar;
+    },
+    toggleJobSeekerJobsFilter: (state) => {
+      state.showJobSeekerJobsFilter = !state.showJobSeekerJobsFilter;
+    },
+    toggleJobSeekerCompanyFilter: (state) => {
+      state.showJobSeekerCompanyFilter = !state.showJobSeekerCompanyFilter;
+    },
   },
 });
 
@@ -31,4 +43,7 @@ export const {
   toggleEmployerCandidatesFilter,
   toggleEmployerCompanyFilter,
   toggleEmployerSmallDashboard,
+  toggleJobSeekerSmallBar,
+  toggleJobSeekerCompanyFilter,
+  toggleJobSeekerJobsFilter,
 } = responsiveSlice.actions;

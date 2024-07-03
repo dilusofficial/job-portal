@@ -10,9 +10,11 @@ import cors from "cors";
 import authRouter from "./modules/auth/routers/authRouter.js";
 import employerDashboardRouter from "./modules/employer/routers/employerDashboardRouter.js";
 import userRouter from "./modules/user/routers/userRouter.js";
+import jobseekerRouter from "./modules/jobseeker/routers/jobSeekerRouter.js";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import {
   authenticateEmployer,
+  authenticateJobSeeker,
   authenticateUser,
 } from "./middleware/authMiddleware.js";
 
@@ -31,6 +33,7 @@ app.use(
 
 app.use("/auth", authRouter);
 app.use("/user", authenticateUser, userRouter);
+app.use("/jobseeker", authenticateUser, authenticateJobSeeker, jobseekerRouter);
 app.use(
   "/employer",
   authenticateUser,

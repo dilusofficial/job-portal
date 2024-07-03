@@ -12,8 +12,8 @@ export default function SearchSelectElt({ title, list, icon }) {
         <select id="status" className="form-select">
           <option value={""}>{"ALL"}</option>
           {list?.map((item) => (
-            <option key={item?.category} value={item?.category}>
-              {item?.category}
+            <option key={item} value={item}>
+              {item}
             </option>
           ))}
         </select>

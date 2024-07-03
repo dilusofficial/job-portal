@@ -1,6 +1,7 @@
 import React from "react";
 import { BsClockHistory, BsSuitcase } from "react-icons/bs";
 import { SlLocationPin } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 export default function CompanyHeaderPart() {
   return (
@@ -36,6 +37,14 @@ export default function CompanyHeaderPart() {
             open positions: 12
           </div>
         </div>
+      </div>
+      <div className="mt-3 md:mt-0">
+        <Link
+          to={"/employer/companies"}
+          className="px-3 py-3 bg-ascent hover:bg-hover text-secondary rounded-lg mr-2"
+        >
+          Back
+        </Link>
       </div>
     </div>
   );

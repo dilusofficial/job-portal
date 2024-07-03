@@ -1,5 +1,5 @@
 import React from "react";
-import LandingPageSmallSearch from "../../user/home/LandingPageSmallSearch";
+import LandingPageSmallSearch from "../../jobseeker/home/LandingPageSmallSearch";
 import { CiSearch } from "react-icons/ci";
 import { SlLocationPin } from "react-icons/sl";
 

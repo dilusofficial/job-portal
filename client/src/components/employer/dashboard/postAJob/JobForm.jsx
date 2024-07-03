@@ -41,9 +41,10 @@ export default function JobForm() {
 
   const handlePost = async () => {
     try {
+      const formattedDesc = description.replace(/\n/g, "<br>");
       const res = await postNewJob({
         jobTitle,
-        description,
+        description: formattedDesc,
         category,
         jobType,
         qualification,
@@ -58,6 +59,7 @@ export default function JobForm() {
         toast.success("Job successfully added");
         dispatch(resetAll());
         navigate("/employer/dashboard/manage-jobs");
+        window.scrollTo(0, 0);
       } else {
         toast.error(res.msg);
       }

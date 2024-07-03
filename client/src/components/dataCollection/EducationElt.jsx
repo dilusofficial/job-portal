@@ -15,6 +15,7 @@ export default function EducationElt({
           type="text"
           value={educationDetail?.programme || ""}
           onChange={(e) => handleChange(index, "programme", e.target.value)}
+          required
           className="form-input"
         />
       </div>

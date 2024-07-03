@@ -5,6 +5,7 @@ import {
   UnauthorizedError,
 } from "../errors/customErrors.js";
 import Employer from "../models/EmployerModel.js";
+import JobSeeker from "../models/JobSeeker.js";
 import User from "../models/UserModel.js";
 import { verifyJWT } from "../utils/jwtUtils.js";
 
@@ -29,6 +30,17 @@ export const authenticateEmployer = async (req, res, next) => {
     next();
   } else {
     throw new UnauthorizedError("Not authorized. Employers only");
+  }
+};
+
+export const authenticateJobSeeker = async (req, res, next) => {
+  if (req.user) {
+    const jobSeeker = await JobSeeker.findOne({ owner: req.user.userId });
+    if (!jobSeeker) throw new NotFoundError("No Jobseeker found");
+    req.user.jobseekerId = jobSeeker._id;
+    next();
+  } else {
+    throw new UnauthorizedError("Not Authorized. Job Seekers only");
   }
 };
 

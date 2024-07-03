@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import HomeLayout from "./pages/user/HomeLayout";
+import HomeLayout from "./pages/jobseeker/HomeLayout";
 import ErrorPage from "./pages/error/ErrorPage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
@@ -21,9 +21,9 @@ import AdvertisementSettings from "./pages/admin/settings/AdvertisementSettings"
 import PlanSettings from "./pages/admin/settings/PlanSettings";
 import SingleNotification from "./pages/admin/settings/SingleNotification";
 import DataCollection from "./pages/dataCollection/DataCollection";
-import HomePage from "./pages/user/home/HomePage";
-import JobPage from "./pages/user/jobs/JobPage";
-import CompaniesPage from "./pages/user/companies/CompaniesPage";
+import HomePage from "./pages/jobseeker/home/HomePage";
+import JobPage from "./pages/jobseeker/jobs/JobPage";
+import CompaniesPage from "./pages/jobseeker/companies/CompaniesPage";
 import MobileOtp from "./pages/auth/MobileOtp";
 import MobileVerify from "./pages/auth/MobileVerify";
 import ResetPassword from "./pages/auth/ResetPassword";
@@ -50,6 +50,8 @@ import LandingPage from "./pages/home/landing/LandingPage";
 import UserData from "./pages/dataCollection/UserData";
 import Choose5 from "./pages/dataCollection/Choose5";
 import JobPortalType from "./pages/dataCollection/JobPortalType";
+import JobSeekerSingleJobPage from "./pages/jobseeker/jobs/JobSeekerSingleJobPage";
+import JobSeekerSingleCompany from "./pages/jobseeker/companies/JobSeekerSingleCompany";
 
 function App() {
   const router = createBrowserRouter([
@@ -90,8 +92,16 @@ function App() {
           element: <JobPage />,
         },
         {
+          path: "jobs/:id",
+          element: <JobSeekerSingleJobPage />,
+        },
+        {
           path: "companies",
           element: <CompaniesPage />,
+        },
+        {
+          path: "companies/:id",
+          element: <JobSeekerSingleCompany />,
         },
         {
           path: "details",

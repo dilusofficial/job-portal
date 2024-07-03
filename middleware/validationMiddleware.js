@@ -105,3 +105,18 @@ export const validatePostJobInput = withValidationErrors([
   body("deadline").notEmpty().withMessage("deadline is required"),
   body("salary").notEmpty().withMessage("Job salary is required"),
 ]);
+
+export const validateJobseekerDetailInput = withValidationErrors([
+  body("fullName").notEmpty().withMessage("fullName is required"),
+  body("currentSalary").notEmpty().withMessage("current salary is required"),
+  body("expectedSalary").notEmpty().withMessage("expected salary is required"),
+  body("totalExperience")
+    .notEmpty()
+    .withMessage("total experience is required"),
+  body("preferredLocation")
+    .notEmpty()
+    .withMessage("preferred location is required"),
+  body("skills").notEmpty().withMessage("skills is required"),
+  body("languages").notEmpty().withMessage("languages is required"),
+  body("about").notEmpty().withMessage("about is required"),
+]);

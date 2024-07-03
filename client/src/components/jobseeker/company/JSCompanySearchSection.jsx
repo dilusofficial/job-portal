@@ -6,17 +6,17 @@ import SearchSelectElt from "../../SearchSelectElt";
 import { TbCategory } from "react-icons/tb";
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { toggleEmployerCompanyFilter } from "../../../slices/responsiveSlice";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { toggleJobSeekerCompanyFilter } from "../../../slices/responsiveSlice";
 const membership = ["2010", "2015", "2020"];
 
-export default function SearchSectionCompany() {
+export default function JSCompanySearchSection() {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-col justify-start gap-8 h-full sticky left-0 top-0">
       <div className="flex justify-end xl:hidden">
         <button
-          onClick={() => dispatch(toggleEmployerCompanyFilter())}
+          onClick={() => dispatch(toggleJobSeekerCompanyFilter())}
           className="text-3xl"
         >
           <IoMdCloseCircleOutline />

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { BASE_URL } from "../../constants";
 import axios from "axios";
 import { setUserInfo } from "../../slices/allUsersSlice";
+import JobSeekerSmallBar from "../../components/jobseeker/JobSeekerSmallBar";
 
 export default function HomeLayout() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default function HomeLayout() {
   return (
     <>
       <Header />
+      <JobSeekerSmallBar />
       <div className="p-6 lg:px-16">
         <Outlet />
       </div>

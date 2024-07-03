@@ -17,7 +17,11 @@ export default function JobPortalType() {
     try {
       const res = await saveEmployer().unwrap();
       if (res.msg === "success") {
-        navigate("/employer/dashboard/company-profile");
+        if (res.employer?.companyName || res.newEmployer?.companyName) {
+          navigate("/employer");
+        } else {
+          navigate("/employer/dashboard/company-profile");
+        }
       } else {
         toast.error(res.msg);
       }
@@ -45,7 +49,7 @@ export default function JobPortalType() {
 
   useEffect(() => {
     if (!userInfo?.username) {
-      navigate("/");
+      navigate("/auth/login");
     }
   }, [userInfo]);
   return (

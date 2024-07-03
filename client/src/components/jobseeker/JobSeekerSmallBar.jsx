@@ -2,13 +2,13 @@ import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleEmployerSmallBar } from "../../slices/responsiveSlice";
+import { toggleJobSeekerSmallBar } from "../../slices/responsiveSlice";
 import { useLogoutUserMutation } from "../../slices/authApiSlice";
 import { setUserInfo } from "../../slices/allUsersSlice";
 import { toast } from "react-toastify";
 
-export default function EmployerSmallBar() {
-  const { showEmployerSmallBar } = useSelector((state) => state.responsive);
+export default function JobSeekerSmallBar() {
+  const { showJobSeekerSmallBar } = useSelector((state) => state.responsive);
   const { userInfo } = useSelector((state) => state.allUsers);
   const dispatch = useDispatch();
   const [logoutUser] = useLogoutUserMutation();
@@ -30,21 +30,21 @@ export default function EmployerSmallBar() {
 
   return (
     <div
-      className={`overflow-auto w-80 h-full bg-primary fixed left-0 z-10 p-5 ${
-        showEmployerSmallBar ? "ml-0" : "-ml-80"
+      className={`overflow-auto w-80 h-full bg-background1 fixed left-0 z-10 p-5 ${
+        showJobSeekerSmallBar ? "ml-0" : "-ml-80"
       } nav-link`}
     >
       <div className="flex justify-end">
         <button
           className="text-3xl"
-          onClick={() => dispatch(toggleEmployerSmallBar())}
+          onClick={() => dispatch(toggleJobSeekerSmallBar())}
         >
           <IoMdCloseCircleOutline />
         </button>
       </div>
 
       <Link
-        to={"/employer"}
+        to={"/jobseeker"}
         className="text-xl md:text-3xl font-semibold my-7 border-b-2 py-2"
       >
         Job Portal
@@ -55,39 +55,39 @@ export default function EmployerSmallBar() {
 
       <div className="flex flex-col items-start gap-10 text-md font-semibold border-b-2 pb-7 mb-3">
         <NavLink
-          onClick={() => dispatch(toggleEmployerSmallBar())}
+          onClick={() => dispatch(toggleJobSeekerSmallBar())}
           className={"hover:ms-4 nav-link p-2"}
           to={"/"}
         >
           Home
         </NavLink>
         <NavLink
-          onClick={() => dispatch(toggleEmployerSmallBar())}
+          onClick={() => dispatch(toggleJobSeekerSmallBar())}
           className={"hover:ms-4 nav-link p-2"}
-          to={"/employer/candidates"}
+          to={"/jobseeker/jobs"}
         >
-          Candidates
+          Find Jobs
         </NavLink>
         <NavLink
-          onClick={() => dispatch(toggleEmployerSmallBar())}
+          onClick={() => dispatch(toggleJobSeekerSmallBar())}
           className={"hover:ms-4 nav-link p-2"}
-          to={"/employer/companies"}
+          to={"/jobseeker/companies"}
         >
           Companies
         </NavLink>
         <NavLink
-          onClick={() => dispatch(toggleEmployerSmallBar())}
+          onClick={() => dispatch(toggleJobSeekerSmallBar())}
           className={"hover:ms-4 nav-link p-2"}
-          to={"/jobseeker"}
+          to={"/employer"}
         >
-          Jobseeker
+          Employer
         </NavLink>
         {userInfo?.username && (
           <>
             <NavLink
-              onClick={() => dispatch(toggleEmployerSmallBar())}
+              onClick={() => dispatch(toggleJobSeekerSmallBar())}
               className={"hover:ms-4 nav-link p-2"}
-              to={"/employer/dashboard"}
+              to={"/jobseeker/dashboard"}
             >
               Dashboard
             </NavLink>

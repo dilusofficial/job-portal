@@ -46,10 +46,11 @@ export default function EditJobForm() {
 
   const handleUpdate = async () => {
     try {
+      const formattedDesc = description.replace(/\n/g, "<br>");
       const res = await editSingleJob({
         id,
         jobTitle,
-        description,
+        description: formattedDesc,
         category,
         jobType,
         qualification,
