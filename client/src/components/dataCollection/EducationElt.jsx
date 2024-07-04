@@ -32,7 +32,7 @@ export default function EducationElt({
         <label className="form-label">Start Date</label>
         <input
           type="date"
-          value={educationDetail?.started || ""}
+          value={educationDetail?.started?.toString().slice(0, 10) || ""}
           onChange={(e) => handleChange(index, "started", e.target.value)}
           className="form-input"
         />
@@ -41,7 +41,7 @@ export default function EducationElt({
         <label className="form-label">End Date</label>
         <input
           type="date"
-          value={educationDetail?.ended || ""}
+          value={educationDetail?.ended?.toString().slice(0, 10) || ""}
           onChange={(e) => handleChange(index, "ended", e.target.value)}
           className="form-input"
         />

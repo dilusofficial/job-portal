@@ -6,6 +6,7 @@ import { toggleEmployerSmallBar } from "../../slices/responsiveSlice";
 import { useLogoutUserMutation } from "../../slices/authApiSlice";
 import { setUserInfo } from "../../slices/allUsersSlice";
 import { toast } from "react-toastify";
+import { resetData } from "../../slices/dataCollectionSlice";
 
 export default function EmployerSmallBar() {
   const { showEmployerSmallBar } = useSelector((state) => state.responsive);
@@ -17,8 +18,9 @@ export default function EmployerSmallBar() {
     try {
       const res = await logoutUser().unwrap();
       if (res.msg === "successfully logged out") {
-        navigate("/");
+        dispatch(resetData());
         dispatch(setUserInfo(null));
+        navigate("/");
         toast.success("Logged out");
       } else {
         toast.error(res.msg);

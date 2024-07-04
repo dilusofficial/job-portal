@@ -8,7 +8,7 @@ import {
   setWorkDetails,
 } from "../../slices/dataCollectionSlice";
 
-export default function WorkDetails() {
+export default function WorkDetails({ inside }) {
   const { work } = useSelector((state) => state.dataCollection);
   const [workDetail, setWorkDetail] = useState(work || [{}]);
   const dispatch = useDispatch();
@@ -41,7 +41,11 @@ export default function WorkDetails() {
     setWorkDetail(updated);
   }
   return (
-    <div className="p-4 bg-secondary min-h-96 w-11/12 lg:w-1/2 rounded-lg mt-3">
+    <div
+      className={`p-4 bg-secondary min-h-96  ${
+        inside ? "w-full" : "w-11/12 lg:w-1/2"
+      } rounded-lg mt-3`}
+    >
       <h1 className="text-xl my-2">Work Experience</h1>
       {workDetail.map((elt, index) => (
         <WorkElt
@@ -55,24 +59,33 @@ export default function WorkDetails() {
 
       <div>
         <div className="flex justify-end">
-          <button
-            className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
-            onClick={handleBack}
-          >
-            Back
-          </button>
+          {!inside && (
+            <button
+              className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
+              onClick={handleBack}
+            >
+              Back
+            </button>
+          )}
           <button
             className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
             onClick={addNewForm}
           >
             Add New
           </button>
-          <button
-            className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"
-            onClick={handleNext}
-          >
-            Next
-          </button>
+          {inside && (
+            <button className="p-2 bg-ascent text-primary rounded-md hover:bg-hover">
+              Save
+            </button>
+          )}
+          {!inside && (
+            <button
+              className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>

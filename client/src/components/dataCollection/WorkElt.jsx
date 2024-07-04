@@ -31,7 +31,7 @@ export default function WorkElt({
         <label className="form-label">Start Date</label>
         <input
           type="date"
-          value={workDetail?.started || ""}
+          value={workDetail?.started?.toString().slice(0, 10) || ""}
           onChange={(e) => handleChange(index, "started", e.target.value)}
           className="form-input"
         />
@@ -40,7 +40,7 @@ export default function WorkElt({
         <label className="form-label">End Date</label>
         <input
           type="date"
-          value={workDetail?.ended || ""}
+          value={workDetail?.ended?.toString().slice(0, 10) || ""}
           onChange={(e) => handleChange(index, "ended", e.target.value)}
           className="form-input"
         />

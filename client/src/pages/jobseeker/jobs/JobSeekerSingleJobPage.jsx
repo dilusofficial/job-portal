@@ -1,5 +1,19 @@
 import React from "react";
+import JSSingleJobHeader from "../../../components/jobseeker/jobs/singlejob/JSSingleJobHeader";
+import { useParams } from "react-router-dom";
+import { useGetSingleJobQuery } from "../../../slices/jobSeekerApiSlice";
+import Loading from "../../../components/Loading";
+import JSSinglePageDetails from "../../../components/jobseeker/jobs/singlejob/JSSinglePageDetails";
 
 export default function JobSeekerSingleJobPage() {
-  return <div>SingleJobPage</div>;
+  const { id } = useParams();
+  const { data, isLoading } = useGetSingleJobQuery(id);
+  return isLoading ? (
+    <Loading />
+  ) : (
+    <div>
+      <JSSingleJobHeader data={data} />
+      <JSSinglePageDetails data={data} />
+    </div>
+  );
 }

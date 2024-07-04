@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { toggleJobSeekerSmallBar } from "../slices/responsiveSlice";
+import { resetData } from "../slices/dataCollectionSlice";
 
 export default function Header() {
   const location = useLocation();
@@ -24,8 +25,9 @@ export default function Header() {
     try {
       const res = await logoutUser().unwrap();
       if (res.msg === "successfully logged out") {
-        navigate("/");
         dispatch(setUserInfo(null));
+        navigate("/");
+        dispatch(resetData());
         toast.success("Logged out");
       } else {
         toast.error(res.msg);

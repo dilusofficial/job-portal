@@ -46,7 +46,6 @@ export default function MobileOtp() {
               required
             />
           </div>
-
           <button
             type="submit"
             onClick={handleSubmit}
@@ -55,6 +54,7 @@ export default function MobileOtp() {
           >
             Send OTP
           </button>
+          <Link to={"/details"}>Do this Later</Link>
           {isLoading && <Loading />}
         </form>
       </div>

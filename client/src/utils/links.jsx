@@ -84,6 +84,51 @@ export const employerDashboardLinks = [
   },
 ];
 
+export const jobSeekerDashboardLinks = [
+  {
+    path: "/jobseeker/dashboard",
+    text: "Dashboard",
+    icon: <IoHomeOutline />,
+  },
+  {
+    path: "/jobseeker/dashboard/profile",
+    text: "My Profile",
+    icon: <FaRegUser />,
+  },
+
+  {
+    path: "/jobseeker/dashboard/applied-jobs",
+    text: "Applied Jobs",
+    icon: <BsSuitcaseLg />,
+  },
+
+  {
+    path: "/jobseeker/dashboard/shortlisted",
+    text: "Shortlisted Jobs",
+    icon: <TbBadge />,
+  },
+  {
+    path: "/jobseeker/dashboard/messages",
+    text: "Messages",
+    icon: <BiMessageDetail />,
+  },
+  {
+    path: "/jobseeker/dashboard/change-password",
+    text: "Change Password",
+    icon: <IoLockClosedOutline />,
+  },
+  {
+    path: "/jobseeker/dashboard/logout",
+    text: "Logout",
+    icon: <IoLogOutOutline />,
+  },
+  {
+    path: "/jobseeker/dashboard/delete-account",
+    text: "Delete Account",
+    icon: <MdDeleteOutline />,
+  },
+];
+
 export const adminLinks = [
   {
     path: "/admin/statistics",

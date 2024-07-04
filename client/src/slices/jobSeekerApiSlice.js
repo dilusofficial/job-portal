@@ -39,6 +39,27 @@ export const jobSeekerApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 3,
     }),
+    getCompanyActiveJobs: builder.query({
+      query: (companyId) => ({
+        url: `${BASE_URL}/jobseeker/active-jobs/${companyId}`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 3,
+    }),
+    deleteMyJSAccount: builder.mutation({
+      query: () => ({
+        url: `${BASE_URL}/jobseeker`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+    }),
+    getJobSeekerDetails: builder.query({
+      query: () => ({
+        url: `${BASE_URL}/jobseeker`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -47,5 +68,8 @@ export const {
   useGetAllJobsQuery,
   useGetAllCompaniesQuery,
   useGetSingleCompanyQuery,
+  useGetCompanyActiveJobsQuery,
   useGetSingleJobQuery,
+  useDeleteMyJSAccountMutation,
+  useGetJobSeekerDetailsQuery,
 } = jobSeekerApiSlice;

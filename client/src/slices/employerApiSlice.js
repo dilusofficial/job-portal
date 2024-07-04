@@ -55,6 +55,13 @@ export const employerApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    deleteMyAccount: builder.mutation({
+      query: () => ({
+        url: `${BASE_URL}/employer`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -66,4 +73,5 @@ export const {
   useEditSingleJobMutation,
   useGetMySingleJobQuery,
   useDeleteMyJobMutation,
+  useDeleteMyAccountMutation,
 } = employerApiSlice;

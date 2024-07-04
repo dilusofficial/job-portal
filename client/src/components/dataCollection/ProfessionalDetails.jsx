@@ -10,7 +10,7 @@ import {
 } from "../../slices/dataCollectionSlice";
 import Certificate from "./Certificate";
 
-export default function ProfessionalDetails() {
+export default function ProfessionalDetails({ inside }) {
   const { projects, certificates } = useSelector(
     (state) => state.dataCollection
   );
@@ -67,7 +67,11 @@ export default function ProfessionalDetails() {
     setCertificateDetail(updated);
   }
   return (
-    <div className="p-4 bg-secondary min-h-96 w-11/12 lg:w-1/2 rounded-lg mt-3">
+    <div
+      className={`p-4 bg-secondary min-h-96  ${
+        inside ? "w-full" : "w-11/12 lg:w-1/2"
+      } rounded-lg mt-3`}
+    >
       <h1 className="text-xl my-2">Personal Projects</h1>
       {projectDetail.map((elt, index) => (
         <ProjectElt
@@ -108,18 +112,27 @@ export default function ProfessionalDetails() {
       </div>
       <div>
         <div className="flex justify-end">
-          <button
-            className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
-            onClick={handleBack}
-          >
-            Back
-          </button>
-          <button
-            className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"
-            onClick={handleNext}
-          >
-            Next
-          </button>
+          {!inside && (
+            <>
+              <button
+                className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
+                onClick={handleBack}
+              >
+                Back
+              </button>
+              <button
+                className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"
+                onClick={handleNext}
+              >
+                Next
+              </button>
+            </>
+          )}
+          {inside && (
+            <button className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1">
+              Save
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -36,8 +36,42 @@ export const getAllJobs = async (req, res) => {
   res.status(200).json(jobs);
 };
 
+export const getsingleJob = async (req, res) => {
+  const { id } = req.params;
+  const job = await Job.findById(id).populate("owner");
+  console.log();
+  if (!job) throw new NotFoundError("No job found");
+  res.status(200).json(job);
+};
+
 export const getAllCompanies = async (req, res) => {
   const companies = await Employer.find({ companyName: { $exists: true } });
   if (!companies) throw new NotFoundError("no companies found");
   res.status(200).json(companies);
+};
+
+export const getSingleCompany = async (req, res) => {
+  const { id } = req.params;
+  const company = await Employer.findById(id);
+  if (!company) throw new NotFoundError("No company found");
+  res.status(200).json(company);
+};
+
+export const getCompanyActiveJobs = async (req, res) => {
+  const { id } = req.params;
+  const jobs = await Job.find({ owner: id, isActive: true });
+  if (!jobs) throw new NotFoundError("No active jobs found");
+  res.status(200).json(jobs);
+};
+
+export const deleteMyAccount = async (req, res) => {
+  const user = await JobSeeker.findByIdAndDelete(req.user.jobseekerId);
+  if (!user) throw new NotFoundError("no user detected");
+  res.status(200).json({ msg: "account has been deleted" });
+};
+
+export const GetJobSeeker = async (req, res) => {
+  const user = await JobSeeker.findById(req.user.jobseekerId).populate("owner");
+  if (!user) throw new NotFoundError("no user detected");
+  res.status(200).json(user);
 };

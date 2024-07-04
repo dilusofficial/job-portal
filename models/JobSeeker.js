@@ -36,8 +36,11 @@ const JobSeekerSchema = new Schema(
       type: String,
     },
     owner: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+    profilePic: {
+      type: String,
     },
     totalExperience: {
       type: String,
@@ -47,6 +50,16 @@ const JobSeekerSchema = new Schema(
     },
     currentSalary: {
       type: String,
+    },
+    qualification: {
+      type: String,
+      enum: [
+        "Certificate",
+        "Diploma",
+        "Bachelors Degree",
+        "Masters Degree",
+        "Doctorate",
+      ],
     },
     expectedSalary: { type: String },
     preferredLocation: {

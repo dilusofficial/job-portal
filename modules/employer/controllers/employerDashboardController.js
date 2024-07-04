@@ -86,3 +86,9 @@ export const deleteJob = async (req, res) => {
   if (!job) throw new NotFoundError("no jobs found");
   res.status(200).json({ msg: "Job deleted successfully" });
 };
+
+export const deleteAccount = async (req, res) => {
+  const account = await Employer.findByIdAndDelete(req.user.employerId);
+  if (!account) throw new NotFoundError("no account has been found");
+  res.status(200).json({ msg: "account has been deleted" });
+};

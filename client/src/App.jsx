@@ -52,6 +52,17 @@ import Choose5 from "./pages/dataCollection/Choose5";
 import JobPortalType from "./pages/dataCollection/JobPortalType";
 import JobSeekerSingleJobPage from "./pages/jobseeker/jobs/JobSeekerSingleJobPage";
 import JobSeekerSingleCompany from "./pages/jobseeker/companies/JobSeekerSingleCompany";
+import Logout from "./pages/employer/dashboard/Logout";
+import DeleteAccount from "./pages/employer/dashboard/DeleteAccount";
+import JSDashboardLayout from "./pages/jobseeker/dashBoard/JSDashboardLayout";
+import JSDashboard from "./pages/jobseeker/dashBoard/JSDashboard";
+import JSMyProfile from "./pages/jobseeker/dashBoard/JSMyProfile";
+import JSAppliedJobs from "./pages/jobseeker/dashBoard/JSAppliedJobs";
+import JSShortlisted from "./pages/jobseeker/dashBoard/JSShortlisted";
+import JSMessage from "./pages/jobseeker/dashBoard/JSMessage";
+import JSChangePassword from "./pages/jobseeker/dashBoard/JSChangePassword";
+import JSLogout from "./pages/jobseeker/dashBoard/JSLogout";
+import JSdeleteAccount from "./pages/jobseeker/dashBoard/JSdeleteAccount";
 
 function App() {
   const router = createBrowserRouter([
@@ -106,6 +117,44 @@ function App() {
         {
           path: "details",
           element: <DataCollection />,
+        },
+        {
+          path: "dashboard",
+          element: <JSDashboardLayout />,
+          children: [
+            {
+              index: true,
+              element: <JSDashboard />,
+            },
+            {
+              path: "profile",
+              element: <JSMyProfile />,
+            },
+            {
+              path: "applied-jobs",
+              element: <JSAppliedJobs />,
+            },
+            {
+              path: "shortlisted",
+              element: <JSShortlisted />,
+            },
+            {
+              path: "messages",
+              element: <JSMessage />,
+            },
+            {
+              path: "change-password",
+              element: <JSChangePassword />,
+            },
+            {
+              path: "logout",
+              element: <JSLogout />,
+            },
+            {
+              path: "delete-account",
+              element: <JSdeleteAccount />,
+            },
+          ],
         },
       ],
     },
@@ -206,6 +255,14 @@ function App() {
             {
               path: "change-password",
               element: <ChangePassword />,
+            },
+            {
+              path: "logout",
+              element: <Logout />,
+            },
+            {
+              path: "delete-account",
+              element: <DeleteAccount />,
             },
           ],
         },

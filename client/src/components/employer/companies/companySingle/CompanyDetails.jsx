@@ -1,7 +1,7 @@
 import React from "react";
 import CompanyExtraDetails from "./CompanyExtraDetails";
-import SocialMedia from "../../candidates/candidateSingle/SocialMedia";
 import ActiveJobs from "./ActiveJobs";
+import SocialMedia from "../../../SocialMedia";
 
 export default function CompanyDetails() {
   return (

@@ -8,6 +8,7 @@ const initialState = {
   showJobSeekerSmallBar: false,
   showJobSeekerJobsFilter: false,
   showJobSeekerCompanyFilter: false,
+  showJobSeekerSmallDashboard: false,
 };
 const responsiveSlice = createSlice({
   name: "responsive",
@@ -34,6 +35,9 @@ const responsiveSlice = createSlice({
     toggleJobSeekerCompanyFilter: (state) => {
       state.showJobSeekerCompanyFilter = !state.showJobSeekerCompanyFilter;
     },
+    toggleJobSeekerSmallDashboard: (state) => {
+      state.showJobSeekerSmallDashboard = !state.showJobSeekerSmallDashboard;
+    },
   },
 });
 
@@ -46,4 +50,5 @@ export const {
   toggleJobSeekerSmallBar,
   toggleJobSeekerCompanyFilter,
   toggleJobSeekerJobsFilter,
+  toggleJobSeekerSmallDashboard,
 } = responsiveSlice.actions;

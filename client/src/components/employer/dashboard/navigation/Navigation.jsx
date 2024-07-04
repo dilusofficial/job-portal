@@ -3,6 +3,7 @@ import NavigationLinks from "./NavigationLinks";
 import { useDispatch } from "react-redux";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { toggleEmployerSmallDashboard } from "../../../../slices/responsiveSlice";
+import { employerDashboardLinks } from "../../../../utils/links";
 
 export default function Navigation() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function Navigation() {
           <IoMdCloseCircleOutline />
         </button>
       </div>
-      <NavigationLinks />
+      <NavigationLinks links={employerDashboardLinks} />
     </div>
   );
 }

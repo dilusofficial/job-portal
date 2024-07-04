@@ -2,9 +2,9 @@ import React from "react";
 import ProfessionalDetailListing from "./ProfessionalDetailListing";
 import ExtraDetails from "./ExtraDetails";
 import ContactDetails from "./ContactDetails";
-import SocialMedia from "./SocialMedia";
+import SocialMedia from "../../../SocialMedia";
 import Skills from "./Skills";
-import MessageForm from "./MessageForm";
+import MessageForm from "../../../MessageForm";
 
 export default function CandidateDetails() {
   return (

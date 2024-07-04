@@ -23,7 +23,7 @@ export default function Certificate({
         <label className="form-label">Start Date</label>
         <input
           type="date"
-          value={certificateDetail?.started || ""}
+          value={certificateDetail?.started?.toString().slice(0, 10) || ""}
           onChange={(e) => handleChange(index, "started", e.target.value)}
           className="form-input"
         />
@@ -32,7 +32,7 @@ export default function Certificate({
         <label className="form-label">End Date</label>
         <input
           type="date"
-          value={certificateDetail?.ended || ""}
+          value={certificateDetail?.ended?.toString().slice(0, 10) || ""}
           onChange={(e) => handleChange(index, "ended", e.target.value)}
           className="form-input"
         />

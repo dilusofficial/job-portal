@@ -7,7 +7,7 @@ import {
   setWorkDetails,
 } from "../../slices/dataCollectionSlice";
 
-export default function EducationDetail() {
+export default function EducationDetail({ inside }) {
   const { education } = useSelector((state) => state.dataCollection);
   const [educationDetail, setEducationDetail] = useState(education || [{}]);
 
@@ -39,7 +39,11 @@ export default function EducationDetail() {
   }
 
   return (
-    <div className="p-4 bg-secondary min-h-96 w-11/12 lg:w-1/2 rounded-lg mt-3">
+    <div
+      className={`p-4 bg-secondary min-h-96 ${
+        inside ? "w-full" : "w-11/12 lg:w-1/2"
+      } rounded-lg mt-3`}
+    >
       <h1 className="text-xl my-2">Education</h1>
       {educationDetail.map((elt, index) => (
         <EducationElt
@@ -59,12 +63,19 @@ export default function EducationDetail() {
           >
             Add New
           </button>
-          <button
-            className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"
-            onClick={handleNext}
-          >
-            Next
-          </button>
+          {inside && (
+            <button className="p-2 bg-ascent text-primary rounded-md hover:bg-hover">
+              Save
+            </button>
+          )}
+          {!inside && (
+            <button
+              className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>

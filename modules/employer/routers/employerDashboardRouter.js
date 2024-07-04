@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   addNewJob,
   companyProfile,
+  deleteAccount,
   deleteJob,
   editJob,
   getEmployerJobs,
@@ -26,5 +27,6 @@ router.post("/job", validatePostJobInput, checkCompany, addNewJob);
 router.patch("/job/:id", editJob);
 router.get("/job/:id", getSingleJob);
 router.delete("/job/:id", deleteJob);
+router.delete("/", deleteAccount);
 
 export default router;

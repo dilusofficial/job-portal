@@ -1,0 +1,27 @@
+import React from "react";
+import JobCard from "../../../employer/companies/companySingle/JobCard";
+
+export default function JSCompanyActiveJobs({ data }) {
+  return (
+    <div>
+      <h1 className="my-4 text-xl">Active Jobs</h1>
+      <div className="flex flex-col gap-3">
+        {" "}
+        {data &&
+          data.map((x) => (
+            <JobCard
+              key={x._id}
+              seeker
+              id={x._id}
+              image={x.owner.logo ? x.owner.logo : "/company-1.png"}
+              name={x.jobTitle}
+              joblocation={x.jobLocation}
+              category={x.category}
+              jobtype={x.jobtype}
+              salary={x.salary}
+            />
+          ))}
+      </div>
+    </div>
+  );
+}

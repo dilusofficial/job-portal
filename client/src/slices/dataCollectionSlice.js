@@ -14,6 +14,14 @@ const initialState = {
   projects: [{}],
   certificates: [{}],
   fullName: "",
+  age: "",
+  email: "",
+  address: "",
+  dateOfBirth: "",
+  profilePic: "",
+  qualification: "",
+  portfolio: "",
+  github: "",
   resume: "",
   currentSalary: "",
   expectedSalary: "",
@@ -107,6 +115,30 @@ const dataCollectionSlice = createSlice({
     setAbout: (state, { payload }) => {
       state.about = payload;
     },
+    setAge: (state, { payload }) => {
+      state.age = payload;
+    },
+    setAddress: (state, { payload }) => {
+      state.address = payload;
+    },
+    setDateOfBirth: (state, { payload }) => {
+      state.dateOfBirth = payload;
+    },
+    setEmail: (state, { payload }) => {
+      state.email = payload;
+    },
+    setPortfolio: (state, { payload }) => {
+      state.portfolio = payload;
+    },
+    setGithub: (state, { payload }) => {
+      state.github = payload;
+    },
+    setProfilePic: (state, { payload }) => {
+      state.profilePic = payload;
+    },
+    setQualification: (state, { payload }) => {
+      state.qualification = payload;
+    },
     resetData: (state) => {
       state.education = [{}];
       state.work = [{}];
@@ -121,6 +153,14 @@ const dataCollectionSlice = createSlice({
       state.skills = "";
       state.languages = "";
       state.about = "";
+      state.age = "";
+      state.email = "";
+      state.address = "";
+      state.dateOfBirth = "";
+      state.profilePic = "";
+      state.qualification = "";
+      state.portfolio = "";
+      state.github = "";
     },
   },
 });
@@ -144,5 +184,13 @@ export const {
   setTotalExperience,
   setWork,
   setskills,
+  setAddress,
+  setAge,
+  setDateOfBirth,
+  setEmail,
+  setGithub,
+  setPortfolio,
+  setProfilePic,
+  setQualification,
   resetData,
 } = dataCollectionSlice.actions;

@@ -10,6 +10,7 @@ import { useLogoutUserMutation } from "../../slices/authApiSlice";
 import { toast } from "react-toastify";
 import { setUserInfo } from "../../slices/allUsersSlice";
 import { useGetCompanyProfileQuery } from "../../slices/employerApiSlice";
+import { resetData } from "../../slices/dataCollectionSlice";
 
 export default function EmployerHeader() {
   const location = useLocation();
@@ -24,8 +25,9 @@ export default function EmployerHeader() {
     try {
       const res = await logoutUser().unwrap();
       if (res.msg === "successfully logged out") {
-        navigate("/");
+        dispatch(resetData());
         dispatch(setUserInfo(null));
+        navigate("/");
         toast.success("Logged out");
       } else {
         toast.error(res.msg);

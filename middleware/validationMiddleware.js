@@ -55,7 +55,7 @@ export const validateCompanyProfileInput = withValidationErrors([
     .withMessage("company name is required")
     .custom(async (companyName, { req }) => {
       const user = await Employer.findOne({ companyName });
-      if (user && user._id.toString() !== req.user.userId.toString()) {
+      if (user && user._id.toString() !== req.user.employerId.toString()) {
         throw new BadRequestError("Company Name already exists");
       }
     }),
@@ -66,7 +66,7 @@ export const validateCompanyProfileInput = withValidationErrors([
     .withMessage("Invalid email format")
     .custom(async (companyEmail, { req }) => {
       const user = await Employer.findOne({ companyEmail });
-      if (user && user._id.toString() !== req.user.userId.toString()) {
+      if (user && user._id.toString() !== req.user.employerId.toString()) {
         throw new BadRequestError("Email already exists");
       }
     }),
@@ -75,7 +75,7 @@ export const validateCompanyProfileInput = withValidationErrors([
     .withMessage("company contact is required")
     .custom(async (companyContact, { req }) => {
       const user = await Employer.findOne({ companyContact });
-      if (user && user._id.toString() !== req.user.userId.toString()) {
+      if (user && user._id.toString() !== req.user.employerId.toString()) {
         throw new BadRequestError("Company contact already exists");
       }
     }),
