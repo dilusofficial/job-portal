@@ -12,6 +12,7 @@ import {
   setFounded,
   setIndustry,
   setLinkedin,
+  setLogo,
   setSize,
   setState,
   setTwitter,
@@ -57,6 +58,7 @@ export default function ProfileForm() {
       dispatch(setCompanyName(data.companyName));
       dispatch(setCompanyEmail(data.companyEmail));
       dispatch(setCompanyContact(data.companyContact));
+      dispatch(setLogo(data.logo));
       dispatch(setSize(data.size));
       dispatch(setIndustry(data.industry));
       dispatch(setWebsite(data.website));

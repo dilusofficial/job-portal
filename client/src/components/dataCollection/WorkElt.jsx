@@ -49,7 +49,7 @@ export default function WorkElt({
         <label className=" me-3">Currently working</label>
         <input
           type="checkbox"
-          value={workDetail?.isWorking || false}
+          value={workDetail.isWorking ? true : false}
           onChange={(e) => handleChange(index, "isWorking", e.target.checked)}
           className=""
         />

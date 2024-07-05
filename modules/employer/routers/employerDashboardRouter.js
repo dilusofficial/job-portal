@@ -7,6 +7,7 @@ import {
   editJob,
   getEmployerJobs,
   getSingleJob,
+  logoUpload,
   updateCompanyProfile,
 } from "../controllers/employerDashboardController.js";
 import {
@@ -14,6 +15,7 @@ import {
   validatePostJobInput,
 } from "../../../middleware/validationMiddleware.js";
 import { checkCompany } from "../../../middleware/authMiddleware.js";
+import upload from "../../../middleware/multerMiddleware.js";
 
 const router = Router();
 router.post(
@@ -28,5 +30,6 @@ router.patch("/job/:id", editJob);
 router.get("/job/:id", getSingleJob);
 router.delete("/job/:id", deleteJob);
 router.delete("/", deleteAccount);
+router.patch("/company-logo", upload.single("logo"), logoUpload);
 
 export default router;

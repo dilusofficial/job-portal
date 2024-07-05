@@ -162,6 +162,38 @@ const dataCollectionSlice = createSlice({
       state.portfolio = "";
       state.github = "";
     },
+    setData: (state, { payload }) => {
+      state.education = payload.education.length > 0 ? payload.education : [{}];
+      state.work = payload.work.length > 0 ? payload.work : [{}];
+      state.projects = payload.projects.length > 0 ? payload.projects : [{}];
+      state.certificates =
+        payload.certificates.length > 0 ? payload.certificates : [{}];
+      state.fullName = payload.fullName ? payload.fullName : "";
+      state.resume = payload.resume ? payload.resume : "";
+      state.currentSalary = payload.currentSalary ? payload.currentSalary : "";
+      state.expectedSalary = payload.expectedSalary
+        ? payload.expectedSalary
+        : "";
+      state.totalExperience = payload.totalExperience
+        ? payload.totalExperience
+        : "";
+      state.preferredLocation = payload.preferredLocation
+        ? payload.preferredLocation
+        : "";
+      state.skills = payload.skills ? payload.skills : "";
+      state.languages = payload.languages ? payload.languages : "";
+      state.about = payload.about ? payload.about : "";
+      state.age = payload.owner.age ? payload.owner.age : "";
+      state.email = payload.owner.email ? payload.owner.email : "";
+      state.address = payload.owner.address ? payload.owner.address : "";
+      state.dateOfBirth = payload.owner.dateOfBirth
+        ? payload.owner.dateOfBirth
+        : "";
+      state.profilePic = payload.profilePic ? payload.profilePic : "";
+      state.qualification = payload.qualification ? payload.qualification : "";
+      state.portfolio = payload.portfolio ? payload.portfolio : "";
+      state.github = payload.github ? payload.github : "";
+    },
   },
 });
 
@@ -193,4 +225,5 @@ export const {
   setProfilePic,
   setQualification,
   resetData,
+  setData,
 } = dataCollectionSlice.actions;

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setAbout,
   setCurrentSalary,
+  setData,
   setExpectedSalary,
   setGithub,
   setLanguages,
@@ -12,10 +13,40 @@ import {
   setskills,
   setTotalExperience,
 } from "../../../../slices/dataCollectionSlice";
+import { useUpdatePreferencesMutation } from "../../../../slices/jobSeekerApiSlice";
+import { toast } from "react-toastify";
+import Loading from "../../../Loading";
 
-export default function JSPreferences() {
+export default function JSPreferences({ toggle, togglestate }) {
   const state = useSelector((state) => state.dataCollection);
+  const [updatePreferences, { isLoading }] = useUpdatePreferencesMutation();
   const dispatch = useDispatch();
+
+  async function handleSave() {
+    try {
+      const res = await updatePreferences({
+        expectedSalary: state.expectedSalary,
+        currentSalary: state.currentSalary,
+        totalExperience: state.totalExperience,
+        preferredLocation: state.preferredLocation,
+        languages: state.languages,
+        skills: state.skills,
+        portfolio: state.portfolio,
+        github: state.github,
+        about: state.github,
+      }).unwrap();
+      if (res.msg === "success") {
+        toggle(!togglestate);
+        dispatch(setData(res.seeker));
+        toast.success("saved");
+        window.scrollTo(0, 0);
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
   return (
     <div className="p-4 bg-secondary w-full rounded-lg mt-3">
       <FormInput
@@ -73,9 +104,13 @@ export default function JSPreferences() {
         onchange={(e) => dispatch(setAbout(e.target.value))}
       />
       <div className="flex justify-end">
-        <button className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1">
+        <button
+          onClick={handleSave}
+          className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
+        >
           Save
         </button>
+        {isLoading && <Loading />}
       </div>
     </div>
   );

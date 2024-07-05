@@ -4,6 +4,7 @@ const initialState = {
   companyName: "",
   companyEmail: "",
   companyContact: "",
+  logo: "",
   founded: "",
   size: "10-15",
   industry: "Information Technology & Telecommunications",
@@ -23,6 +24,9 @@ const employerCompanyProfileSlice = createSlice({
   reducers: {
     setCompanyName: (state, { payload }) => {
       state.companyName = payload;
+    },
+    setLogo: (state, { payload }) => {
+      state.logo = payload;
     },
     setCompanyEmail: (state, { payload }) => {
       state.companyEmail = payload;
@@ -82,4 +86,5 @@ export const {
   setState,
   setCompanyAddress,
   setAbout,
+  setLogo,
 } = employerCompanyProfileSlice.actions;

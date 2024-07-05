@@ -19,23 +19,35 @@ export default function JSMyProfile() {
         <div onClick={() => setShowBasic(!showBasic)}>
           <ListHeader name={"Basic Details"} />
         </div>
-        {showBasic && <JSBasicDetails />}
+        {showBasic && (
+          <JSBasicDetails toggle={setShowBasic} togglestate={showBasic} />
+        )}
         <div onClick={() => setShowEdu(!showEdu)}>
           <ListHeader name={"Education Details"} />
         </div>
-        {showEdu && <EducationDetail inside />}
+        {showEdu && (
+          <EducationDetail inside toggle={setShowEdu} togglestate={showEdu} />
+        )}
         <div onClick={() => setShowWork(!showWork)}>
           <ListHeader name={"Work Details"} />
         </div>
-        {showWork && <WorkDetails inside />}
+        {showWork && (
+          <WorkDetails inside toggle={setShowWork} togglestate={showWork} />
+        )}
         <div onClick={() => setShowPro(!showPro)}>
           <ListHeader name={"Professional Details"} />
         </div>
-        {showPro && <ProfessionalDetails inside />}
+        {showPro && (
+          <ProfessionalDetails
+            inside
+            toggle={setShowPro}
+            togglestate={showPro}
+          />
+        )}
         <div onClick={() => setShowPre(!showPre)}>
           <ListHeader name={"Preferences"} />
         </div>
-        {showPre && <JSPreferences />}
+        {showPre && <JSPreferences toggle={setShowPre} togglestate={showPre} />}
       </div>
     </div>
   );

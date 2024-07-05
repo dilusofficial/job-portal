@@ -62,6 +62,14 @@ export const employerApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    uploadLogo: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/employer/company-logo`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -74,4 +82,5 @@ export const {
   useGetMySingleJobQuery,
   useDeleteMyJobMutation,
   useDeleteMyAccountMutation,
+  useUploadLogoMutation,
 } = employerApiSlice;

@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import WorkElt from "./WorkElt";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setData,
   setEducationDetails,
   setProfessionalDetails,
   setWork,
   setWorkDetails,
 } from "../../slices/dataCollectionSlice";
+import { useUpdateWorkDetailsMutation } from "../../slices/jobSeekerApiSlice";
+import { toast } from "react-toastify";
+import Loading from "../Loading";
 
-export default function WorkDetails({ inside }) {
+export default function WorkDetails({ inside, toggle, togglestate }) {
   const { work } = useSelector((state) => state.dataCollection);
+  const [updateWorkDetails, { isLoading }] = useUpdateWorkDetailsMutation();
   const [workDetail, setWorkDetail] = useState(work || [{}]);
   const dispatch = useDispatch();
 
@@ -39,6 +44,24 @@ export default function WorkDetails({ inside }) {
   function removeForm(index) {
     const updated = workDetail.filter((_, i) => i !== index);
     setWorkDetail(updated);
+  }
+
+  async function handleSave() {
+    try {
+      const res = await updateWorkDetails({
+        work: workDetail,
+      }).unwrap();
+      if (res.msg === "success") {
+        toggle(!togglestate);
+        dispatch(setData(res.seeker));
+        toast.success("saved");
+        window.scrollTo(0, 0);
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
   }
   return (
     <div
@@ -74,9 +97,15 @@ export default function WorkDetails({ inside }) {
             Add New
           </button>
           {inside && (
-            <button className="p-2 bg-ascent text-primary rounded-md hover:bg-hover">
-              Save
-            </button>
+            <>
+              <button
+                onClick={handleSave}
+                className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"
+              >
+                Save
+              </button>
+              {isLoading && <Loading />}
+            </>
           )}
           {!inside && (
             <button

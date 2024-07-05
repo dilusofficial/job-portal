@@ -3,17 +3,23 @@ import ProjectElt from "./ProjectElt";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCertificates,
+  setData,
   setPreferences,
   setProfessionalDetails,
   setProjects,
   setWorkDetails,
 } from "../../slices/dataCollectionSlice";
 import Certificate from "./Certificate";
+import { useUpdateProfessionalDetailsMutation } from "../../slices/jobSeekerApiSlice";
+import { toast } from "react-toastify";
+import Loading from "../Loading";
 
-export default function ProfessionalDetails({ inside }) {
+export default function ProfessionalDetails({ inside, toggle, togglestate }) {
   const { projects, certificates } = useSelector(
     (state) => state.dataCollection
   );
+  const [updateProfessionalDetails, { isLoading }] =
+    useUpdateProfessionalDetailsMutation();
   const [projectDetail, setProjectDetail] = useState(projects || [{}]);
   const [certificateDetail, setCertificateDetail] = useState(
     certificates || [{}]
@@ -66,6 +72,26 @@ export default function ProfessionalDetails({ inside }) {
     const updated = certificateDetail.filter((_, i) => i !== index);
     setCertificateDetail(updated);
   }
+
+  async function handleSave() {
+    try {
+      const res = await updateProfessionalDetails({
+        projects: projectDetail,
+        certificates: certificateDetail,
+      }).unwrap();
+      if (res.msg === "success") {
+        toggle(!togglestate);
+        dispatch(setData(res.seeker));
+        toast.success("saved");
+        window.scrollTo(0, 0);
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
+
   return (
     <div
       className={`p-4 bg-secondary min-h-96  ${
@@ -129,9 +155,16 @@ export default function ProfessionalDetails({ inside }) {
             </>
           )}
           {inside && (
-            <button className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1">
-              Save
-            </button>
+            <>
+              {" "}
+              <button
+                onClick={handleSave}
+                className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
+              >
+                Save
+              </button>
+              {isLoading && <Loading />}
+            </>
           )}
         </div>
       </div>

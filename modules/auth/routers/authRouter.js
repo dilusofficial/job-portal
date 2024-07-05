@@ -9,9 +9,11 @@ import {
   resetPassword,
   sendOTP,
   verifyOTP,
+  changePassword,
 } from "../controllers/authController.js";
 import { authenticateUser } from "../../../middleware/authMiddleware.js";
 import {
+  validateChangePasswordInput,
   validateLoginInput,
   validateRegisterInput,
 } from "../../../middleware/validationMiddleware.js";
@@ -27,5 +29,11 @@ router.post("/google-login", googleLogin);
 router.post("/send-otp", authenticateUser, sendOTP);
 router.post("/verify", authenticateUser, verifyOTP);
 router.get("/userInfo", authenticateUser, userInfo);
+router.patch(
+  "/change-password",
+  authenticateUser,
+  validateChangePasswordInput,
+  changePassword
+);
 
 export default router;

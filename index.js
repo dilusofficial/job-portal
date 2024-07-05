@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import { v2 as cloudinary } from "cloudinary";
 
 import authRouter from "./modules/auth/routers/authRouter.js";
 import employerDashboardRouter from "./modules/employer/routers/employerDashboardRouter.js";
@@ -20,10 +21,17 @@ import {
 
 const app = express();
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(
   cors({
     credentials: true,

@@ -42,10 +42,16 @@ const JobSeekerSchema = new Schema(
     profilePic: {
       type: String,
     },
+    picPublicId: {
+      type: String,
+    },
     totalExperience: {
       type: String,
     },
     resume: {
+      type: String,
+    },
+    resumePublicId: {
       type: String,
     },
     currentSalary: {

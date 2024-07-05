@@ -156,3 +156,17 @@ export const userInfo = async (req, res) => {
   if (!user) throw new NotFoundError("No user found");
   res.status(200).json(user);
 };
+
+export const changePassword = async (req, res) => {
+  const user = await User.findById(req.user.userId);
+  if (!user) throw new NotFoundError("No user found");
+  const isPasswordCorrect = await comparePassword(
+    req.body.password,
+    user.password
+  );
+  if (!isPasswordCorrect) throw new UnauthenticatedError("Invalid credentials");
+  const hashedPassword = await hashPassword(req.body.newPassword);
+  user.password = hashedPassword;
+  await user.save();
+  res.status(200).json({ msg: "password changed successfully" });
+};

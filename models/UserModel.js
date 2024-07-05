@@ -27,6 +27,9 @@ const UserSchema = new Schema(
     image: {
       type: String,
     },
+    imagePublicId: {
+      type: String,
+    },
     gender: {
       type: String,
       enum: ["Male", "Female", "Others"],

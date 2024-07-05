@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import EducationElt from "./EducationElt";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setData,
   setEducation,
   setEducationDetails,
   setWorkDetails,
 } from "../../slices/dataCollectionSlice";
+import { useUpdateEducationDetailsMutation } from "../../slices/jobSeekerApiSlice";
+import { toast } from "react-toastify";
+import Loading from "../Loading";
 
-export default function EducationDetail({ inside }) {
+export default function EducationDetail({ inside, toggle, togglestate }) {
   const { education } = useSelector((state) => state.dataCollection);
+  const [updateEducationDetails, { isLoading }] =
+    useUpdateEducationDetailsMutation();
   const [educationDetail, setEducationDetail] = useState(education || [{}]);
 
   const dispatch = useDispatch();
@@ -38,6 +44,24 @@ export default function EducationDetail({ inside }) {
     setEducationDetail(updated);
   }
 
+  async function handleSave() {
+    try {
+      const res = await updateEducationDetails({
+        education: educationDetail,
+      }).unwrap();
+      if (res.msg === "success") {
+        toggle(!togglestate);
+        dispatch(setData(res.seeker));
+        toast.success("saved");
+        window.scrollTo(0, 0);
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
+
   return (
     <div
       className={`p-4 bg-secondary min-h-96 ${
@@ -64,9 +88,15 @@ export default function EducationDetail({ inside }) {
             Add New
           </button>
           {inside && (
-            <button className="p-2 bg-ascent text-primary rounded-md hover:bg-hover">
-              Save
-            </button>
+            <>
+              <button
+                onClick={handleSave}
+                className="p-2 bg-ascent text-primary rounded-md hover:bg-hover"
+              >
+                Save
+              </button>
+              {isLoading && <Loading />}
+            </>
           )}
           {!inside && (
             <button

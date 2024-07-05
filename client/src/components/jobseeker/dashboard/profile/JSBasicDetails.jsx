@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setAddress,
   setAge,
+  setData,
   setDateOfBirth,
   setEmail,
   setFullName,
@@ -12,10 +13,38 @@ import {
   setQualification,
   setResume,
 } from "../../../../slices/dataCollectionSlice";
+import { useUpdateBasicDetailsMutation } from "../../../../slices/jobSeekerApiSlice";
+import { toast } from "react-toastify";
+import Loading from "../../../Loading";
 
-export default function JSBasicDetails() {
+export default function JSBasicDetails({ toggle, togglestate }) {
   const state = useSelector((state) => state.dataCollection);
+  const [updateBasicDetails, { isLoading }] = useUpdateBasicDetailsMutation();
   const dispatch = useDispatch();
+
+  async function handleSave() {
+    try {
+      const res = await updateBasicDetails({
+        age: state.age,
+        address: state.address,
+        dateOfBirth: state.dateOfBirth,
+        email: state.email,
+        fullName: state.fullName,
+        qualification: state.qualification,
+      }).unwrap();
+      if (res.msg === "success") {
+        toggle(!togglestate);
+        dispatch(setData(res.updated));
+        toast.success("saved");
+        window.scrollTo(0, 0);
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
+
   return (
     <div className="p-4 bg-secondary w-full rounded-lg mt-3">
       <FormInput
@@ -73,9 +102,13 @@ export default function JSBasicDetails() {
         onchange={(e) => dispatch(setQualification(e.target.value))}
       />
       <div className="flex justify-end">
-        <button className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1">
+        <button
+          onClick={handleSave}
+          className="p-2 bg-ascent text-primary rounded-md hover:bg-hover me-1"
+        >
           Save
         </button>
+        {isLoading && <Loading />}
       </div>
     </div>
   );

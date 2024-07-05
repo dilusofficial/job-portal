@@ -9,6 +9,9 @@ const EmployerSchema = new Schema(
     logo: {
       type: String,
     },
+    logoPublicId: {
+      type: String,
+    },
     companyName: {
       type: String,
     },

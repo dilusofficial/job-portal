@@ -2,6 +2,7 @@ import { NotFoundError } from "../../../errors/customErrors.js";
 import Employer from "../../../models/EmployerModel.js";
 import Job from "../../../models/JobModel.js";
 import JobSeeker from "../../../models/JobSeeker.js";
+import User from "../../../models/UserModel.js";
 
 export const saveData = async (req, res) => {
   const skillsArray = req.body.skills.split(",").map((item) => item.trim());
@@ -74,4 +75,82 @@ export const GetJobSeeker = async (req, res) => {
   const user = await JobSeeker.findById(req.user.jobseekerId).populate("owner");
   if (!user) throw new NotFoundError("no user detected");
   res.status(200).json(user);
+};
+
+export const updatebasicDetails = async (req, res) => {
+  const seeker = await JobSeeker.findById(req.user.jobseekerId);
+  const user = await User.findById(req.user.userId);
+  if (!seeker || !user)
+    throw new NotFoundError("no jobseeker or user detected");
+  seeker.fullName = req.body.fullName;
+  seeker.profilePic = req.body.profilePic;
+  seeker.resume = req.body.resume;
+  seeker.qualification = req.body.qualification;
+  user.age = req.body.age;
+  user.dateOfBirth = req.body.dateOfBirth;
+  user.address = req.body.address;
+  user.email = req.body.email;
+  await user.save();
+  await seeker.save();
+  const updated = await JobSeeker.findById(req.user.jobseekerId).populate(
+    "owner"
+  );
+  res.status(200).json({ msg: "success", updated });
+};
+
+export const updateeducationDetails = async (req, res) => {
+  const seeker = await JobSeeker.findById(req.user.jobseekerId).populate(
+    "owner"
+  );
+  if (!seeker) throw new NotFoundError("no jobseeker found");
+  seeker.education = req.body.education;
+  seeker.dataCollected = true;
+  await seeker.save();
+  res.status(200).json({ msg: "success", seeker });
+};
+
+export const updateworkDetails = async (req, res) => {
+  const seeker = await JobSeeker.findById(req.user.jobseekerId).populate(
+    "owner"
+  );
+  if (!seeker) throw new NotFoundError("no jobseeker found");
+  seeker.work = req.body.work;
+  await seeker.save();
+  res.status(200).json({ msg: "success", seeker });
+};
+
+export const updateprofessionalDetails = async (req, res) => {
+  const seeker = await JobSeeker.findById(req.user.jobseekerId).populate(
+    "owner"
+  );
+  if (!seeker) throw new NotFoundError("no jobseeker found");
+  seeker.certificates = req.body.certificates;
+  seeker.projects = req.body.projects;
+  await seeker.save();
+  res.status(200).json({ msg: "success", seeker });
+};
+
+export const updatepreferences = async (req, res) => {
+  const skillsArray = req.body.skills.split(",").map((item) => item.trim());
+  const languagesArray = req.body.languages
+    .split(",")
+    .map((item) => item.trim());
+  const locationArray = req.body.preferredLocation
+    .split(",")
+    .map((item) => item.trim());
+  const seeker = await JobSeeker.findById(req.user.jobseekerId).populate(
+    "owner"
+  );
+  if (!seeker) throw new NotFoundError("no jobseeker found");
+  seeker.currentSalary = req.body.currentSalary;
+  seeker.expectedSalary = req.body.expectedSalary;
+  seeker.totalExperience = req.body.totalExperience;
+  seeker.preferredLocation = locationArray;
+  seeker.skills = skillsArray;
+  seeker.languages = languagesArray;
+  seeker.portfolio = req.body.portfolio;
+  seeker.github = req.body.github;
+  seeker.about = req.body.about;
+  await seeker.save();
+  res.status(200).json({ msg: "success", seeker });
 };

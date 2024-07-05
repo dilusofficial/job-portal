@@ -1,6 +1,7 @@
 import { body, validationResult } from "express-validator";
 import { BadRequestError } from "../errors/customErrors.js";
 import Employer from "../models/EmployerModel.js";
+import User from "../models/UserModel.js";
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -119,4 +120,42 @@ export const validateJobseekerDetailInput = withValidationErrors([
   body("skills").notEmpty().withMessage("skills is required"),
   body("languages").notEmpty().withMessage("languages is required"),
   body("about").notEmpty().withMessage("about is required"),
+]);
+
+export const validateBasicDetailsInput = withValidationErrors([
+  body("fullName").notEmpty().withMessage("fullName is required"),
+  body("age").notEmpty().withMessage("age is required"),
+  body("dateOfBirth").notEmpty().withMessage("date of birth is required"),
+  body("address").notEmpty().withMessage("address is required"),
+  body("qualification").notEmpty().withMessage("qualification is required"),
+  body("email")
+    .notEmpty()
+    .withMessage("email is required")
+    .isEmail()
+    .withMessage("Invalid email format")
+    .custom(async (email, { req }) => {
+      const user = await User.findOne({ email });
+      if (user && user._id.toString() !== req.user.userId.toString()) {
+        throw new BadRequestError("Email already exists");
+      }
+    }),
+]);
+
+export const validatePreferencesInput = withValidationErrors([
+  body("currentSalary").notEmpty().withMessage("current salary is required"),
+  body("expectedSalary").notEmpty().withMessage("expected salary is required"),
+  body("totalExperience")
+    .notEmpty()
+    .withMessage("total experience is required"),
+  body("preferredLocation")
+    .notEmpty()
+    .withMessage("preferred location is required"),
+  body("skills").notEmpty().withMessage("skills is required"),
+  body("languages").notEmpty().withMessage("languages is required"),
+  body("about").notEmpty().withMessage("about is required"),
+]);
+
+export const validateChangePasswordInput = withValidationErrors([
+  body("password").notEmpty().withMessage("password is required"),
+  body("newPassword").notEmpty().withMessage("new password is required"),
 ]);

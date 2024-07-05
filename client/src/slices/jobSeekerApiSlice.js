@@ -60,6 +60,46 @@ export const jobSeekerApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    updateBasicDetails: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/jobseeker/profile/basic`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    updateEducationDetails: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/jobseeker/profile/education`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    updateWorkDetails: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/jobseeker/profile/work`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    updateProfessionalDetails: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/jobseeker/profile/professional`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    updatePreferences: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/jobseeker/profile/preferences`,
+        body: data,
+        method: "PATCH",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -72,4 +112,9 @@ export const {
   useGetSingleJobQuery,
   useDeleteMyJSAccountMutation,
   useGetJobSeekerDetailsQuery,
+  useUpdateBasicDetailsMutation,
+  useUpdateEducationDetailsMutation,
+  useUpdateWorkDetailsMutation,
+  useUpdateProfessionalDetailsMutation,
+  useUpdatePreferencesMutation,
 } = jobSeekerApiSlice;

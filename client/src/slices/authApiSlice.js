@@ -74,6 +74,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/auth/change-password`,
+        body: data,
+        method: "PATCH",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -87,4 +95,5 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useGetUserInfoQuery,
+  useChangePasswordMutation,
 } = authApiSlice;

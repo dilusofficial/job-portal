@@ -8,29 +8,7 @@ import axios from "axios";
 import { setUserInfo } from "../../slices/allUsersSlice";
 import JobSeekerSmallBar from "../../components/jobseeker/JobSeekerSmallBar";
 import { useGetJobSeekerDetailsQuery } from "../../slices/jobSeekerApiSlice";
-import {
-  setAbout,
-  setAddress,
-  setAge,
-  setCertificates,
-  setCurrentSalary,
-  setDateOfBirth,
-  setEducation,
-  setEmail,
-  setExpectedSalary,
-  setFullName,
-  setGithub,
-  setLanguages,
-  setPortfolio,
-  setPrefferedLocation,
-  setProfilePic,
-  setProjects,
-  setQualification,
-  setResume,
-  setskills,
-  setTotalExperience,
-  setWork,
-} from "../../slices/dataCollectionSlice";
+import { setData } from "../../slices/dataCollectionSlice";
 
 export default function HomeLayout() {
   const dispatch = useDispatch();
@@ -53,39 +31,7 @@ export default function HomeLayout() {
 
   useEffect(() => {
     if (data) {
-      dispatch(setEducation(data.education.length > 0 ? data.education : [{}]));
-      dispatch(setWork(data.work.length > 0 ? data.work : [{}]));
-      dispatch(setProjects(data.projects.length > 0 ? data.projects : [{}]));
-      dispatch(
-        setCertificates(data.certificates.length > 0 ? data.certificates : [{}])
-      );
-      dispatch(setFullName(data.fullName ? data.fullName : ""));
-      dispatch(setAge(data.owner.age ? data.owner.age : ""));
-      dispatch(setEmail(data.owner.email ? data.owner.email : ""));
-      dispatch(setAddress(data.owner.address ? data.owner.address : ""));
-      dispatch(
-        setDateOfBirth(data.owner.dateOfBirth ? data.owner.dateOfBirth : "")
-      );
-      dispatch(setProfilePic(data.profilePic ? data.profilePic : ""));
-      dispatch(setQualification(data.qualification ? data.qualification : ""));
-      dispatch(setPortfolio(data.portfolio ? data.portfolio : ""));
-      dispatch(setGithub(data.github ? data.github : ""));
-      dispatch(setResume(data.resume ? data.resume : ""));
-      dispatch(setCurrentSalary(data.currentSalary ? data.currentSalary : ""));
-      dispatch(
-        setExpectedSalary(data.expectedSalary ? data.expectedSalary : "")
-      );
-      dispatch(
-        setTotalExperience(data.totalExperience ? data.totalExperience : "")
-      );
-      dispatch(
-        setPrefferedLocation(
-          data.preferredLocation ? data.preferredLocation : ""
-        )
-      );
-      dispatch(setskills(data.skills ? data.skills : ""));
-      dispatch(setLanguages(data.languages ? data.languages : ""));
-      dispatch(setAbout(data.about ? data.about : ""));
+      dispatch(setData(data));
     }
   }, [isLoading]);
   return (
