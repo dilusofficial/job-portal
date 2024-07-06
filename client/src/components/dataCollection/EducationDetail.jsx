@@ -15,7 +15,9 @@ export default function EducationDetail({ inside, toggle, togglestate }) {
   const { education } = useSelector((state) => state.dataCollection);
   const [updateEducationDetails, { isLoading }] =
     useUpdateEducationDetailsMutation();
-  const [educationDetail, setEducationDetail] = useState(education || [{}]);
+  const [educationDetail, setEducationDetail] = useState(
+    education ? education : [{}]
+  );
 
   const dispatch = useDispatch();
 

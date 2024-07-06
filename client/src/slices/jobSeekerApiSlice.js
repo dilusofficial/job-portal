@@ -100,6 +100,22 @@ export const jobSeekerApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    updateProfilePicture: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/jobseeker/profile/profile-image`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    updateResume: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/jobseeker/profile/resume`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -117,4 +133,6 @@ export const {
   useUpdateWorkDetailsMutation,
   useUpdateProfessionalDetailsMutation,
   useUpdatePreferencesMutation,
+  useUpdateProfilePictureMutation,
+  useUpdateResumeMutation,
 } = jobSeekerApiSlice;

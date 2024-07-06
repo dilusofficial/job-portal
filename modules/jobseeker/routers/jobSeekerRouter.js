@@ -13,12 +13,15 @@ import {
   updatepreferences,
   updateprofessionalDetails,
   updateworkDetails,
+  uploadProfilePicture,
+  uploadResume,
 } from "../controllers/jobSeekerController.js";
 import {
   validateBasicDetailsInput,
   validateJobseekerDetailInput,
   validatePreferencesInput,
 } from "../../../middleware/validationMiddleware.js";
+import upload from "../../../middleware/multerMiddleware.js";
 
 const router = Router();
 
@@ -34,6 +37,12 @@ router.patch("/profile/basic", validateBasicDetailsInput, updatebasicDetails);
 router.patch("/profile/education", updateeducationDetails);
 router.patch("/profile/work", updateworkDetails);
 router.patch("/profile/professional", updateprofessionalDetails);
+router.patch(
+  "/profile/profile-image",
+  upload.single("profilePic"),
+  uploadProfilePicture
+);
+router.patch("/profile/resume", upload.single("resume"), uploadResume);
 router.patch(
   "/profile/preferences",
   validatePreferencesInput,

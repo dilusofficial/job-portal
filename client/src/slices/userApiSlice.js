@@ -25,6 +25,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    updateImage: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/user/image-upload`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -32,4 +40,5 @@ export const {
   useAddUserDetailsMutation,
   useSaveEmployerMutation,
   useSaveJobSeekerMutation,
+  useUpdateImageMutation,
 } = userApiSlice;

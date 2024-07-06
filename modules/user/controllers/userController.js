@@ -2,9 +2,11 @@ import {
   BadRequestError,
   NotFoundError,
 } from "../../../errors/customErrors.js";
+import { formatImage } from "../../../middleware/multerMiddleware.js";
 import Employer from "../../../models/EmployerModel.js";
 import JobSeeker from "../../../models/JobSeeker.js";
 import User from "../../../models/UserModel.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const addUserDetails = async (req, res) => {
   const user = await User.findById(req.user.userId).select("-password");
@@ -47,5 +49,23 @@ export const saveJobSeeker = async (req, res) => {
     });
     await newSeeker.save();
     res.status(201).json({ msg: "success", newSeeker });
+  }
+};
+
+export const uploadImage = async (req, res) => {
+  const user = await User.findById(req.user.userId);
+  if (!user) throw new NotFoundError("No user found");
+  if (req.file) {
+    const file = formatImage(req.file);
+    if (user.imagePublicId) {
+      await cloudinary.uploader.destroy(user.imagePublicId);
+    }
+    const response = await cloudinary.uploader.upload(file);
+    user.image = response.secure_url;
+    user.imagePublicId = response.public_id;
+    await user.save();
+    res.status(200).json({ msg: "success", url: response.secure_url });
+  } else {
+    throw new BadRequestError("No files found");
   }
 };

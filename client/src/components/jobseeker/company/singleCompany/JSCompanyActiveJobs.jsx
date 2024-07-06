@@ -13,7 +13,7 @@ export default function JSCompanyActiveJobs({ data }) {
               key={x._id}
               seeker
               id={x._id}
-              image={x.owner.logo ? x.owner.logo : "/company-1.png"}
+              image={x.owner.logo ? x.owner.logo : "/nocompany.png"}
               name={x.jobTitle}
               joblocation={x.jobLocation}
               category={x.category}

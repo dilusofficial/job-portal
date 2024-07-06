@@ -6,7 +6,7 @@ export default function TableCard({ image, name, category, location }) {
   return (
     <div className="flex md:flex-row flex-col md:justify-between items-center md:px-10 p-3 rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
-        <div>
+        <div className="w-20 h-20 rounded-full overflow-hidden">
           <img
             className="border rounded-full border-hover p-1"
             src={image}

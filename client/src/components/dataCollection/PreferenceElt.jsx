@@ -11,6 +11,8 @@ import {
   setTotalExperience,
   setskills,
 } from "../../slices/dataCollectionSlice";
+import Loading from "../Loading";
+import { useUpdateResumeMutation } from "../../slices/jobSeekerApiSlice";
 
 export default function PreferenceElt() {
   const {
@@ -24,7 +26,29 @@ export default function PreferenceElt() {
     languages,
     about,
   } = useSelector((state) => state.dataCollection);
+  const [updateResume, { isLoading: loadingResume }] =
+    useUpdateResumeMutation();
   const dispatch = useDispatch();
+
+  async function handlepdf(e) {
+    const formdata = new FormData();
+    formdata.append("resume", e.target.files[0]);
+    const file = formdata.get("resume");
+    if (file.size > 500000) {
+      toast.error("Pdf file too large. should be below 500 kb");
+      return null;
+    }
+    try {
+      const res = await updateResume(formdata).unwrap();
+      if (res.msg === "success") {
+        dispatch(setResume(res.url));
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
   return (
     <div className="p-4 bg-secondary w-full rounded-lg mt-3">
       <div className="form-row">
@@ -37,8 +61,17 @@ export default function PreferenceElt() {
         />
       </div>
       <div className="form-row">
-        <label className="form-label">Upload Resume</label>
-        <input type="file" className="form-input" />
+        <label className="form-label">Resume </label>
+        <div className="flex items-center">
+          <input
+            type={"file"}
+            className="w-full py-1 px-3 rounded-lg bg-background2 border border-gray-300 text-gray-900 h-11"
+            onChange={handlepdf}
+            accept="application/pdf"
+          />
+        </div>
+        {loadingResume && <Loading />}
+        {resume && <p className="text-xs">{resume}</p>}
       </div>
       <div className="form-row">
         <label className="form-label">Current CTC</label>

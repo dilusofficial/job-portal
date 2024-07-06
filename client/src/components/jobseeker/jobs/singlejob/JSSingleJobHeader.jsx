@@ -8,8 +8,8 @@ export default function JSSingleJobHeader({ data }) {
   return (
     <div className="flex md:flex-row flex-col md:justify-between bg-background2 items-center md:px-10 p-3  rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
-        <div>
-          <img src={"/nocompany.png"}></img>
+        <div className="w-20 h-20 rounded-full overflow-hidden">
+          <img src={data.owner.logo ? data.owner.logo : "/nocompany.png"}></img>
         </div>
         <div className="flex flex-col gap-4">
           <h1 className="text-xl font-medium">{data.jobTitle}</h1>

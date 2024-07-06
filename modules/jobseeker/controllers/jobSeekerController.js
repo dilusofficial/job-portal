@@ -1,8 +1,10 @@
 import { NotFoundError } from "../../../errors/customErrors.js";
+import { formatImage } from "../../../middleware/multerMiddleware.js";
 import Employer from "../../../models/EmployerModel.js";
 import Job from "../../../models/JobModel.js";
 import JobSeeker from "../../../models/JobSeeker.js";
 import User from "../../../models/UserModel.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const saveData = async (req, res) => {
   const skillsArray = req.body.skills.split(",").map((item) => item.trim());
@@ -60,7 +62,7 @@ export const getSingleCompany = async (req, res) => {
 
 export const getCompanyActiveJobs = async (req, res) => {
   const { id } = req.params;
-  const jobs = await Job.find({ owner: id, isActive: true });
+  const jobs = await Job.find({ owner: id, isActive: true }).populate("owner");
   if (!jobs) throw new NotFoundError("No active jobs found");
   res.status(200).json(jobs);
 };
@@ -153,4 +155,40 @@ export const updatepreferences = async (req, res) => {
   seeker.about = req.body.about;
   await seeker.save();
   res.status(200).json({ msg: "success", seeker });
+};
+
+export const uploadProfilePicture = async (req, res) => {
+  const seeker = await JobSeeker.findById(req.user.jobseekerId);
+  if (!seeker) throw new NotFoundError("No jobseeker found");
+  if (req.file) {
+    const file = formatImage(req.file);
+    if (seeker.picPublicId) {
+      await cloudinary.uploader.destroy(seeker.picPublicId);
+    }
+    const response = await cloudinary.uploader.upload(file);
+    seeker.profilePic = response.secure_url;
+    seeker.picPublicId = response.public_id;
+    await seeker.save();
+    res.status(200).json({ msg: "success", url: response.secure_url });
+  } else {
+    throw new BadRequestError("No files found");
+  }
+};
+
+export const uploadResume = async (req, res) => {
+  const seeker = await JobSeeker.findById(req.user.jobseekerId);
+  if (!seeker) throw new NotFoundError("No jobseeker found");
+  if (req.file) {
+    const file = formatImage(req.file);
+    if (seeker.resumePublicId) {
+      await cloudinary.uploader.destroy(seeker.resumePublicId);
+    }
+    const response = await cloudinary.uploader.upload(file);
+    seeker.resume = response.secure_url;
+    seeker.resumePublicId = response.public_id;
+    await seeker.save();
+    res.status(200).json({ msg: "success", url: response.secure_url });
+  } else {
+    throw new BadRequestError("No files found");
+  }
 };

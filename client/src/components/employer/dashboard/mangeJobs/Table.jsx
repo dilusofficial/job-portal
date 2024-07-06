@@ -75,7 +75,7 @@ export default function JobTable() {
                 >
                   <TableCell component="th" scope="row">
                     <TableCard
-                      image={"/nocompany.png"}
+                      image={row.owner.logo ? row.owner.logo : "/nocompany.png"}
                       name={row.jobTitle}
                       category={row.category}
                       location={row.jobLocation}

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import FormInput from "../../components/FormInput";
 import FormSelect from "../../components/FormSelect";
-import { useAddUserDetailsMutation } from "../../slices/userApiSlice";
+import {
+  useAddUserDetailsMutation,
+  useUpdateImageMutation,
+} from "../../slices/userApiSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../slices/allUsersSlice";
+import Loading from "../../components/Loading";
 
 export default function UserData() {
   const [age, setAge] = useState("");
@@ -20,8 +24,10 @@ export default function UserData() {
   const [highestQualification, setHighestQualification] =
     useState("High School");
   const [addUserDetails, { isLoading }] = useAddUserDetailsMutation();
+  const [updateImage, { isLoading: loadingImage }] = useUpdateImageMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleSave = async () => {
     try {
       const res = await addUserDetails({
@@ -57,6 +63,27 @@ export default function UserData() {
       toast.error(err?.data?.msg || err?.error);
     }
   };
+
+  async function handleImageUpload(e) {
+    const formdata = new FormData();
+    formdata.append("image", e.target.files[0]);
+    const file = formdata.get("image");
+    if (file.size > 500000) {
+      toast.error("Image is too large. should be below 500kb");
+      return null;
+    }
+    try {
+      const res = await updateImage(formdata).unwrap();
+      if (res.msg === "success") {
+        setImage(res.url);
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
+
   return (
     <div className="flex justify-center">
       <div className="p-4 bg-secondary lg:w-1/2 rounded-lg mt-3">
@@ -74,12 +101,22 @@ export default function UserData() {
           value={dateOfBirth}
           onchange={(e) => setDateOfBirth(e.target.value)}
         />
-        <FormInput
-          type={"file"}
-          title={"Profile Picture"}
-          value={image}
-          onchange={(e) => setImage(e.target.value)}
-        />
+        <div className="form-row">
+          <label className="form-label">Image</label>
+          <div className="flex items-center">
+            <input
+              type={"file"}
+              className="w-full py-1 px-3 rounded-lg bg-background2 border border-gray-300 text-gray-900 h-11"
+              onChange={handleImageUpload}
+            />
+          </div>
+          {loadingImage && <Loading />}
+          {image && (
+            <div className="w-14 h-14 rounded-full overflow-hidden">
+              <img src={image}></img>
+            </div>
+          )}
+        </div>
         <FormInput
           title={"Hobbies"}
           type={"text"}

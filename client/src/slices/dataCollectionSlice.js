@@ -19,7 +19,7 @@ const initialState = {
   address: "",
   dateOfBirth: "",
   profilePic: "",
-  qualification: "",
+  qualification: "Certificate",
   portfolio: "",
   github: "",
   resume: "",
@@ -158,7 +158,7 @@ const dataCollectionSlice = createSlice({
       state.address = "";
       state.dateOfBirth = "";
       state.profilePic = "";
-      state.qualification = "";
+      state.qualification = "Certificate";
       state.portfolio = "";
       state.github = "";
     },
@@ -190,7 +190,9 @@ const dataCollectionSlice = createSlice({
         ? payload.owner.dateOfBirth
         : "";
       state.profilePic = payload.profilePic ? payload.profilePic : "";
-      state.qualification = payload.qualification ? payload.qualification : "";
+      state.qualification = payload.qualification
+        ? payload.qualification
+        : "Certificate";
       state.portfolio = payload.portfolio ? payload.portfolio : "";
       state.github = payload.github ? payload.github : "";
     },

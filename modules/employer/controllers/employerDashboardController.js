@@ -55,13 +55,13 @@ export const addNewJob = async (req, res) => {
 };
 
 export const getEmployerJobs = async (req, res) => {
-  const jobs = await Job.find({ owner: req.user.employerId });
+  const jobs = await Job.find({ owner: req.user.employerId }).populate("owner");
   if (!jobs) throw new NotFoundError("No Jobs Found");
   res.status(200).json(jobs);
 };
 
 export const getSingleJob = async (req, res) => {
-  const job = await Job.findById(req.params.id);
+  const job = await Job.findById(req.params.id).populate("owner");
   if (!job) throw new NotFoundError("No Job found");
   res.status(200).json(job);
 };

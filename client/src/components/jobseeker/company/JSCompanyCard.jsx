@@ -14,7 +14,7 @@ export default function JSCompanyCard({
   return (
     <div className="flex md:flex-row flex-col gap-3 md:justify-between items-center md:px-10 p-3 border border-primary shadow-md rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
-        <div>
+        <div className="w-20 h-20 rounded-full overflow-hidden">
           <img src={image}></img>
         </div>
         <div className="flex flex-col gap-4">
