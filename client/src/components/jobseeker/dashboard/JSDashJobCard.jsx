@@ -2,26 +2,42 @@ import React from "react";
 import { IoCashOutline } from "react-icons/io5";
 import { SlLocationPin } from "react-icons/sl";
 import { Link } from "react-router-dom";
+import { useGetSingleCompanyQuery } from "../../../slices/jobSeekerApiSlice";
+import Loading from "../../Loading";
+import { useSelector } from "react-redux";
 
 export default function JSDashJobCard({
-  image,
   jobTitle,
-  company,
+  owner,
   salary,
   location,
   skills,
   jobId,
+  shortlist,
+  reject,
 }) {
+  const { data, isLoading } = useGetSingleCompanyQuery(owner);
+  const { JSInfo } = useSelector((state) => state.allUsers);
   return (
     <div className="flex md:flex-row flex-col md:justify-between items-center md:px-10 p-3 border border-primary shadow-md rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
-        <div className="w-20 h-20 rounded-full overflow-hidden">
-          <img src={image}></img>
-        </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="w-20 h-20 rounded-full overflow-hidden">
+            <img src={data.logo || "/nocompany.png"}></img>
+          </div>
+        )}
+
         <div className="flex flex-col gap-4">
           <h1 className="text-xl font-medium">{jobTitle}</h1>
           <div className="flex gap-5 text-sm">
-            <p className="text-hover">{company}</p>
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <p className="text-hover">{data.companyName}</p>
+            )}
+
             <p className="flex gap-2 items-center text-gray-500">
               <span>
                 <SlLocationPin />
@@ -45,6 +61,23 @@ export default function JSDashJobCard({
               </div>
             ))}
           </div>
+          {shortlist && reject && (
+            <>
+              {shortlist?.includes(JSInfo._id) ? (
+                <h1 className="p-2 w-fit rounded-md bg-green-400 text-green-800">
+                  ShortListed
+                </h1>
+              ) : reject?.includes(JSInfo._id) ? (
+                <h1 className="p-2 rounded-md w-fit bg-red-400 text-red-800">
+                  Rejected
+                </h1>
+              ) : (
+                <h1 className="p-2 rounded-md w-fit bg-yellow-400 text-yellow-800">
+                  Pending
+                </h1>
+              )}
+            </>
+          )}
 
           <div className="flex gap-3 justify-between">
             <Link
@@ -53,10 +86,6 @@ export default function JSDashJobCard({
             >
               View
             </Link>
-
-            <button className="text-red-700 bg-red-100 hover:bg-red-200 p-2 rounded-xl">
-              Delete
-            </button>
           </div>
         </div>
       </div>

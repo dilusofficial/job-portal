@@ -127,10 +127,6 @@ export default function CandidateCard({
                 {loading2 && <Loading />}
               </button>
             )}
-
-            <button className="text-red-700 bg-red-100 hover:bg-red-200 p-2 rounded-xl">
-              Delete
-            </button>
           </div>
         </div>
       </div>

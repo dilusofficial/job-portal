@@ -220,6 +220,7 @@ export const getAppliedJobs = async (req, res) => {
   const user = await JobSeeker.findById(req.user.jobseekerId).populate([
     "appliedJobs",
     "shortListed",
+    "appliedJobs.owner",
   ]);
   if (!user) throw new NotFoundError("No user found");
   res.status(200).json(user);

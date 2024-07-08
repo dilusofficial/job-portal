@@ -1,11 +1,11 @@
 import React from "react";
+import { useGetAllAppliedJobsQuery } from "../../../../slices/jobSeekerApiSlice";
+import Loading from "../../../Loading";
 import FormSelect from "../../../FormSelect";
 import JSDashJobCard from "../JSDashJobCard";
-import { useGetAllAppliedJobsQuery } from "../../../../slices/jobSeekerApiSlice";
 import Pagination from "../../../Pagination";
-import Loading from "../../../Loading";
 
-export default function AppliedList() {
+export default function JSDashShortListedList() {
   const { data, isLoading } = useGetAllAppliedJobsQuery();
 
   return isLoading ? (
@@ -18,8 +18,8 @@ export default function AppliedList() {
         </div>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-2  gap-4 my-4">
-        {data.appliedJobs.length > 0 ? (
-          data.appliedJobs.map((item) => (
+        {data.shortListed.length > 0 ? (
+          data.shortListed.map((item) => (
             <JSDashJobCard
               key={item._id}
               owner={item.owner}
@@ -28,12 +28,10 @@ export default function AppliedList() {
               skills={item.skills}
               location={item.jobLocation}
               jobId={item._id}
-              shortlist={item.shortListed}
-              reject={item.rejected}
             />
           ))
         ) : (
-          <h1>No Applied Jobs</h1>
+          <h1>No ShortListed Jobs</h1>
         )}
       </div>
       <Pagination />
