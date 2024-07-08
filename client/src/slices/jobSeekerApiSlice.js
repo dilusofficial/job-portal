@@ -25,6 +25,13 @@ export const jobSeekerApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 3,
     }),
+    applyJob: builder.mutation({
+      query: (id) => ({
+        url: `${BASE_URL}/jobseeker/jobs/${id}`,
+        method: "PATCH",
+        credentials: "include",
+      }),
+    }),
     getAllCompanies: builder.query({
       query: () => ({
         url: `${BASE_URL}/jobseeker/companies`,
@@ -116,6 +123,13 @@ export const jobSeekerApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    getAllAppliedJobs: builder.query({
+      query: () => ({
+        url: `${BASE_URL}/jobseeker/applied-jobs`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 3,
+    }),
   }),
 });
 
@@ -126,6 +140,7 @@ export const {
   useGetSingleCompanyQuery,
   useGetCompanyActiveJobsQuery,
   useGetSingleJobQuery,
+  useApplyJobMutation,
   useDeleteMyJSAccountMutation,
   useGetJobSeekerDetailsQuery,
   useUpdateBasicDetailsMutation,
@@ -135,4 +150,5 @@ export const {
   useUpdatePreferencesMutation,
   useUpdateProfilePictureMutation,
   useUpdateResumeMutation,
+  useGetAllAppliedJobsQuery,
 } = jobSeekerApiSlice;

@@ -13,7 +13,7 @@ export default function CompanyCard({
   return (
     <div className="flex md:flex-row flex-col gap-3 md:justify-between items-center md:px-10 p-3 border border-primary shadow-md rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
-        <div>
+        <div className="w-20 h-20 rounded-full overflow-hidden">
           <img src={image}></img>
         </div>
         <div className="flex flex-col gap-4">
@@ -27,11 +27,11 @@ export default function CompanyCard({
               {location}
             </p>
           </div>
-          <div className="">
+          {/*<div className="">
             <div className="px-2 py-2 text-xs bg-background2 text-center text-gray-500 rounded-lg">
               open positions: {no}
             </div>
-          </div>
+          </div>*/}
         </div>
       </div>
       <div className="my-3 md:my-0">

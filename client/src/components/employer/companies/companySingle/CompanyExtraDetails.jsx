@@ -7,38 +7,38 @@ import { MdOutlinePhoneEnabled } from "react-icons/md";
 import { IoMailOutline } from "react-icons/io5";
 import ExtraDetailElt from "../../candidates/candidateSingle/ExtraDetailElt";
 
-export default function CompanyExtraDetails() {
+export default function CompanyExtraDetails({ data }) {
   return (
     <div className="flex flex-col gap-8 my-5">
       <ExtraDetailElt
         title={"Industry"}
         icon={<LiaIndustrySolid />}
-        content={"Accounting/Finance"}
+        content={data.industry}
       />
       <ExtraDetailElt
         title={"Size"}
         icon={<PiUsersFourLight />}
-        content={"50-100"}
+        content={data.size}
       />
       <ExtraDetailElt
         title={"Founded"}
         icon={<LiaHourglassStartSolid />}
-        content={"2007"}
+        content={data.founded.toString().slice(0, 10)}
       />
       <ExtraDetailElt
         title={"Website"}
         icon={<CgWebsite />}
-        content={"www.example.com"}
+        content={data.website}
       />
       <ExtraDetailElt
         title={"Contact"}
         icon={<MdOutlinePhoneEnabled />}
-        content={"+911234567890"}
+        content={data.companyContact}
       />
       <ExtraDetailElt
         title={"Mail"}
         icon={<IoMailOutline />}
-        content={"example@mail.com"}
+        content={data.companyEmail}
       />
     </div>
   );

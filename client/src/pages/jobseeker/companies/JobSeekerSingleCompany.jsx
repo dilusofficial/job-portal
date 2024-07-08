@@ -17,7 +17,7 @@ export default function JobSeekerSingleCompany() {
     <Loading />
   ) : (
     <div>
-      <JSSingleCompanyHeader data={data} />
+      <JSSingleCompanyHeader data={data} openJobs={data2?.length} />
       <JSCompanyPageDetail data={data} isLoading={isLoading2} data2={data2} />
     </div>
   );

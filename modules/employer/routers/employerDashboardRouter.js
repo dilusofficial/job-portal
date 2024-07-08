@@ -5,9 +5,16 @@ import {
   deleteAccount,
   deleteJob,
   editJob,
+  getAllCandidates,
+  getAllEmCompanies,
+  getApplicants,
   getEmployerJobs,
+  getSingleCandidate,
+  getSingleEmCompany,
   getSingleJob,
   logoUpload,
+  rejectSeeker,
+  shortListSeeker,
   updateCompanyProfile,
 } from "../controllers/employerDashboardController.js";
 import {
@@ -31,5 +38,12 @@ router.get("/job/:id", getSingleJob);
 router.delete("/job/:id", deleteJob);
 router.delete("/", deleteAccount);
 router.patch("/company-logo", upload.single("logo"), logoUpload);
+router.get("/candidates", getAllCandidates);
+router.get("/candidates/:id", getSingleCandidate);
+router.get("/companies", getAllEmCompanies);
+router.get("/companies/:id", getSingleEmCompany);
+router.get("/applicants", getApplicants);
+router.patch("/shortlist", shortListSeeker);
+router.patch("/reject", rejectSeeker);
 
 export default router;

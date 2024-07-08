@@ -6,6 +6,7 @@ import {
   setExpectedSalary,
   setFullName,
   setLanguages,
+  setOneWord,
   setPrefferedLocation,
   setResume,
   setTotalExperience,
@@ -25,6 +26,7 @@ export default function PreferenceElt() {
     skills,
     languages,
     about,
+    oneWord,
   } = useSelector((state) => state.dataCollection);
   const [updateResume, { isLoading: loadingResume }] =
     useUpdateResumeMutation();
@@ -125,6 +127,16 @@ export default function PreferenceElt() {
           className="form-input"
           value={languages}
           onChange={(e) => dispatch(setLanguages(e.target.value))}
+        />
+      </div>
+      <div className="form-row">
+        <label className="form-label">Describe yorself in 1 word</label>
+        <input
+          type="text"
+          className="form-input"
+          placeholder="eg: Web Developer"
+          value={oneWord}
+          onChange={(e) => dispatch(setOneWord(e.target.value))}
         />
       </div>
       <div className="form-row">

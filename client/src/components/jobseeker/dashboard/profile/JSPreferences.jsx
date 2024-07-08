@@ -8,6 +8,7 @@ import {
   setExpectedSalary,
   setGithub,
   setLanguages,
+  setOneWord,
   setPortfolio,
   setPrefferedLocation,
   setskills,
@@ -33,7 +34,8 @@ export default function JSPreferences({ toggle, togglestate }) {
         skills: state.skills,
         portfolio: state.portfolio,
         github: state.github,
-        about: state.github,
+        about: state.about,
+        oneWord: state.oneWord,
       }).unwrap();
       if (res.msg === "success") {
         toggle(!togglestate);
@@ -96,6 +98,13 @@ export default function JSPreferences({ toggle, togglestate }) {
         type={"text"}
         value={state.github}
         onchange={(e) => dispatch(setGithub(e.target.value))}
+      />
+      <FormInput
+        title={"Describe in 1 word"}
+        type={"text"}
+        value={state.oneWord}
+        placeholder={"eg: Web Developer"}
+        onchange={(e) => dispatch(setOneWord(e.target.value))}
       />
       <FormInput
         title={"about"}

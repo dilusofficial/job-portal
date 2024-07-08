@@ -3,7 +3,7 @@ import { BsClockHistory, BsSuitcase } from "react-icons/bs";
 import { SlLocationPin } from "react-icons/sl";
 import { Link } from "react-router-dom";
 
-export default function JSSingleCompanyHeader({ data }) {
+export default function JSSingleCompanyHeader({ data, openJobs }) {
   return (
     <div className="flex md:flex-row flex-col md:justify-between bg-background2 items-center md:px-10 p-3  rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
@@ -34,7 +34,7 @@ export default function JSSingleCompanyHeader({ data }) {
             </p>
           </div>
           <div className="px-2 py-2 text-xs bg-primary w-fit text-gray-500 rounded-lg">
-            {/*open positions: 12*/}
+            Active Jobs: {openJobs}
           </div>
         </div>
       </div>

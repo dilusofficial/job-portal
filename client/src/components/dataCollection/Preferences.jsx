@@ -3,7 +3,6 @@ import PreferenceElt from "./PreferenceElt";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  resetData,
   setPreferences,
   setProfessionalDetails,
 } from "../../slices/dataCollectionSlice";
@@ -38,10 +37,10 @@ export default function Preferences() {
         skills: states.skills,
         languages: states.languages,
         about: states.about,
+        oneWord: states.oneWord,
       }).unwrap();
       if (res.msg === "details added successfully") {
         dispatch(setPreferences("completed"));
-        dispatch(resetData());
         navigate("/jobseeker");
         toast.success("details added successfully");
       } else {

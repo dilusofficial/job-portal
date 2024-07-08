@@ -43,7 +43,7 @@ export default function JSSinglePageExtra({ data }) {
       <ExtraDetailElt
         title={"Salary"}
         icon={<PiMoneyLight />}
-        content={data.salary}
+        content={`${data.salary} CTC`}
       />
       <ExtraDetailElt
         title={"Gender"}

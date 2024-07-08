@@ -25,9 +25,11 @@ export const saveData = async (req, res) => {
   jobseeker.expectedSalary = req.body.expectedSalary;
   jobseeker.totalExperience = req.body.totalExperience;
   jobseeker.about = req.body.about;
+  jobseeker.oneWord = req.body.oneWord;
   jobseeker.preferredLocation = locationArray;
   jobseeker.skills = skillsArray;
   jobseeker.languages = languagesArray;
+
   jobseeker.dataCollected = true;
   await jobseeker.save();
   res.status(200).json({ msg: "details added successfully" });
@@ -153,6 +155,7 @@ export const updatepreferences = async (req, res) => {
   seeker.portfolio = req.body.portfolio;
   seeker.github = req.body.github;
   seeker.about = req.body.about;
+  seeker.oneWord = req.body.oneWord;
   await seeker.save();
   res.status(200).json({ msg: "success", seeker });
 };
@@ -191,4 +194,33 @@ export const uploadResume = async (req, res) => {
   } else {
     throw new BadRequestError("No files found");
   }
+};
+
+export const applyjob = async (req, res) => {
+  const job = await Job.findById(req.params.id);
+  if (!job) throw new NotFoundError("No job found");
+  const seeker = await JobSeeker.findById(req.user.jobseekerId);
+  if (!seeker) throw new NotFoundError("No seeker found");
+  const employer = await Employer.findById(job.owner);
+  if (!employer) throw new NotFoundError("No employer found");
+  job.applied.push(req.user.jobseekerId);
+  seeker.appliedJobs.push(job._id);
+  const applicantObject = {
+    applicant: req.user.jobseekerId,
+    jobApplied: job._id,
+  };
+  employer.allApplicants.push(applicantObject);
+  await job.save();
+  await seeker.save();
+  await employer.save();
+  res.status(200).json({ msg: "success" });
+};
+
+export const getAppliedJobs = async (req, res) => {
+  const user = await JobSeeker.findById(req.user.jobseekerId).populate([
+    "appliedJobs",
+    "shortListed",
+  ]);
+  if (!user) throw new NotFoundError("No user found");
+  res.status(200).json(user);
 };

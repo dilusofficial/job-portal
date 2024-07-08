@@ -1,8 +1,10 @@
 import { Router } from "express";
 import {
+  applyjob,
   deleteMyAccount,
   getAllCompanies,
   getAllJobs,
+  getAppliedJobs,
   getCompanyActiveJobs,
   GetJobSeeker,
   getSingleCompany,
@@ -30,6 +32,8 @@ router.delete("/", deleteMyAccount);
 router.post("/data", validateJobseekerDetailInput, saveData);
 router.get("/jobs", getAllJobs);
 router.get("/jobs/:id", getsingleJob);
+router.patch("/jobs/:id", applyjob);
+router.get("/applied-jobs", getAppliedJobs);
 router.get("/companies", getAllCompanies);
 router.get("/companies/:id", getSingleCompany);
 router.get("/active-jobs/:id", getCompanyActiveJobs);

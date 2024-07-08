@@ -57,6 +57,9 @@ const JobSeekerSchema = new Schema(
     currentSalary: {
       type: String,
     },
+    oneWord: {
+      type: String,
+    },
     qualification: {
       type: String,
       enum: [
@@ -86,6 +89,11 @@ const JobSeekerSchema = new Schema(
       default: [],
     },
     shortListed: {
+      type: [mongoose.Types.ObjectId],
+      ref: "Job",
+      default: [],
+    },
+    rejected: {
       type: [mongoose.Types.ObjectId],
       ref: "Job",
       default: [],

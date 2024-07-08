@@ -10,39 +10,43 @@ import {
 import { HiOutlineLanguage } from "react-icons/hi2";
 import ExtraDetailElt from "./ExtraDetailElt";
 
-export default function ExtraDetails() {
+export default function ExtraDetails({ data }) {
   return (
     <div className="flex flex-col gap-8 my-5">
       <ExtraDetailElt
         title={"Experience"}
         icon={<PiNotepad />}
-        content={"1-2"}
+        content={data.totalExperience}
       />
       <ExtraDetailElt
         title={"Age"}
         icon={<PiHourglassSimpleLow />}
-        content={"25"}
+        content={data.owner.age}
       />
       <ExtraDetailElt
         title={"Current Salary"}
         icon={<PiCoins />}
-        content={"4.5 CTC"}
+        content={`${data.currentSalary} CTC`}
       />
       <ExtraDetailElt
         title={"Expected Salary"}
         icon={<PiMoney />}
-        content={"5.5 CTC"}
+        content={`${data.expectedSalary} CTC`}
       />
-      <ExtraDetailElt title={"Gender"} icon={<PiUser />} content={"Male"} />
+      <ExtraDetailElt
+        title={"Gender"}
+        icon={<PiUser />}
+        content={data.owner.gender}
+      />
       <ExtraDetailElt
         title={"Languages"}
         icon={<HiOutlineLanguage />}
-        content={"English Hindi Spanish"}
+        content={data.languages.toString()}
       />
       <ExtraDetailElt
         title={"Qualification"}
         icon={<PiGraduationCap />}
-        content={"Bachelors Degree"}
+        content={data.qualification}
       />
     </div>
   );

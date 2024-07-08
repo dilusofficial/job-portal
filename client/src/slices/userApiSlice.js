@@ -33,6 +33,20 @@ export const userApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    checkEmployer: builder.mutation({
+      query: ()=>({
+        url: `${BASE_URL}/user/check-employer`,
+        method: "POST",
+        credentials: "include"
+      })
+    }),
+    checkjobSeeker: builder.mutation({
+      query: ()=>({
+        url: `${BASE_URL}/user/check-jobseeker`,
+        method: "POST",
+        credentials: "include"
+      })
+    })
   }),
 });
 
@@ -41,4 +55,6 @@ export const {
   useSaveEmployerMutation,
   useSaveJobSeekerMutation,
   useUpdateImageMutation,
+  useCheckEmployerMutation,
+  useCheckjobSeekerMutation
 } = userApiSlice;

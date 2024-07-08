@@ -17,8 +17,9 @@ export default function JSCompanyActiveJobs({ data }) {
               name={x.jobTitle}
               joblocation={x.jobLocation}
               category={x.category}
-              jobtype={x.jobtype}
+              jobtype={x.jobType}
               salary={x.salary}
+              open={x.applied.length.toString()}
             />
           ))}
       </div>

@@ -43,7 +43,7 @@ export default function JobCard({
             </p>
             {open && (
               <p className="text-gray-500 flex gap-2 items-center">
-                {open} Open Positions
+                {`${open} Applications`}
               </p>
             )}
           </div>

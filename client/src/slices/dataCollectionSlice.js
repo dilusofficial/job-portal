@@ -30,6 +30,7 @@ const initialState = {
   skills: "",
   languages: "",
   about: "",
+  oneWord: "",
 };
 
 const dataCollectionSlice = createSlice({
@@ -139,6 +140,9 @@ const dataCollectionSlice = createSlice({
     setQualification: (state, { payload }) => {
       state.qualification = payload;
     },
+    setOneWord: (state, { payload }) => {
+      state.oneWord = payload;
+    },
     resetData: (state) => {
       state.education = [{}];
       state.work = [{}];
@@ -161,6 +165,7 @@ const dataCollectionSlice = createSlice({
       state.qualification = "Certificate";
       state.portfolio = "";
       state.github = "";
+      state.oneWord = "";
     },
     setData: (state, { payload }) => {
       state.education = payload.education.length > 0 ? payload.education : [{}];
@@ -178,10 +183,10 @@ const dataCollectionSlice = createSlice({
         ? payload.totalExperience
         : "";
       state.preferredLocation = payload.preferredLocation
-        ? payload.preferredLocation
+        ? payload.preferredLocation.toString()
         : "";
-      state.skills = payload.skills ? payload.skills : "";
-      state.languages = payload.languages ? payload.languages : "";
+      state.skills = payload.skills ? payload.skills.toString() : "";
+      state.languages = payload.languages ? payload.languages.toString() : "";
       state.about = payload.about ? payload.about : "";
       state.age = payload.owner.age ? payload.owner.age : "";
       state.email = payload.owner.email ? payload.owner.email : "";
@@ -195,6 +200,7 @@ const dataCollectionSlice = createSlice({
         : "Certificate";
       state.portfolio = payload.portfolio ? payload.portfolio : "";
       state.github = payload.github ? payload.github : "";
+      state.oneWord = payload.oneWord ? payload.oneWord : "";
     },
   },
 });
@@ -226,6 +232,7 @@ export const {
   setPortfolio,
   setProfilePic,
   setQualification,
+  setOneWord,
   resetData,
   setData,
 } = dataCollectionSlice.actions;

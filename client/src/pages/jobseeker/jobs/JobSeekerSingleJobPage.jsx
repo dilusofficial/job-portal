@@ -7,12 +7,12 @@ import JSSinglePageDetails from "../../../components/jobseeker/jobs/singlejob/JS
 
 export default function JobSeekerSingleJobPage() {
   const { id } = useParams();
-  const { data, isLoading } = useGetSingleJobQuery(id);
+  const { data, isLoading, refetch } = useGetSingleJobQuery(id);
   return isLoading ? (
     <Loading />
   ) : (
     <div>
-      <JSSingleJobHeader data={data} />
+      <JSSingleJobHeader data={data} refetchData={refetch} />
       <JSSinglePageDetails data={data} />
     </div>
   );

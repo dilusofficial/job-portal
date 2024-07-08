@@ -5,6 +5,7 @@ export default function ProfessionalDetailListing({
   education,
   work,
   certificates,
+  projects,
   heading,
   subheading,
   year,
@@ -20,6 +21,8 @@ export default function ProfessionalDetailListing({
             ? "text-green-700"
             : certificates
             ? "text-yellow-700"
+            : projects
+            ? "text-red-700"
             : ""
         }
       >
@@ -37,6 +40,8 @@ export default function ProfessionalDetailListing({
                   ? "text-green-700"
                   : certificates
                   ? "text-yellow-700"
+                  : projects
+                  ? "text-red-700"
                   : ""
               }
             >
@@ -51,16 +56,15 @@ export default function ProfessionalDetailListing({
                 ? "text-green-700 bg-green-100"
                 : certificates
                 ? "text-yellow-700 bg-yellow-100"
+                : projects
+                ? "text-red-700 bg-red-100"
                 : ""
             }`}
           >
             <p>{year}</p>
           </div>
         </div>
-        <p className="text-gray-500 text-sm">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum
-          tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-        </p>
+        <p className="text-gray-500 text-sm">{desc}</p>
       </div>
     </div>
   );

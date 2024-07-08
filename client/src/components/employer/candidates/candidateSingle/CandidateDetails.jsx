@@ -6,70 +6,74 @@ import SocialMedia from "../../../SocialMedia";
 import Skills from "./Skills";
 import MessageForm from "../../../MessageForm";
 
-export default function CandidateDetails() {
+export default function CandidateDetails({ data }) {
   return (
     <div className="flex lg:flex-row flex-col gap-3 w-full my-4">
       <div className="bg-background2 w-full rounded-lg p-3 lg:px-10">
         <h1 className="my-4 text-xl">Description</h1>
-        <p className="text-gray-500 leading-9">
-          Hello my name is Nicole Wells and web developer from Portland. In
-          pharetra orci dignissim, blandit mi semper, ultricies diam.
-          Suspendisse malesuada suscipit nunc non volutpat. Sed porta nulla id
-          orci laoreet tempor non consequat enim. Sed vitae aliquam velit.
-          Aliquam ante erat, blandit at pretium et, accumsan ac est. Integer
-          vehicula rhoncus molestie. Morbi ornare ipsum sed sem condimentum, et
-          pulvinar tortor luctus. Suspendisse condimentum lorem ut elementum
-          aliquam. Mauris nec erat ut libero vulputate pulvinar. Aliquam ante
-          erat, blandit at pretium et, accumsan ac est. Integer vehicula rhoncus
-          molestie. Morbi ornare ipsum sed sem condimentum, et pulvinar tortor
-          luctus. Suspendisse condimentum lorem ut elementum aliquam. Mauris nec
-          erat ut libero vulputate pulvinar.
-        </p>
+        <p className="text-gray-500 leading-9">{data.about}</p>
         <h1 className="my-4 text-xl">Education</h1>
-        <ProfessionalDetailListing
-          education
-          heading={"Bachelor of Fine Arts"}
-          subheading={"Mordern College"}
-          year={"2012-2014"}
-        />
-        <ProfessionalDetailListing
-          education
-          heading={"computer Science"}
-          subheading={"Haward university"}
-          year={"2010-2012"}
-        />
+        {data.education.length > 0 &&
+          data.education.map((x) => (
+            <ProfessionalDetailListing
+              key={x._id}
+              education
+              heading={x.programme}
+              subheading={x.institution}
+              desc={x.courses}
+              year={`${x.started.toString().slice(0, 7)} - ${
+                x.ended && x.ended.toString().slice(0, 7)
+              }`}
+            />
+          ))}
         <h1 className="my-4 text-xl">Work Experience</h1>
-        <ProfessionalDetailListing
-          work
-          heading={"Product Designer"}
-          subheading={"Spotify Inc."}
-          year={"2016-2020"}
-        />
-        <ProfessionalDetailListing
-          work
-          heading={"UX Designer"}
-          subheading={"Dropbox Inc."}
-          year={"2014-2016"}
-        />
+        {data.work.length > 0 &&
+          data.work.map((x) => (
+            <ProfessionalDetailListing
+              key={x._id}
+              work
+              heading={x.jobTitle}
+              subheading={x.company}
+              desc={x.acheivements}
+              year={`${x.started.toString().slice(0, 7)} - ${
+                x.ended && x.ended.toString().slice(0, 7)
+              }`}
+            />
+          ))}
         <h1 className="my-4 text-xl">Certificates</h1>
-        <ProfessionalDetailListing
-          certificates
-          heading={"Perfect Attendance Programs"}
-          subheading={"Software Algorithm"}
-          year={"2016-2020"}
-        />
-        <ProfessionalDetailListing
-          certificates
-          heading={"Top Performer Recognition"}
-          subheading={"Web Application"}
-          year={"2014-2016"}
-        />
+        {data.certificates.length > 0 &&
+          data.certificates.map((x) => (
+            <ProfessionalDetailListing
+              key={x._id}
+              certificates
+              heading={x.certificate}
+              subheading={""}
+              desc={x.description}
+              year={`${x.started.toString().slice(0, 7)} - ${
+                x.ended && x.ended.toString().slice(0, 7)
+              }`}
+            />
+          ))}
+        <h1 className="my-4 text-xl">Projects</h1>
+        {data.projects.length > 0 &&
+          data.projects.map((x) => (
+            <ProfessionalDetailListing
+              key={x._id}
+              projects
+              heading={x.project}
+              subheading={""}
+              desc={x.description}
+              year={`${x.started.toString().slice(0, 7)} - ${
+                x.ended && x.ended.toString().slice(0, 7)
+              }`}
+            />
+          ))}
       </div>
       <div className="bg-background1 w-full lg:w-1/4 rounded-lg p-3 lg:px-8">
-        <ExtraDetails />
-        <ContactDetails />
-        <SocialMedia candidate />
-        <Skills />
+        <ExtraDetails data={data} />
+        <ContactDetails data={data} />
+        <SocialMedia candidate data={data} />
+        <Skills skills={data.skills} />
         <MessageForm />
       </div>
     </div>

@@ -2,9 +2,36 @@ import React from "react";
 import { BsClockHistory, BsSuitcase } from "react-icons/bs";
 import { GiMoneyStack } from "react-icons/gi";
 import { SlLocationPin } from "react-icons/sl";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  useApplyJobMutation,
+  useGetJobSeekerDetailsQuery,
+} from "../../../../slices/jobSeekerApiSlice";
+import { toast } from "react-toastify";
+import { setJSInfo } from "../../../../slices/allUsersSlice";
+import Loading from "../../../Loading";
 
-export default function JSSingleJobHeader({ data }) {
+export default function JSSingleJobHeader({ data, refetchData }) {
+  const dispatch = useDispatch();
+  const { JSInfo } = useSelector((state) => state.allUsers);
+  const [applyJob, { isLoading }] = useApplyJobMutation();
+  const { data: userData, refetch: refetch2 } = useGetJobSeekerDetailsQuery();
+  async function handleApply() {
+    try {
+      const res = await applyJob(data._id).unwrap();
+      if (res.msg === "success") {
+        toast.success("Applied");
+        await refetchData();
+        await refetch2();
+        dispatch(setJSInfo(userData));
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
   return (
     <div className="flex md:flex-row flex-col md:justify-between bg-background2 items-center md:px-10 p-3  rounded-xl">
       <div className="flex md:flex-row flex-col gap-4 items-center">
@@ -63,9 +90,14 @@ export default function JSSingleJobHeader({ data }) {
         >
           Back
         </Link>
-        <button className="p-3 rounded-lg bg-ascent text-secondary hover:bg-hover ml-3">
-          Apply
+        <button
+          className="p-3 rounded-lg bg-ascent text-secondary hover:bg-hover ml-3"
+          disabled={data.applied.includes(JSInfo._id)}
+          onClick={handleApply}
+        >
+          {data.applied.includes(JSInfo._id) ? "Applied" : "Apply"}
         </button>
+        {isLoading && <Loading />}
       </div>
     </div>
   );

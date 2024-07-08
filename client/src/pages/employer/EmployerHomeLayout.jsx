@@ -6,11 +6,12 @@ import EmployerSmallBar from "../../components/employer/EmployerSmallBar";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
-import { setUserInfo } from "../../slices/allUsersSlice";
+import { setEInfo, setUserInfo } from "../../slices/allUsersSlice";
+import { useGetCompanyProfileQuery } from "../../slices/employerApiSlice";
 
 export default function EmployerHomeLayout() {
   const dispatch = useDispatch();
-
+  const { data, isLoading } = useGetCompanyProfileQuery();
   const getInfo = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/auth/userInfo`, {
@@ -25,6 +26,12 @@ export default function EmployerHomeLayout() {
   useEffect(() => {
     getInfo();
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setEInfo(data));
+    }
+  }, [isLoading]);
 
   return (
     <div>

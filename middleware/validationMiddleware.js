@@ -119,6 +119,7 @@ export const validateJobseekerDetailInput = withValidationErrors([
     .withMessage("preferred location is required"),
   body("skills").notEmpty().withMessage("skills is required"),
   body("languages").notEmpty().withMessage("languages is required"),
+  body("oneWord").notEmpty().withMessage("one word description is required"),
   body("about").notEmpty().withMessage("about is required"),
 ]);
 
@@ -152,6 +153,7 @@ export const validatePreferencesInput = withValidationErrors([
     .withMessage("preferred location is required"),
   body("skills").notEmpty().withMessage("skills is required"),
   body("languages").notEmpty().withMessage("languages is required"),
+  body("oneWord").notEmpty().withMessage("one word description is required"),
   body("about").notEmpty().withMessage("about is required"),
 ]);
 

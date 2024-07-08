@@ -70,6 +70,57 @@ export const employerApiSlice = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    getAllCandidates: builder.query({
+      query: () => ({
+        url: `${BASE_URL}/employer/candidates`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 3,
+    }),
+    getSingleCandidate: builder.query({
+      query: (candidateId) => ({
+        url: `${BASE_URL}/employer/candidates/${candidateId}`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 3,
+    }),
+    getAllEmployerCompanies: builder.query({
+      query: () => ({
+        url: `${BASE_URL}/employer/companies`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 3,
+    }),
+    getSingleECompany: builder.query({
+      query: (id) => ({
+        url: `${BASE_URL}/employer/companies/${id}`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 3,
+    }),
+    getAllApplicants: builder.query({
+      query: () => ({
+        url: `${BASE_URL}/employer/applicants`,
+        credentials: "include",
+      }),
+      keepUnusedDataFor: 3,
+    }),
+    shortListUser: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/employer/shortlist`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    rejectUser: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/employer/reject`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -83,4 +134,11 @@ export const {
   useDeleteMyJobMutation,
   useDeleteMyAccountMutation,
   useUploadLogoMutation,
+  useGetAllCandidatesQuery,
+  useGetSingleCandidateQuery,
+  useGetAllEmployerCompaniesQuery,
+  useGetSingleECompanyQuery,
+  useGetAllApplicantsQuery,
+  useShortListUserMutation,
+  useRejectUserMutation,
 } = employerApiSlice;

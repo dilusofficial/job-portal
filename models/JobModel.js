@@ -76,7 +76,7 @@ const JobSchema = new Schema(
     },
     applied: {
       type: [mongoose.Types.ObjectId],
-      ref: "User",
+      ref: "JobSeeker",
       default: [],
     },
     isActive: {
@@ -86,12 +86,12 @@ const JobSchema = new Schema(
     },
     shortListed: {
       type: [mongoose.Types.ObjectId],
-      ref: "User",
+      ref: "JobSeeker",
       default: [],
     },
     rejected: {
       type: [mongoose.Types.ObjectId],
-      ref: "User",
+      ref: "JobSeeker",
       default: [],
     },
   },

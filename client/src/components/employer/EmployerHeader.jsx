@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { setUserInfo } from "../../slices/allUsersSlice";
 import { useGetCompanyProfileQuery } from "../../slices/employerApiSlice";
 import { resetData } from "../../slices/dataCollectionSlice";
+import { useCheckjobSeekerMutation } from "../../slices/userApiSlice";
 
 export default function EmployerHeader() {
   const location = useLocation();
@@ -20,6 +21,7 @@ export default function EmployerHeader() {
   const { data } = useGetCompanyProfileQuery();
   const [showLogout, setShowLogout] = useState(false);
   const [logoutUser] = useLogoutUserMutation();
+  const [checkjobSeeker] = useCheckjobSeekerMutation()
   const navigate = useNavigate();
   async function handleLogout() {
     try {
@@ -29,6 +31,19 @@ export default function EmployerHeader() {
         dispatch(setUserInfo(null));
         navigate("/");
         toast.success("Logged out");
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
+
+  async function handleSeeker(){
+    try {
+      const res = await checkjobSeeker().unwrap();
+      if (res.msg === "success" || res.msg === "already created") {
+       return
       } else {
         toast.error(res.msg);
       }
@@ -84,6 +99,7 @@ export default function EmployerHeader() {
         <Link
           to={"/jobseeker"}
           className="p-1 px-2 border hidden lg:block border-ascent rounded-md hover:bg-hover text-xl"
+          onClick={handleSeeker}
         >
           JobSeeker
         </Link>

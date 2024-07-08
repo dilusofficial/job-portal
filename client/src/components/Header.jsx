@@ -10,6 +10,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { toggleJobSeekerSmallBar } from "../slices/responsiveSlice";
 import { resetData } from "../slices/dataCollectionSlice";
+import { useCheckEmployerMutation } from "../slices/userApiSlice";
 
 export default function Header() {
   const location = useLocation();
@@ -18,6 +19,7 @@ export default function Header() {
   const { userInfo } = useSelector((state) => state.allUsers);
   const [showLogout, setShowLogout] = useState(false);
   const [logoutUser] = useLogoutUserMutation();
+  const [checkEmployer] = useCheckEmployerMutation()
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,6 +31,19 @@ export default function Header() {
         navigate("/");
         dispatch(resetData());
         toast.success("Logged out");
+      } else {
+        toast.error(res.msg);
+      }
+    } catch (err) {
+      toast.error(err?.data?.msg || err?.error);
+    }
+  }
+
+  async function handleEmployer(){
+    try {
+      const res = await checkEmployer().unwrap();
+      if (res.msg === "success" || res.msg === "already created") {
+       return
       } else {
         toast.error(res.msg);
       }
@@ -80,6 +95,7 @@ export default function Header() {
         </button>
         <Link
           to={"/employer"}
+          onClick={handleEmployer}
           className="p-1 px-2 border hidden lg:block border-ascent rounded-md hover:bg-hover text-xl"
         >
           Employer

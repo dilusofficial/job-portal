@@ -7,7 +7,7 @@ import {
 } from "react-icons/fa";
 import { TbLetterP } from "react-icons/tb";
 
-export default function SocialMedia({ candidate, fb, ins, tw, ln }) {
+export default function SocialMedia({ candidate, fb, ins, tw, ln, data }) {
   return (
     <div className="flex flex-col gap-5 my-5 w-full">
       <h1 className="text-xl">Social Media</h1>
@@ -32,7 +32,7 @@ export default function SocialMedia({ candidate, fb, ins, tw, ln }) {
             <div className="text-ascent text-lg">
               <TbLetterP />
             </div>
-            <p className="text-gray-500 text-md">example@gmail.com</p>
+            <p className="text-gray-500 text-md">{data.portfolio}</p>
           </div>
         </>
       )}

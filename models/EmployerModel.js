@@ -1,5 +1,51 @@
 import mongoose, { Schema, model } from "mongoose";
 
+const AllApplicantsSchema = new Schema(
+  {
+    applicant: {
+      type: mongoose.Types.ObjectId,
+      ref: "JobSeeker",
+    },
+    jobApplied: {
+      type: mongoose.Types.ObjectId,
+      ref: "Job",
+    },
+    action: {
+      type: String,
+      enum: ["shortListed", "rejected"],
+    },
+  },
+  { timestamps: true }
+);
+
+const ShortListedSchema = new Schema(
+  {
+    applicant: {
+      type: mongoose.Types.ObjectId,
+      ref: "JobSeeker",
+    },
+    jobApplied: {
+      type: mongoose.Types.ObjectId,
+      ref: "Job",
+    },
+  },
+  { timestamps: true }
+);
+
+const rejectedSchema = new Schema(
+  {
+    applicant: {
+      type: mongoose.Types.ObjectId,
+      ref: "JobSeeker",
+    },
+    jobApplied: {
+      type: mongoose.Types.ObjectId,
+      ref: "Job",
+    },
+  },
+  { timestamps: true }
+);
+
 const EmployerSchema = new Schema(
   {
     owner: {
@@ -73,9 +119,16 @@ const EmployerSchema = new Schema(
     activeJobs: {
       type: String,
     },
+    allApplicants: {
+      type: [AllApplicantsSchema],
+      default: [],
+    },
     shortlisted: {
-      type: [mongoose.Types.ObjectId],
-      ref: "User",
+      type: [ShortListedSchema],
+      default: [],
+    },
+    rejected: {
+      type: [rejectedSchema],
       default: [],
     },
   },

@@ -6,6 +6,7 @@ import { formatImage } from "../../../middleware/multerMiddleware.js";
 import Employer from "../../../models/EmployerModel.js";
 import Job from "../../../models/JobModel.js";
 import { v2 as cloudinary } from "cloudinary";
+import JobSeeker from "../../../models/JobSeeker.js";
 
 export const updateCompanyProfile = async (req, res) => {
   const employer = await Employer.findById(req.user.employerId);
@@ -114,4 +115,105 @@ export const logoUpload = async (req, res) => {
   } else {
     throw new BadRequestError("No files found");
   }
+};
+
+export const getAllCandidates = async (req, res) => {
+  const candidates = await JobSeeker.find({ dataCollected: true }).populate(
+    "owner"
+  );
+  if (!candidates) throw new NotFoundError("No jobseekers found");
+  res.status(200).json(candidates);
+};
+
+export const getSingleCandidate = async (req, res) => {
+  const candidate = await JobSeeker.findById(req.params.id).populate("owner");
+  if (!candidate) throw new NotFoundError("No candidate found");
+  res.status(200).json(candidate);
+};
+
+export const getAllEmCompanies = async (req, res) => {
+  const companies = await Employer.find({
+    _id: { $ne: req.user.employerId },
+    companyName: { $exists: true },
+  });
+  if (!companies) throw new NotFoundError("No companies found");
+  res.status(200).json(companies);
+};
+
+export const getSingleEmCompany = async (req, res) => {
+  const company = await Employer.findById(req.params.id);
+  if (!company) throw new NotFoundError("no company found");
+  const totalJobs = await Job.find({
+    owner: company._id,
+    isActive: true,
+  });
+  res.status(200).json({ company, totalJobs });
+};
+
+export const getApplicants = async (req, res) => {
+  const applicants = await Employer.findById(req.user.employerId).populate([
+    "allApplicants.applicant",
+    "allApplicants.jobApplied",
+    "shortlisted.applicant",
+    "shortlisted.jobApplied",
+  ]);
+  if (!applicants) throw new NotFoundError("No employer found");
+  res.status(200).json(applicants);
+};
+
+export const shortListSeeker = async (req, res) => {
+  const applicant = await JobSeeker.findById(req.body.applicantId);
+  const job = await Job.findById(req.body.jobId);
+  const employer = await Employer.findById(req.user.employerId);
+  if (!applicant || !job || !employer)
+    throw new NotFoundError("Something wrong. Incomplete details");
+  let allapplicantArray = employer.allApplicants;
+  const upobject = allapplicantArray.find(
+    (x) =>
+      x.applicant.toString() === req.body.applicantId.toString() &&
+      x.jobApplied.toString() === req.body.jobId.toString()
+  );
+  if (!upobject) throw new NotFoundError("No data");
+  upobject.action = "shortListed";
+
+  const shortlistObj = {
+    applicant: req.body.applicantId,
+    jobApplied: req.body.jobId,
+  };
+  employer.shortlisted.push(shortlistObj);
+  employer.allApplicants = allapplicantArray;
+  job.shortListed.push(req.body.applicantId);
+  applicant.shortListed.push(req.body.jobId);
+  await job.save();
+  await employer.save();
+  await applicant.save();
+  res.status(200).json({ msg: "success" });
+};
+
+export const rejectSeeker = async (req, res) => {
+  const applicant = await JobSeeker.findById(req.body.applicantId);
+  const job = await Job.findById(req.body.jobId);
+  const employer = await Employer.findById(req.user.employerId);
+  if (!applicant || !job || !employer)
+    throw new NotFoundError("Something wrong. Incomplete details");
+  let allapplicantArray = employer.allApplicants;
+  const upobject = allapplicantArray.find(
+    (x) =>
+      x.applicant.toString() === req.body.applicantId.toString() &&
+      x.jobApplied.toString() === req.body.jobId.toString()
+  );
+  if (!upobject) throw new NotFoundError("No data");
+  upobject.action = "rejected";
+  const rejectObj = {
+    applicant: req.body.applicantId,
+    jobApplied: req.body.jobId,
+  };
+  employer.rejected.push(rejectObj);
+  employer.allApplicants = allapplicantArray;
+  job.rejected.push(req.body.applicantId);
+  applicant.rejected.push(req.body.jobId);
+  await job.save();
+  await employer.save();
+  await applicant.save();
+  res.status(200).json({ msg: "success" });
 };
