@@ -1,11 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedConversation } from "../../../slices/JPMessagesSlice";
+import { useSocketContext } from "../../../context/SocketContext";
 
 export default function ConversationElt({ data }) {
   const { selectedConversation } = useSelector((state) => state.jpMessages);
   const isSelected = selectedConversation?._id === data._id;
   const dispatch = useDispatch();
+  const { onlineUsers } = useSocketContext();
+  const onlineId = data?.jsId ? data.jsId._id : data?.emId._id;
+  const isOnline = onlineUsers.includes(onlineId);
   return (
     <div>
       <div
@@ -14,7 +18,7 @@ export default function ConversationElt({ data }) {
         }`}
         onClick={() => dispatch(setSelectedConversation(data))}
       >
-        <div className="avatar online z-0">
+        <div className={`avatar z-0 ${isOnline ? "online" : ""}`}>
           <div className="w-12 h-12 rounded-full overflow-hidden">
             <img
               src={

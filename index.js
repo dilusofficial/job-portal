@@ -19,8 +19,7 @@ import {
   authenticateJobSeeker,
   authenticateUser,
 } from "./middleware/authMiddleware.js";
-
-const app = express();
+import { app, server } from "./socket/socket.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -40,16 +39,21 @@ app.use(
   })
 );
 
-app.use("/auth", authRouter);
-app.use("/user", authenticateUser, userRouter);
-app.use("/jobseeker", authenticateUser, authenticateJobSeeker, jobseekerRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/user", authenticateUser, userRouter);
 app.use(
-  "/employer",
+  "/api/jobseeker",
+  authenticateUser,
+  authenticateJobSeeker,
+  jobseekerRouter
+);
+app.use(
+  "/api/employer",
   authenticateUser,
   authenticateEmployer,
   employerDashboardRouter
 );
-app.use("/jobportal/messages", authenticateUser, JPMessageRouter);
+app.use("/api/jobportal/messages", authenticateUser, JPMessageRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "Not Found" });
@@ -59,7 +63,7 @@ app.use(errorHandlerMiddleware);
 const port = process.env.PORT || 3000;
 try {
   await mongoose.connect(process.env.MONGODB_URI);
-  app.listen(port, () => {
+  server.listen(port, () => {
     console.log(`server running on port ${port}`);
   });
 } catch (error) {

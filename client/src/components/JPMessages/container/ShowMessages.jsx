@@ -5,8 +5,10 @@ import { useGetMessagesQuery } from "../../../slices/JPMessagesApiSlice";
 import Loading from "../../Loading";
 import MessageInput from "./MessageInput";
 import { setConversationMessages } from "../../../slices/JPMessagesSlice";
+import useListenSocketMessages from "../../../hooks/JPmessages/useListenSocketMessages";
 
 export default function ShowMessages() {
+  useListenSocketMessages();
   const { selectedConversation, conversationMessages } = useSelector(
     (state) => state.jpMessages
   );
@@ -33,8 +35,8 @@ export default function ShowMessages() {
   ) : (
     <>
       <div id="mcon" className="px-4 flex-1 overflow-auto">
-        {data.length > 0 &&
-          data.map((item) => (
+        {conversationMessages?.length > 0 &&
+          conversationMessages.map((item) => (
             <div key={item._id} ref={lastMessageRef}>
               <SingleMessage data={item} />
             </div>

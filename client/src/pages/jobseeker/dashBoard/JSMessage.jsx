@@ -5,6 +5,7 @@ import { useGetUserInfoQuery } from "../../../slices/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../../slices/allUsersSlice";
 import Loading from "../../../components/Loading";
+import { SocketContextProvider } from "../../../context/SocketContext";
 
 export default function JSMessage() {
   const { data, isLoading } = useGetUserInfoQuery();
@@ -21,8 +22,10 @@ export default function JSMessage() {
     <div className="">
       <h1 className="text-xl my-3">Messages</h1>
       <div className="flex gap-2 messageHeight">
-        <JPmessageSideBar />
-        <JPMessageContainer />
+        <SocketContextProvider>
+          <JPmessageSideBar />
+          <JPMessageContainer />
+        </SocketContextProvider>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./store.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import {} from "./context/SocketContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         }
       >
         <App />
+
         <ToastContainer position="top-center" />
       </GoogleOAuthProvider>
     </Provider>

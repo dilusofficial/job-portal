@@ -2,6 +2,7 @@ import { NotFoundError } from "../../../errors/customErrors.js";
 import Conversation from "../../../models/ConversationModel.js";
 import Message from "../../../models/MessageModel.js";
 import User from "../../../models/UserModel.js";
+import { getRecieverSocketId, io } from "../../../socket/socket.js";
 import { newConnection } from "../../../utils/newConnection.js";
 
 export const sendMessages = async (req, res) => {
@@ -29,6 +30,12 @@ export const sendMessages = async (req, res) => {
   await newMessage.save();
   conversation.messages.push(newMessage._id);
   await conversation.save();
+
+  const recieverSocketId = getRecieverSocketId(receiverId);
+  console.log(recieverSocketId);
+  if (recieverSocketId) {
+    io.to(recieverSocketId).emit("newMessage", newMessage);
+  }
   res.status(200).json({ msg: "success", newMessage });
 };
 
