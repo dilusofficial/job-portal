@@ -1,5 +1,33 @@
 import mongoose, { Schema, model } from "mongoose";
 
+const emconnectionSchema = new Schema(
+  {
+    emId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Employer",
+    },
+    jsId: {
+      type: mongoose.Types.ObjectId,
+      ref: "JobSeeker",
+    },
+  },
+  { timestamps: true }
+);
+
+const jsconnectionSchema = new Schema(
+  {
+    emId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Employer",
+    },
+    jsId: {
+      type: mongoose.Types.ObjectId,
+      ref: "JobSeeker",
+    },
+  },
+  { timestamps: true }
+);
+
 const UserSchema = new Schema(
   {
     username: {
@@ -69,6 +97,14 @@ const UserSchema = new Schema(
         "Masters Degree",
         "Doctorate",
       ],
+    },
+    emconnections: {
+      type: [emconnectionSchema],
+      default: [],
+    },
+    jsconnections: {
+      type: [jsconnectionSchema],
+      default: [],
     },
   },
   {

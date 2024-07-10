@@ -8,7 +8,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { toggleEmployerSmallBar } from "../../slices/responsiveSlice";
 import { useLogoutUserMutation } from "../../slices/authApiSlice";
 import { toast } from "react-toastify";
-import { setUserInfo } from "../../slices/allUsersSlice";
+import { setType, setUserInfo } from "../../slices/allUsersSlice";
 import { useGetCompanyProfileQuery } from "../../slices/employerApiSlice";
 import { resetData } from "../../slices/dataCollectionSlice";
 import { useCheckjobSeekerMutation } from "../../slices/userApiSlice";
@@ -21,7 +21,7 @@ export default function EmployerHeader() {
   const { data } = useGetCompanyProfileQuery();
   const [showLogout, setShowLogout] = useState(false);
   const [logoutUser] = useLogoutUserMutation();
-  const [checkjobSeeker] = useCheckjobSeekerMutation()
+  const [checkjobSeeker] = useCheckjobSeekerMutation();
   const navigate = useNavigate();
   async function handleLogout() {
     try {
@@ -39,11 +39,12 @@ export default function EmployerHeader() {
     }
   }
 
-  async function handleSeeker(){
+  async function handleSeeker() {
     try {
       const res = await checkjobSeeker().unwrap();
       if (res.msg === "success" || res.msg === "already created") {
-       return
+        dispatch(setType("jobseeker"));
+        return;
       } else {
         toast.error(res.msg);
       }

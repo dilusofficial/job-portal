@@ -2,6 +2,7 @@ import React from "react";
 import CompanyExtraDetails from "./CompanyExtraDetails";
 import ActiveJobs from "./ActiveJobs";
 import SocialMedia from "../../../SocialMedia";
+import MessageForm from "../../../MessageForm";
 
 export default function CompanyDetails({ data }) {
   return (
@@ -14,6 +15,7 @@ export default function CompanyDetails({ data }) {
       <div className="bg-background1 w-full lg:w-1/4 rounded-lg p-3 lg:px-8">
         <CompanyExtraDetails data={data.company} />
         <SocialMedia />
+        <MessageForm data={data.company} />
       </div>
     </div>
   );

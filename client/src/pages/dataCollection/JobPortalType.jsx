@@ -6,10 +6,12 @@ import {
   useSaveJobSeekerMutation,
 } from "../../slices/userApiSlice";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setType } from "../../slices/allUsersSlice";
 
 export default function JobPortalType() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [saveEmployer] = useSaveEmployerMutation();
   const [saveJobSeeker] = useSaveJobSeekerMutation();
 
@@ -18,8 +20,10 @@ export default function JobPortalType() {
       const res = await saveEmployer().unwrap();
       if (res.msg === "success") {
         if (res.employer?.companyName || res.newEmployer?.companyName) {
+          dispatch(setType("employer"));
           navigate("/employer");
         } else {
+          dispatch(setType("employer"));
           navigate("/employer/dashboard/company-profile");
         }
       } else {
@@ -34,8 +38,10 @@ export default function JobPortalType() {
       const res = await saveJobSeeker().unwrap();
       if (res.msg === "success") {
         if (res.newSeeker?.dataCollected || res.jobseeker?.dataCollected) {
+          dispatch(setType("jobseeker"));
           navigate("/jobseeker");
         } else {
+          dispatch(setType("jobseeker"));
           navigate("/jobseeker/details");
         }
       } else {

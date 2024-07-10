@@ -74,7 +74,7 @@ export default function CandidateDetails({ data }) {
         <ContactDetails data={data} />
         <SocialMedia candidate data={data} />
         <Skills skills={data.skills} />
-        <MessageForm />
+        <MessageForm data={data} />
       </div>
     </div>
   );

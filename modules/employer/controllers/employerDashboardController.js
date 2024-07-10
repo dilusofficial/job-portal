@@ -118,9 +118,10 @@ export const logoUpload = async (req, res) => {
 };
 
 export const getAllCandidates = async (req, res) => {
-  const candidates = await JobSeeker.find({ dataCollected: true }).populate(
-    "owner"
-  );
+  const candidates = await JobSeeker.find({
+    dataCollected: true,
+    owner: { $ne: req.user.userId },
+  }).populate("owner");
   if (!candidates) throw new NotFoundError("No jobseekers found");
   res.status(200).json(candidates);
 };

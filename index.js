@@ -12,6 +12,7 @@ import authRouter from "./modules/auth/routers/authRouter.js";
 import employerDashboardRouter from "./modules/employer/routers/employerDashboardRouter.js";
 import userRouter from "./modules/user/routers/userRouter.js";
 import jobseekerRouter from "./modules/jobseeker/routers/jobSeekerRouter.js";
+import JPMessageRouter from "./modules/jobportalmessages/routers/JPMessageRouter.js";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import {
   authenticateEmployer,
@@ -48,6 +49,7 @@ app.use(
   authenticateEmployer,
   employerDashboardRouter
 );
+app.use("/jobportal/messages", authenticateUser, JPMessageRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "Not Found" });

@@ -152,7 +152,14 @@ export const verifyOTP = async (req, res) => {
 
 export const userInfo = async (req, res) => {
   const { userId } = req.user;
-  const user = await User.findById(userId).select("-password");
+  const user = await User.findById(userId)
+    .select("-password")
+    .populate([
+      "emconnections.jsId",
+      "emconnections.emId",
+      "jsconnections.jsId",
+      "jsconnections.emId",
+    ]);
   if (!user) throw new NotFoundError("No user found");
   res.status(200).json(user);
 };

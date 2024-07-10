@@ -15,7 +15,7 @@ export default function JSDashboardLayout() {
 
   useEffect(() => {
     if (!userInfo?.username) {
-      navigate("/auth/login");
+      navigate("/jobseeker");
     }
   }, [userInfo]);
   return (

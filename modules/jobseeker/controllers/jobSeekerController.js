@@ -38,7 +38,10 @@ export const saveData = async (req, res) => {
 export const getAllJobs = async (req, res) => {
   const jobs = (await Job.find().populate("owner")).reverse();
   if (!jobs) throw new NotFoundError("No jobs found");
-  res.status(200).json(jobs);
+  const filtered = jobs.filter(
+    (item) => item.owner.owner.toString() !== req.user.userId
+  );
+  res.status(200).json(filtered);
 };
 
 export const getsingleJob = async (req, res) => {
@@ -50,7 +53,10 @@ export const getsingleJob = async (req, res) => {
 };
 
 export const getAllCompanies = async (req, res) => {
-  const companies = await Employer.find({ companyName: { $exists: true } });
+  const companies = await Employer.find({
+    companyName: { $exists: true },
+    owner: { $ne: req.user.userId },
+  });
   if (!companies) throw new NotFoundError("no companies found");
   res.status(200).json(companies);
 };

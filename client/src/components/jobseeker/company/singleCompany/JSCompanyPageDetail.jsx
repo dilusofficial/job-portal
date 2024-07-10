@@ -19,7 +19,7 @@ export default function JSCompanyPageDetail({ data, data2, isLoading }) {
       <div className="bg-background1 w-full lg:w-1/4 rounded-lg p-3 lg:px-8">
         <JSCompanyExtra data={data} />
         <SocialMedia />
-        <MessageForm />
+        <MessageForm data={data} />
       </div>
     </div>
   );

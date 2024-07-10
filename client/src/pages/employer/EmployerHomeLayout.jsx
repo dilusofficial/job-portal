@@ -6,7 +6,7 @@ import EmployerSmallBar from "../../components/employer/EmployerSmallBar";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
-import { setEInfo, setUserInfo } from "../../slices/allUsersSlice";
+import { setEInfo, setType, setUserInfo } from "../../slices/allUsersSlice";
 import { useGetCompanyProfileQuery } from "../../slices/employerApiSlice";
 
 export default function EmployerHomeLayout() {
@@ -30,6 +30,7 @@ export default function EmployerHomeLayout() {
   useEffect(() => {
     if (data) {
       dispatch(setEInfo(data));
+      dispatch(setType("employer"));
     }
   }, [isLoading]);
 

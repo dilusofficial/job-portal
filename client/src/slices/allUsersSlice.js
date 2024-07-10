@@ -4,6 +4,7 @@ const initialState = {
   userInfo: null,
   JSInfo: null,
   EInfo: null,
+  type: "",
 };
 
 const allUserSSlice = createSlice({
@@ -19,8 +20,12 @@ const allUserSSlice = createSlice({
     setEInfo: (state, { payload }) => {
       state.EInfo = payload;
     },
+    setType: (state, { payload }) => {
+      state.type = payload;
+    },
   },
 });
 
 export default allUserSSlice.reducer;
-export const { setUserInfo, setEInfo, setJSInfo } = allUserSSlice.actions;
+export const { setUserInfo, setEInfo, setJSInfo, setType } =
+  allUserSSlice.actions;

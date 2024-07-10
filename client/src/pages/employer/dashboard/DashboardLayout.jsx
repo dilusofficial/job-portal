@@ -15,7 +15,7 @@ export default function DashboardLayout() {
 
   useEffect(() => {
     if (!userInfo?.username) {
-      navigate("/auth/login");
+      navigate("/employer");
     }
   }, [userInfo]);
   return (

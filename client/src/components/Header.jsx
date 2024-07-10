@@ -4,7 +4,7 @@ import { homeLinks1 } from "../utils/links";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogoutUserMutation } from "../slices/authApiSlice";
-import { setUserInfo } from "../slices/allUsersSlice";
+import { setType, setUserInfo } from "../slices/allUsersSlice";
 import { toast } from "react-toastify";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -19,7 +19,7 @@ export default function Header() {
   const { userInfo } = useSelector((state) => state.allUsers);
   const [showLogout, setShowLogout] = useState(false);
   const [logoutUser] = useLogoutUserMutation();
-  const [checkEmployer] = useCheckEmployerMutation()
+  const [checkEmployer] = useCheckEmployerMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -39,11 +39,12 @@ export default function Header() {
     }
   }
 
-  async function handleEmployer(){
+  async function handleEmployer() {
     try {
       const res = await checkEmployer().unwrap();
       if (res.msg === "success" || res.msg === "already created") {
-       return
+        dispatch(setType("employer"));
+        return;
       } else {
         toast.error(res.msg);
       }

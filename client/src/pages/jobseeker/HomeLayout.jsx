@@ -3,38 +3,30 @@ import { Outlet } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useDispatch } from "react-redux";
-import { BASE_URL } from "../../constants";
-import axios from "axios";
-import { setJSInfo, setUserInfo } from "../../slices/allUsersSlice";
+import { setJSInfo, setType, setUserInfo } from "../../slices/allUsersSlice";
 import JobSeekerSmallBar from "../../components/jobseeker/JobSeekerSmallBar";
 import { useGetJobSeekerDetailsQuery } from "../../slices/jobSeekerApiSlice";
 import { setData } from "../../slices/dataCollectionSlice";
+import { useGetUserInfoQuery } from "../../slices/authApiSlice";
 
 export default function HomeLayout() {
   const dispatch = useDispatch();
   const { data, isLoading } = useGetJobSeekerDetailsQuery();
-
-  const getInfo = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/auth/userInfo`, {
-        withCredentials: true,
-      });
-      dispatch(setUserInfo(response.data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getInfo();
-  }, []);
+  const { data: data2, isLoading: loading2 } = useGetUserInfoQuery();
 
   useEffect(() => {
     if (data) {
       dispatch(setData(data));
       dispatch(setJSInfo(data));
+      dispatch(setType("jobseeker"));
     }
   }, [isLoading]);
+
+  useEffect(() => {
+    if (data2) {
+      dispatch(setUserInfo(data2));
+    }
+  }, [loading2]);
   return (
     <>
       <Header />
