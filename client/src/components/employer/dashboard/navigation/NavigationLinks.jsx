@@ -1,10 +1,19 @@
 import React from "react";
-import { employerDashboardLinks } from "../../../../utils/links";
 import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  toggleEmployerSmallDashboard,
+  toggleJobSeekerSmallDashboard,
+} from "../../../../slices/responsiveSlice";
 
-export default function NavigationLinks({ links }) {
+export default function NavigationLinks({ links, js }) {
   const location = useLocation();
   const pathname = location.pathname.toString();
+  const dispatch = useDispatch();
+
+  function handleclick() {
+    window.scrollTo(0, 0);
+  }
   return (
     <div className="pt-8 flex flex-col">
       {links.map((item) => (
@@ -14,7 +23,7 @@ export default function NavigationLinks({ links }) {
           }`}
           key={item.text}
           to={item.path}
-          onClick={() => window.scrollTo(0, 0)}
+          onClick={handleclick}
         >
           <span className="lg:text-2xl lg:me-4">{item.icon}</span>
           {item.text}

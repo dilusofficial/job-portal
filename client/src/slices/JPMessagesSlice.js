@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   selectedConversation: null,
   conversationMessages: [],
+  showSide: true,
 };
 
 const jpMessagesSlice = createSlice({
@@ -18,6 +19,9 @@ const jpMessagesSlice = createSlice({
     resetMessages: (state) => {
       (state.selectedConversation = null), (state.conversationMessages = []);
     },
+    toggleShowSide: (state) => {
+      state.showSide = !state.showSide;
+    },
   },
 });
 
@@ -26,4 +30,5 @@ export const {
   setConversationMessages,
   setSelectedConversation,
   resetMessages,
+  toggleShowSide,
 } = jpMessagesSlice.actions;

@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function SearchSelectElt({ title, list, icon }) {
+export default function SearchSelectElt({
+  title,
+  list,
+  icon,
+  value,
+  onChange,
+}) {
   return (
     <div className="form-row">
       <label htmlFor="status" className="form-label">
@@ -9,8 +15,13 @@ export default function SearchSelectElt({ title, list, icon }) {
       <div className="flex items-center">
         <div className="text-2xl py-2 px-3 rounded-lg">{icon}</div>
 
-        <select id="status" className="form-select">
-          <option value={""}>{"ALL"}</option>
+        <select
+          id="status"
+          className="form-select"
+          value={value}
+          onChange={onChange}
+        >
+          <option value={"ALL"}>{"ALL"}</option>
           {list?.map((item) => (
             <option key={item} value={item}>
               {item}

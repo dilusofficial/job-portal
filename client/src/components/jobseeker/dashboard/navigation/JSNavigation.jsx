@@ -17,7 +17,7 @@ export default function JSNavigation() {
           <IoMdCloseCircleOutline />
         </button>
       </div>
-      <NavigationLinks links={jobSeekerDashboardLinks} />
+      <NavigationLinks links={jobSeekerDashboardLinks} js />
     </div>
   );
 }

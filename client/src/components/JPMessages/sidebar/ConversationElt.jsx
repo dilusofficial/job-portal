@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedConversation } from "../../../slices/JPMessagesSlice";
+import {
+  setSelectedConversation,
+  toggleShowSide,
+} from "../../../slices/JPMessagesSlice";
 import { useSocketContext } from "../../../context/SocketContext";
 
 export default function ConversationElt({ data }) {
@@ -16,7 +19,10 @@ export default function ConversationElt({ data }) {
         className={`flex gap-3 items-center hover:bg-primary rounded px-2 py-1 cursor-pointer border-b-2 ${
           isSelected ? "bg-primary" : ""
         }`}
-        onClick={() => dispatch(setSelectedConversation(data))}
+        onClick={() => {
+          dispatch(setSelectedConversation(data));
+          dispatch(toggleShowSide());
+        }}
       >
         <div className={`avatar z-0 ${isOnline ? "online" : ""}`}>
           <div className="w-12 h-12 rounded-full overflow-hidden">

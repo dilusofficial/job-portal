@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleJobSeekerJobsFilter } from "../../../slices/responsiveSlice";
 import SearchElt from "../../SearchElt";
@@ -12,6 +12,19 @@ import { FaRegClock } from "react-icons/fa";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import { GrUserExpert } from "react-icons/gr";
 import { IoSchoolOutline } from "react-icons/io5";
+import {
+  resetJobSearch,
+  setJobsearchCategory,
+  setJobsearchCurrentPage,
+  setJobsearchExperience,
+  setJobsearchGender,
+  setJobsearchJobType,
+  setJobsearchKeyword,
+  setJobsearchLocation,
+  setJobsearchMinsalary,
+  setJobSearchOn,
+  setJobsearchQualification,
+} from "../../../slices/JobportalSearches/jobSearchSlice";
 const genderlist = ["Male", "Female", "Others"];
 const Experiencelist = [
   "Fresher",
@@ -30,6 +43,46 @@ const Qualificationlist = [
 
 export default function JobSearchSection() {
   const dispatch = useDispatch();
+  const [keyword, setKeyword] = useState("");
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("ALL");
+  const [gender, setGender] = useState("ALL");
+  const [jobType, setJobType] = useState("ALL");
+  const [experience, setExperience] = useState("ALL");
+  const [qualification, setQualification] = useState("ALL");
+  const [minSalary, setMinSalary] = useState("");
+
+  function handleclick() {
+    dispatch(setJobsearchKeyword(keyword));
+    dispatch(setJobsearchLocation(location));
+    dispatch(setJobsearchCategory(category));
+    dispatch(setJobsearchGender(gender));
+    dispatch(setJobsearchJobType(jobType));
+    dispatch(setJobsearchExperience(experience));
+    dispatch(setJobsearchQualification(qualification));
+    dispatch(setJobsearchMinsalary(minSalary));
+    dispatch(setJobsearchCurrentPage(1));
+    dispatch(setJobSearchOn());
+    //refetch here
+  }
+
+  function handleReset() {
+    dispatch(resetJobSearch());
+    setCategory("ALL");
+    setExperience("ALL");
+    setQualification("ALL");
+    setKeyword("");
+    setLocation("");
+    setGender("ALL");
+    setJobType("ALL");
+    setMinSalary("");
+    //refetch here
+  }
+
+  useEffect(() => {
+    handleReset();
+  }, []);
+
   return (
     <div
       className={` flex flex-col justify-start gap-8 h-full sticky left-0 top-0`}
@@ -42,19 +95,37 @@ export default function JobSearchSection() {
           <IoMdCloseCircleOutline />
         </button>
       </div>
+      <button
+        onClick={handleclick}
+        className="p-2 rounded-md bg-ascent hover:bg-hover text-primary"
+      >
+        Search
+      </button>
+      <button
+        onClick={handleReset}
+        className="p-2 rounded-md bg-ascent hover:bg-hover text-primary"
+      >
+        Reset
+      </button>
       <SearchElt
         title={"Search by Keywords"}
         icon={<CiSearch />}
         placeholder={"Job Title, Skills, Name...."}
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
       />
       <SearchElt
         title={"Location"}
         icon={<SlLocationPin />}
         placeholder={"Enter location"}
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
       />
       <SearchSelectElt
         title={"Category"}
         icon={<TbCategory />}
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
         list={[
           "Healthcare & Medical",
           "Software Development & IT",
@@ -70,26 +141,36 @@ export default function JobSearchSection() {
       />
       <SearchSelectElt
         title={"Gender"}
+        value={gender}
+        onChange={(e) => setGender(e.target.value)}
         icon={<MdOutlineWorkOutline />}
         list={genderlist}
       />
       <SearchSelectElt
         title={"Job Type"}
         icon={<FaRegClock />}
+        value={jobType}
+        onChange={(e) => setJobType(e.target.value)}
         list={["Full-time", "Part-time", "Internship"]}
       />
       <SearchSelectElt
         title={"Experience Level"}
         icon={<GrUserExpert />}
+        value={experience}
+        onChange={(e) => setExperience(e.target.value)}
         list={Experiencelist}
       />
       <SearchSelectElt
         title={"Qualification"}
+        value={qualification}
+        onChange={(e) => setQualification(e.target.value)}
         icon={<IoSchoolOutline />}
         list={Qualificationlist}
       />
       <SearchElt
         title={"Min Salary"}
+        value={minSalary}
+        onChange={(e) => setMinSalary(e.target.value)}
         icon={<PiMoney />}
         placeholder={"Enter LPA"}
       />
